@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6b3eef5-8e67-4830-82f6-6d9495d46845" name="Default Changelist" comment="Dummy commit" />
+    <list default="true" id="a6b3eef5-8e67-4830-82f6-6d9495d46845" name="Default Changelist" comment="Dummy commit">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handler/food.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbproject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +25,14 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="FoodHandler" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -109,14 +124,6 @@
     </state>
     <state x="368" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1435.976@65.24.1435.976" timestamp="1584118335663" />
     <state x="457" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1855.926@65.24.1855.926" timestamp="1584060412620" />
-    <state x="392" y="43" key="CommitChangelistDialog2" timestamp="1584244509340">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="392" y="43" key="CommitChangelistDialog2/65.24.1435.976@65.24.1435.976" timestamp="1584244509340" />
-    <state x="208" y="94" key="DiffContextDialog" timestamp="1584244502098">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="208" y="94" key="DiffContextDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244502098" />
     <state x="618" y="243" key="FileChooserDialogImpl" timestamp="1584230536273">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
@@ -158,14 +165,6 @@
       <screen x="65" y="24" width="1435" height="976" />
     </state>
     <state width="694" height="333" key="GridCell.Tab.1.right/65.24.1435.976@65.24.1435.976" timestamp="1584238200350" />
-    <state x="209" y="94" key="MergeDialog" timestamp="1584244232478">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="209" y="94" key="MergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244232478" />
-    <state x="492" y="217" key="MultipleFileMergeDialog" timestamp="1584244232486">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="492" y="217" key="MultipleFileMergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244232486" />
     <state x="276" y="134" key="SettingsEditor" timestamp="1584118247757">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
@@ -174,17 +173,36 @@
       <screen x="65" y="24" width="1435" height="976" />
     </state>
     <state x="445" y="342" key="com.intellij.ide.util.TipDialog/65.24.1435.976@65.24.1435.976" timestamp="1584230578268" />
-    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog" timestamp="1584244196465">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244196465" />
-    <state x="522" y="292" key="git4idea.merge.GitMergeDialog" timestamp="1584244524551">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="522" y="292" key="git4idea.merge.GitMergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244524551" />
-    <state x="535" y="401" key="git4idea.ui.GitStashDialog" timestamp="1584244425291">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="535" y="401" key="git4idea.ui.GitStashDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244425291" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handler/food.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handler/food.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handler/food.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handler/food.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handler/food.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
