@@ -6,6 +6,7 @@ from flask_cors import CORS, cross_origin
 
 # Activate
 from handler.food import FoodHandler
+from handler.user import UserHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
@@ -15,17 +16,6 @@ CORS(app)
 @app.route('/')
 def greeting():
     return 'Hello, this is the parts DB App!'
-
-
-@app.route('/droots/users', methods=['GET', 'POST'])
-def getAllUsers():
-    if request.method == 'POST':
-        # cambie a request.json pq el form no estaba bregando
-        # parece q estaba poseido por satanas ...
-        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
-        print("REQUEST: ", request.json)
-    else:
-        return {"": "Ford", "model": "Mustang", "year": 1964}
 
 
 @app.route('/droots/resources/food', methods=['GET', 'POST'])
@@ -50,6 +40,31 @@ def getFoodById(food_id):
         return FoodHandler().updatePart(food_id, request.json)
     elif request.method == 'DELETE':
         return FoodHandler().deletePart(food_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/users', methods=['GET', 'POST'])
+def getAllUsers():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return UserHandler().insertUserJson(request.json)
+
+    else:
+        return UserHandler().getAllUsers()
+
+
+@app.route('/droots/users/<int:user_id>', methods=['GET', 'PUT', 'DELETE'])
+def getUserById(user_id):
+    if request.method == 'GET':
+        return UserHandler().getUserById(user_id)
+
+    elif request.method == 'PUT':
+        return UserHandler().updateUser(user_id, request.form)
+
+    elif request.method == 'DELETE':
+        return UserHandler().deleteUser(user_id)
+
     else:
         return jsonify(Error="Method not allowed."), 405
 
