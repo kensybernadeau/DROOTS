@@ -17,7 +17,7 @@ def greeting():
     return 'Hello, this is the parts DB App!'
 
 
-@app.route('/DROOTS/users', methods=['GET', 'POST'])
+@app.route('/droots/users', methods=['GET', 'POST'])
 def getAllUsers():
     if request.method == 'POST':
         # cambie a request.json pq el form no estaba bregando
@@ -28,7 +28,7 @@ def getAllUsers():
         return {"": "Ford", "model": "Mustang", "year": 1964}
 
 
-@app.route('/DROOTS/food', methods=['GET', 'POST'])
+@app.route('/droots/resources/food', methods=['GET', 'POST'])
 def getAllFood():
     if request.method == 'POST':
         # cambie a request.json pq el form no estaba bregando
@@ -42,12 +42,12 @@ def getAllFood():
         else:
             return FoodHandler().search_food(request.args)
 
-@app.route('/DROOTS/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/droots/resources/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
 def getFoodById(food_id):
     if request.method == 'GET':
         return FoodHandler().getFoodById(food_id)
     elif request.method == 'PUT':
-        return FoodHandler().updatePart(food_id, request.form)
+        return FoodHandler().updatePart(food_id, request.json)
     elif request.method == 'DELETE':
         return FoodHandler().deletePart(food_id)
     else:

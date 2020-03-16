@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6b3eef5-8e67-4830-82f6-6d9495d46845" name="Default Changelist" comment="Dummy commit">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/food.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbproject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/food.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/food.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,14 +22,6 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="FoodHandler" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584244339328</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Dummy commit">
+      <created>1584244543757</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584244543757</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,83 +120,108 @@
     </state>
     <state x="368" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1435.976@65.24.1435.976" timestamp="1584118335663" />
     <state x="457" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1855.926@65.24.1855.926" timestamp="1584060412620" />
+    <state x="545" y="151" key="#xdebugger.evaluate" timestamp="1584319927095">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="545" y="151" key="#xdebugger.evaluate/65.24.1435.976@65.24.1435.976" timestamp="1584319927095" />
+    <state x="392" y="43" key="CommitChangelistDialog2" timestamp="1584245327921">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="392" y="43" key="CommitChangelistDialog2/65.24.1435.976@65.24.1435.976" timestamp="1584245327921" />
+    <state x="208" y="94" key="DiffContextDialog" timestamp="1584245230896">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="208" y="94" key="DiffContextDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245230896" />
     <state x="618" y="243" key="FileChooserDialogImpl" timestamp="1584230536273">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
     <state x="618" y="243" key="FileChooserDialogImpl/65.24.1435.976@65.24.1435.976" timestamp="1584230536273" />
     <state x="780" y="232" key="FileChooserDialogImpl/65.24.1855.926@65.24.1855.926" timestamp="1584060407581" />
-    <state width="1412" height="260" key="GridCell.Tab.0.bottom" timestamp="1584243805550">
+    <state width="1412" height="260" key="GridCell.Tab.0.bottom" timestamp="1584321656063">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.bottom/65.24.1435.976@65.24.1435.976" timestamp="1584243805550" />
+    <state width="1412" height="260" key="GridCell.Tab.0.bottom/65.24.1435.976@65.24.1435.976" timestamp="1584321656063" />
     <state width="1809" height="253" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" timestamp="1584060483641" />
-    <state width="1412" height="260" key="GridCell.Tab.0.center" timestamp="1584243805549">
+    <state width="1412" height="260" key="GridCell.Tab.0.center" timestamp="1584321656062">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.center/65.24.1435.976@65.24.1435.976" timestamp="1584243805549" />
+    <state width="1412" height="260" key="GridCell.Tab.0.center/65.24.1435.976@65.24.1435.976" timestamp="1584321656062" />
     <state width="1809" height="253" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" timestamp="1584060483638" />
-    <state width="1412" height="260" key="GridCell.Tab.0.left" timestamp="1584243805548">
+    <state width="1412" height="260" key="GridCell.Tab.0.left" timestamp="1584321656061">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.left/65.24.1435.976@65.24.1435.976" timestamp="1584243805548" />
+    <state width="1412" height="260" key="GridCell.Tab.0.left/65.24.1435.976@65.24.1435.976" timestamp="1584321656061" />
     <state width="1809" height="253" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" timestamp="1584060483635" />
-    <state width="1412" height="260" key="GridCell.Tab.0.right" timestamp="1584243805550">
+    <state width="1412" height="260" key="GridCell.Tab.0.right" timestamp="1584321656062">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.right/65.24.1435.976@65.24.1435.976" timestamp="1584243805550" />
+    <state width="1412" height="260" key="GridCell.Tab.0.right/65.24.1435.976@65.24.1435.976" timestamp="1584321656062" />
     <state width="1809" height="253" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1584060483639" />
-    <state width="694" height="333" key="GridCell.Tab.1.bottom" timestamp="1584238200351">
+    <state width="1412" height="344" key="GridCell.Tab.1.bottom" timestamp="1584319960827">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="694" height="333" key="GridCell.Tab.1.bottom/65.24.1435.976@65.24.1435.976" timestamp="1584238200351" />
-    <state width="694" height="333" key="GridCell.Tab.1.center" timestamp="1584238200350">
+    <state width="1412" height="344" key="GridCell.Tab.1.bottom/65.24.1435.976@65.24.1435.976" timestamp="1584319960827" />
+    <state width="1412" height="344" key="GridCell.Tab.1.center" timestamp="1584319960826">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="694" height="333" key="GridCell.Tab.1.center/65.24.1435.976@65.24.1435.976" timestamp="1584238200350" />
-    <state width="694" height="333" key="GridCell.Tab.1.left" timestamp="1584238200350">
+    <state width="1412" height="344" key="GridCell.Tab.1.center/65.24.1435.976@65.24.1435.976" timestamp="1584319960826" />
+    <state width="1412" height="344" key="GridCell.Tab.1.left" timestamp="1584319960826">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="694" height="333" key="GridCell.Tab.1.left/65.24.1435.976@65.24.1435.976" timestamp="1584238200350" />
-    <state width="694" height="333" key="GridCell.Tab.1.right" timestamp="1584238200350">
+    <state width="1412" height="344" key="GridCell.Tab.1.left/65.24.1435.976@65.24.1435.976" timestamp="1584319960826" />
+    <state width="1412" height="344" key="GridCell.Tab.1.right" timestamp="1584319960827">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
-    <state width="694" height="333" key="GridCell.Tab.1.right/65.24.1435.976@65.24.1435.976" timestamp="1584238200350" />
+    <state width="1412" height="344" key="GridCell.Tab.1.right/65.24.1435.976@65.24.1435.976" timestamp="1584319960827" />
+    <state x="209" y="94" key="MergeDialog" timestamp="1584245276099">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="209" y="94" key="MergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245276099" />
+    <state x="492" y="217" key="MultipleFileMergeDialog" timestamp="1584245276105">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="492" y="217" key="MultipleFileMergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245276105" />
     <state x="276" y="134" key="SettingsEditor" timestamp="1584118247757">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
     <state x="276" y="134" key="SettingsEditor/65.24.1435.976@65.24.1435.976" timestamp="1584118247757" />
+    <state x="382" y="235" key="Vcs.Push.Dialog.v2" timestamp="1584245348167">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="382" y="235" key="Vcs.Push.Dialog.v2/65.24.1435.976@65.24.1435.976" timestamp="1584245348167" />
     <state x="445" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1584230578268">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
     <state x="445" y="342" key="com.intellij.ide.util.TipDialog/65.24.1435.976@65.24.1435.976" timestamp="1584230578268" />
+    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog" timestamp="1584244196465">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244196465" />
+    <state x="522" y="292" key="git4idea.merge.GitMergeDialog" timestamp="1584245307264">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="522" y="292" key="git4idea.merge.GitMergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245307264" />
+    <state x="443" y="292" key="git4idea.merge.GitPullDialog" timestamp="1584244860038">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="443" y="292" key="git4idea.merge.GitPullDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244860038" />
+    <state x="535" y="401" key="git4idea.ui.GitStashDialog" timestamp="1584244425291">
+      <screen x="65" y="24" width="1435" height="976" />
+    </state>
+    <state x="535" y="401" key="git4idea.ui.GitStashDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244425291" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/handler/food.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="3" />
+          <line>95</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/handler/food.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/handler/food.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/handler/food.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/handler/food.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
