@@ -6,6 +6,7 @@ from flask_cors import CORS, cross_origin
 
 # Activate
 from handler.food import FoodHandler
+from handler.power_resources import PowerResourcesHandler
 from handler.user import UserHandler
 
 app = Flask(__name__)
@@ -64,6 +65,31 @@ def getUserById(user_id):
 
     elif request.method == 'DELETE':
         return UserHandler().deleteUser(user_id)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/powerresources', methods=['GET', 'POST'])
+def getAllPowerResources():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return PowerResourcesHandler().insertPowerResourceJson(request.json)
+
+    else:
+        return PowerResourcesHandler().getAllPowerResources()
+
+
+@app.route('/droots/resources/powerresources/<int:power_resource_id>', methods=['GET', 'PUT', 'DELETE'])
+def getPowerResourceById(power_resource_id):
+    if request.method == 'GET':
+        return PowerResourcesHandler().getPowerResourceById(power_resource_id)
+
+    elif request.method == 'PUT':
+        return PowerResourcesHandler().updatePowerResource(power_resource_id, request.form)
+
+    elif request.method == 'DELETE':
+        return PowerResourcesHandler().deletePowerResource(power_resource_id)
 
     else:
         return jsonify(Error="Method not allowed."), 405
