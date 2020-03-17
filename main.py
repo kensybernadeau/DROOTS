@@ -5,7 +5,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
 # Activate
+from handler.Administrator import AdministratorsHandler
 from handler.food import FoodHandler
+from handler.fuel import FuelHandler
 from handler.power_resources import PowerResourcesHandler
 from handler.user import UserHandler
 
@@ -90,6 +92,57 @@ def getPowerResourceById(power_resource_id):
 
     elif request.method == 'DELETE':
         return PowerResourcesHandler().deletePowerResource(power_resource_id)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/fuel', methods=['GET', 'POST'])
+def getAllFuels():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return FuelHandler().insertFuelJson(request.json)
+
+    else:
+        return FuelHandler().getAllFuels()
+
+
+@app.route('/droots/resources/fuel/<int:fuel_id>', methods=['GET', 'PUT', 'DELETE'])
+def getFuelById(fuel_id):
+    if request.method == 'GET':
+        return FuelHandler().getFuelById(fuel_id)
+
+    elif request.method == 'PUT':
+        return FuelHandler().updateFuel(fuel_id, request.form)
+
+    elif request.method == 'DELETE':
+        return FuelHandler().deleteFuel(fuel_id)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+
+@app.route('/droots/administrators', methods=['GET', 'POST'])
+def getAllAdministrators():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return AdministratorsHandler().insertAdministratorJson(request.json)
+
+    else:
+        return AdministratorsHandler().getAllAdministrators()
+
+
+@app.route('/droots/administrators/<int:administrator_id>', methods=['GET', 'PUT', 'DELETE'])
+def getAdministratorById(administrator_id):
+    if request.method == 'GET':
+        return AdministratorsHandler().getAdministratorById(administrator_id)
+
+    elif request.method == 'PUT':
+        return AdministratorsHandler().updateAdministrator(administrator_id, request.form)
+
+    elif request.method == 'DELETE':
+        return AdministratorsHandler().deleteAdministrator(administrator_id)
 
     else:
         return jsonify(Error="Method not allowed."), 405

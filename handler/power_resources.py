@@ -42,9 +42,9 @@ class PowerResourcesHandler:
         return result
 
     def getAllPowerResources(self):
-        ulist = self.give_me_power_resources()
+        prlist = self.give_me_power_resources()
         result_list = []
-        for row in ulist:
+        for row in prlist:
             result = self.build_power_resources_dict(row)
             result_list.append(result)
         return jsonify(Power_Resources=result_list)
