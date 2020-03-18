@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class FuelHandler:
-    fuels = [(1, "diesel", 20), (2, "gas", 40), (3, "biodiesel", 10)]
+    fuels = [(1, "diesel", 20), (2, "gas", 40), (3, "biodiesel", 10),(4, "diesel", 50),(5, "diesel", 100),(6, "diesel", 40)]
 
     # ----------------utils-------------------
     def give_me_fuels(self):
@@ -12,6 +12,13 @@ class FuelHandler:
         for f in self.fuels:
             if fuel_id == f[0]:
                 return f
+
+    def getByType(self, f_type):
+        result = []
+        for row in self.fuels:
+            if row[1] == f_type:
+                result.append(row)
+        return result
 
     def insert_fuel(self, fuel_type, fuel_quantity):
         self.fuels.append((len(self.fuels) + 1, fuel_type, fuel_quantity))
@@ -40,7 +47,6 @@ class FuelHandler:
         result['fuel_type'] = fuel_type
         result['fuel_quantity'] = fuel_quantity
         return result
-
 
     def getAllFuels(self):
         flist = self.give_me_fuels()
@@ -72,8 +78,6 @@ class FuelHandler:
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
 
-
-
     def updateFuel(self, fuel_id, form):
         if not self.getById(fuel_id):
             return jsonify(Error="Fuel not found."), 404
@@ -90,10 +94,22 @@ class FuelHandler:
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
-
     def deleteFuel(self, fuel_id):
         if not self.getById(fuel_id):
             return jsonify(Error="Fuel not found."), 404
         else:
             self.delete_fuel(fuel_id)
             return jsonify(DeleteStatus="OK"), 200
+
+    def searchFuels(self, args):
+        f_type = args.get("fuel_type")
+        parts_list = []
+        if (len(args) == 1) and f_type:
+            parts_list = self.getByType(f_type)
+        else:
+            return jsonify(Error="Malformed query string"), 400
+        result_list = []
+        for row in parts_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Fuels=result_list)

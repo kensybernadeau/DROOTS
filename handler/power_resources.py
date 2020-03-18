@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class PowerResourcesHandler:
-    power_resources = [(1, "fuel", 20), (2, "diesel", 40), (3, "electric panels", 10)]
+    power_resources = [(1, "batteries", 20), (2, "fuel", 40), (3, "solar", 10)]
 
     # ----------------utils-------------------
     def give_me_power_resources(self):
@@ -12,6 +12,13 @@ class PowerResourcesHandler:
         for f in self.power_resources:
             if user_id == f[0]:
                 return f
+
+    def getByType(self, pr_category):
+        result = []
+        for row in self.power_resources:
+            if row[1] == pr_category:
+                result.append(row)
+        return result
 
     def insert_power_resource(self, power_category, power_quantity):
         self.power_resources.append((len(self.power_resources) + 1, power_category, power_quantity))
@@ -93,3 +100,17 @@ class PowerResourcesHandler:
         else:
             self.delete_power_resource(power_resource_id)
             return jsonify(DeleteStatus="OK"), 200
+
+
+    def searchPowerResources(self, args):
+        pr_category = args.get("power_resource_category")
+        parts_list = []
+        if (len(args) == 1) and pr_category:
+            parts_list = self.getByType(pr_category)
+        else:
+            return jsonify(Error="Malformed query string"), 400
+        result_list = []
+        for row in parts_list:
+            result = self.build_power_resources_dict(row)
+            result_list.append(result)
+        return jsonify(Power_Resources=result_list)

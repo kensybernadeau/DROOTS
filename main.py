@@ -35,6 +35,7 @@ def getAllFood():
         else:
             return FoodHandler().search_food(request.args)
 
+
 @app.route('/droots/resources/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
 def getFoodById(food_id):
     if request.method == 'GET':
@@ -79,7 +80,10 @@ def getAllPowerResources():
         return PowerResourcesHandler().insertPowerResourceJson(request.json)
 
     else:
-        return PowerResourcesHandler().getAllPowerResources()
+        if not request.args:
+            return PowerResourcesHandler().getAllPowerResources()
+        else:
+            return PowerResourcesHandler().searchPowerResources(request.args)
 
 
 @app.route('/droots/resources/powerresources/<int:power_resource_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -104,7 +108,10 @@ def getAllFuels():
         return FuelHandler().insertFuelJson(request.json)
 
     else:
-        return FuelHandler().getAllFuels()
+        if not request.args:
+            return FuelHandler().getAllFuels()
+        else:
+            return FuelHandler().searchFuels(request.args)
 
 
 @app.route('/droots/resources/fuel/<int:fuel_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -120,7 +127,6 @@ def getFuelById(fuel_id):
 
     else:
         return jsonify(Error="Method not allowed."), 405
-
 
 
 @app.route('/droots/administrators', methods=['GET', 'POST'])
