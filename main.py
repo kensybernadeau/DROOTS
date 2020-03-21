@@ -10,6 +10,7 @@ from handler.food import FoodHandler
 from handler.fuel import FuelHandler
 from handler.power_resources import PowerResourcesHandler
 from handler.user import UserHandler
+from handler.clothing import ClothingHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
@@ -125,6 +126,34 @@ def getFuelById(fuel_id):
     elif request.method == 'DELETE':
         return FuelHandler().deleteFuel(fuel_id)
 
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+
+@app.route('/droots/resources/clothing', methods=['GET', 'POST'])
+def getAllClothes():
+    if request.method == 'POST':
+        # cambie a request.json pq el form no estaba bregando
+        # parece q estaba poseido por satanas ...
+        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
+        print("REQUEST: ", request.json)
+        return ClothingHandler().insertClotheJson(request.json)
+    else:
+        if not request.args:
+            return ClothingHandler().getAllclothes()
+        else:
+            return ClothingHandler().search_clothes(request.args)
+
+
+@app.route('/droots/resources/clothing/<int:clothe_id>', methods=['GET', 'PUT', 'DELETE'])
+def getClotheById(clothe_id):
+    if request.method == 'GET':
+        return ClothingHandler().getClotheById(clothe_id)
+    elif request.method == 'PUT':
+        return ClothingHandler().updateClothe(clothe_id, request.json)
+    elif request.method == 'DELETE':
+        return ClothingHandler().deleteClothe(clothe_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
