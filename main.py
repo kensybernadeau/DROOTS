@@ -12,6 +12,7 @@ from handler.power_resources import PowerResourcesHandler
 from handler.user import UserHandler
 from handler.clothing import ClothingHandler
 from handler.tools import ToolsHandler
+from handler.resources import ResourcesHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
@@ -21,6 +22,33 @@ CORS(app)
 @app.route('/')
 def greeting():
     return 'Hello, this is the parts DB App!'
+
+
+@app.route('/droots/resources/', methods=['GET', 'POST'])
+def getAllResources():
+    if request.method == 'POST':
+        # cambie a request.json pq el form no estaba bregando
+        # parece q estaba poseido por satanas ...
+        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
+        print("REQUEST: ", request.json)
+        return ResourcesHandler().insertResourceJson(request.json)
+    else:
+        if not request.args:
+            return ResourcesHandler().getAllResources()
+        else:
+            return ResourcesHandler().search_resource(request.args)
+
+
+@app.route('/droots/resources/<int:resource_id>', methods=['GET', 'PUT', 'DELETE'])
+def getResourceById(resource_id):
+    if request.method == 'GET':
+        return ResourcesHandler().getResourceById(resource_id)
+    elif request.method == 'PUT':
+        return ResourcesHandler().updateResource(resource_id, request.json)
+    elif request.method == 'DELETE':
+        return ResourcesHandler().deleteResource(resource_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 @app.route('/droots/resources/food', methods=['GET', 'POST'])

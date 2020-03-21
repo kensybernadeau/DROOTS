@@ -71,7 +71,7 @@ class ToolsHandler:
             if tool_name and tool_description:
                 # dao = PartsDAO()
                 # pid = dao.insert(pname, pcolor, pmaterial, pprice)
-                tool_id = self.insert_food(tool_name, tool_description)
+                tool_id = self.insert_tool(tool_name, tool_description)
                 result = self.build_part_attributes(tool_id, tool_name, tool_description)
                 return jsonify(Part=result), 201
             else:
