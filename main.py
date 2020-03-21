@@ -11,6 +11,7 @@ from handler.fuel import FuelHandler
 from handler.power_resources import PowerResourcesHandler
 from handler.user import UserHandler
 from handler.clothing import ClothingHandler
+from handler.tools import ToolsHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
@@ -156,6 +157,31 @@ def getClotheById(clothe_id):
         return ClothingHandler().deleteClothe(clothe_id)
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/droots/resources/tools', methods=['GET', 'POST'])
+def getAllTools():
+        if request.method == 'POST':
+            # cambie a request.json pq el form no estaba bregando
+            # parece q estaba poseido por satanas ...
+            # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
+            print("REQUEST: ", request.json)
+            return ToolsHandler().insertToolJson(request.json)
+        else:
+            if not request.args:
+                return ToolsHandler().getAllTools()
+            else:
+                return ToolsHandler().search_tools(request.args)
+
+@app.route('/droots/resources/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])
+def getToolById(tool_id):
+        if request.method == 'GET':
+            return ToolsHandler().getToolById(tool_id)
+        elif request.method == 'PUT':
+            return ToolsHandler().updateTool(tool_id, request.json)
+        elif request.method == 'DELETE':
+            return ToolsHandler().deleteTool(tool_id)
+        else:
+            return jsonify(Error="Method not allowed."), 405
 
 
 @app.route('/droots/administrators', methods=['GET', 'POST'])
