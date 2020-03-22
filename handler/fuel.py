@@ -82,7 +82,7 @@ class FuelHandler:
         if not self.getById(fuel_id):
             return jsonify(Error="Fuel not found."), 404
         else:
-            if len(form) != 3:
+            if len(form) != 2:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 fuel_type = form['fuel_type']
