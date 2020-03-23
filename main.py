@@ -6,6 +6,10 @@ from flask_cors import CORS, cross_origin
 
 # Activate
 from handler.Administrator import AdministratorsHandler
+from handler.Customer import CustomerHandler
+from handler.HeavyEquipment import HeavyEquipmentHandler
+from handler.Request import RequestHandler
+from handler.Reservation import ReservationHandler
 from handler.food import FoodHandler
 from handler.fuel import FuelHandler
 from handler.power_resources import PowerResourcesHandler
@@ -13,6 +17,7 @@ from handler.user import UserHandler
 from handler.clothing import ClothingHandler
 from handler.tools import ToolsHandler
 from handler.resources import ResourcesHandler
+
 
 app = Flask(__name__)
 # Apply CORS to this app
@@ -236,6 +241,80 @@ def getAdministratorById(administrator_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route('/droots/customer/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
+def getCustomerById(customer_id):
+    if request.method == 'GET':
+        return CustomerHandler().getCustomersById(customer_id)
+    elif request.method == 'PUT':
+        return CustomerHandler().updateCustomers(customer_id, request.form)
+    elif request.method == 'DELETE':
+        return CustomerHandler().deleteCustomers(customer_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/customer', methods=['GET', 'POST'])
+def getAllCustomer():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return CustomerHandler().insertCustomersJson(request.json)
+
+    else:
+        return CustomerHandler().getAllCustomers()
+
+
+@app.route('/droots/customer/request/<int:request_id>', methods=['GET', 'POST','PUT'])
+def getRequestById(request_id):
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return RequestHandler().insertRequestJson(request.json)
+    elif request.method == 'GET':
+        return RequestHandler().getAllRequest()
+    elif request.method == 'PUT':
+        return RequestHandler().updateRequest(request_id, request.form)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/customer/reservation/<int:reservation_id>', methods=['GET', 'POST','PUT'])
+def getReservationById(reservation_id):
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ReservationHandler().insertReservationJson(request.json)
+    elif request.method == 'GET':
+        return ReservationHandler().getReservationById(reservation_id)
+    elif request.method == 'PUT':
+        return ReservationHandler().updateReservation(reservation_id, request.form)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/heavyequipment/', methods=['GET', 'POST',])
+def getAllHEquipment():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return HeavyEquipmentHandler().insertHEquipmentJson(request.json)
+    elif request.method == 'GET':
+        return HeavyEquipmentHandler().getAllHEquipment()
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/heavyequipment/<int:hequipment_id>', methods=['GET', 'POST','PUT'])
+def getRequestById(hequipment_id):
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return HeavyEquipmentHandler().insertHEquipmentJson(request.json)
+    elif request.method == 'GET':
+        return HeavyEquipmentHandler().getHEquipmentById(hequipment_id)
+    elif request.method == 'PUT':
+        return HeavyEquipmentHandler().updateHEquipment(hequipment_id, request.form)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 if __name__ == '__main__':
     app.run()
