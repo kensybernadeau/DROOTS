@@ -13,7 +13,7 @@ class PowerResourcesHandler:
             if user_id == f[0]:
                 return f
 
-    def getByType(self, pr_category):
+    def getByCategory(self, pr_category):
         result = []
         for row in self.power_resources:
             if row[1] == pr_category:
@@ -104,13 +104,13 @@ class PowerResourcesHandler:
 
     def searchPowerResources(self, args):
         pr_category = args.get("power_resource_category")
-        parts_list = []
+        pr_list = []
         if (len(args) == 1) and pr_category:
-            parts_list = self.getByType(pr_category)
+            pr_list = self.getByCategory(pr_category)
         else:
             return jsonify(Error="Malformed query string"), 400
         result_list = []
-        for row in parts_list:
+        for row in pr_list:
             result = self.build_power_resources_dict(row)
             result_list.append(result)
         return jsonify(Power_Resources=result_list)

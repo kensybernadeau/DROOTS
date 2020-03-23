@@ -304,7 +304,7 @@ def getAllHEquipment():
 
 
 @app.route('/droots/resources/heavyequipment/<int:hequipment_id>', methods=['GET', 'POST','PUT'])
-def getRequestById(hequipment_id):
+def getHEquipmentById(hequipment_id):
     if request.method == 'POST':
         print("REQUEST: ", request.json)
         return HeavyEquipmentHandler().insertHEquipmentJson(request.json)
