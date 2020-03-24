@@ -3,7 +3,7 @@ from flask import jsonify
 
 class ReservationHandler:
 
-    reservation = [('1'), ('2'), ('3')]
+    reservation = [(1), (2), (3)]
 
     #----------------utils-------------------
     def give_me_reservation(self):
@@ -61,7 +61,7 @@ class ReservationHandler:
 
     def insertReservationJson(self, form):
         print("form: ", form)
-        if len(form) != 0:
+        if len(form) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
                 # dao = PartsDAO()
@@ -75,9 +75,9 @@ class ReservationHandler:
         # dao = PartsDAO()
         # if not dao.getPartById(pid):
         if not self.getReservationById(reservation_id):
-            return jsonify(Error = "Request not found."), 404
+            return jsonify(Error = "Rserevation not found."), 404
         else:
-            if len(form) != 0:
+            if len(form) != 1:
                 return jsonify(Error="Malformed update request"), 400
             else:
                     # dao.update(pid, pname, pcolor, pmaterial, pprice)

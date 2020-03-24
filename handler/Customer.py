@@ -3,7 +3,7 @@ from flask import jsonify
 
 class CustomerHandler:
 
-    customers = [('1'),('2'),('3')]
+    customers = [(1),(2),(3)]
 
     #----------------utils-------------------
     def give_me_customers(self):
@@ -28,7 +28,7 @@ class CustomerHandler:
 
     def build_customers_dict(self, list):
         result = {}
-        result['customers_id'] = list[0]
+        result['customers_id'] = list
         return result
 
     def build_customers_attributes(self, customers_id):

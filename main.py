@@ -6,6 +6,7 @@ from flask_cors import CORS, cross_origin
 
 # Activate
 from handler.Administrator import AdministratorsHandler
+from handler.Batteries import BatteriesHandler
 from handler.Customer import CustomerHandler
 from handler.HeavyEquipment import HeavyEquipmentHandler
 from handler.Request import RequestHandler
@@ -253,6 +254,7 @@ def getCustomerById(customer_id):
         return jsonify(Error="Method not allowed."), 405
 
 
+
 @app.route('/droots/customer', methods=['GET', 'POST'])
 def getAllCustomer():
     if request.method == 'POST':
@@ -315,6 +317,32 @@ def getHEquipmentById(hequipment_id):
 
     else:
         return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/batteries/<int:batteries_id>', methods=['GET', 'PUT', 'DELETE'])
+def getBatteriesById(batteries_id):
+    if request.method == 'GET':
+        return BatteriesHandler().getBatteriesById(batteries_id)
+    elif request.method == 'PUT':
+        return BatteriesHandler().updateBatteries(batteries_id, request.form)
+    elif request.method == 'DELETE':
+        return BatteriesHandler().deleteBatteries(batteries_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/batteries', methods=['GET','POST'])
+def getAllBatteries():
+    if request.method == 'GET':
+        return BatteriesHandler().getAllBatteries()
+
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return BatteriesHandler().insertBatteriesJson(request.json)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 if __name__ == '__main__':
     app.run()

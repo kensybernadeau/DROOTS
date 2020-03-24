@@ -3,7 +3,7 @@ from flask import jsonify
 
 class BatteriesHandler:
 
-    batteries = [('1','AA','1.5','4'),('2','AAA','1.5','8'),('3','D','9','12')]
+    batteries = [(1,'AA','1.5','4'),(2,'AAA','1.5','8'),(3,'D','9','12')]
 
     #----------------utils-------------------
     def give_me_batteries(self):

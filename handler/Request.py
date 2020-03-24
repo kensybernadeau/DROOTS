@@ -3,7 +3,7 @@ from flask import jsonify
 
 class RequestHandler:
 
-    request = [('1'),('2'),('3')]
+    request = [(1),(2),(3)]
 
     #----------------utils-------------------
     def give_me_request(self):
@@ -61,7 +61,7 @@ class RequestHandler:
 
     def insertRequestJson(self, form):
         print("form: ", form)
-        if len(form) != 0:
+        if len(form) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
                 # dao = PartsDAO()
@@ -77,7 +77,7 @@ class RequestHandler:
         if not self.getRequestById(request_id):
             return jsonify(Error = "Request not found."), 404
         else:
-            if len(form) != 0:
+            if len(form) != 1:
                 return jsonify(Error="Malformed update request"), 400
             else:
                     # dao.update(pid, pname, pcolor, pmaterial, pprice)
