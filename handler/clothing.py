@@ -61,7 +61,7 @@ class ClothingHandler:
 
     def insertClotheJson(self, form):
         print("form: ", form)
-        if len(form) != 5:
+        if len(form) != 3:
             return jsonify(Error="Malformed post request"), 400
         else:
             clothe_type = form['clothe_type']
@@ -78,7 +78,7 @@ class ClothingHandler:
         if not self.getClotheById(clothe_id):
             return jsonify(Error = "Clothe not found."), 404
         else:
-            if len(form) != 5:
+            if len(form) != 3:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 clothe_type = form['clothe_type']

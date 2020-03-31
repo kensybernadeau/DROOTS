@@ -54,7 +54,7 @@ class CustomerHandler:
 
     def insertCustomersJson(self, form):
         print("form: ", form)
-        if len(form) != 0:
+        if len(form) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
             customer_id = self.insert_customers()
@@ -65,7 +65,7 @@ class CustomerHandler:
         if not self.getCustomersById(customers_id):
             return jsonify(Error="Customer not found."), 404
         else:
-            if len(form) != 0:
+            if len(form) != 1:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 self.update_customers(customers_id)
