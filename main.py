@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 # services on other ports on this machine or on other
 # machines to access this app
 from flask_cors import CORS, cross_origin
-
+#dhf
 # Activate
 from handler.Administrator import AdministratorsHandler
 from handler.Batteries import BatteriesHandler
@@ -13,7 +13,9 @@ from handler.Request import RequestHandler
 from handler.Reservation import ReservationHandler
 from handler.food import FoodHandler
 from handler.fuel import FuelHandler
+from handler.health import HealthHandler
 from handler.power_resources import PowerResourcesHandler
+from handler.supplier import SupplierHandler
 from handler.user import UserHandler
 from handler.clothing import ClothingHandler
 from handler.tools import ToolsHandler
@@ -80,6 +82,59 @@ def getFoodById(food_id):
         return FoodHandler().updatePart(food_id, request.json)
     elif request.method == 'DELETE':
         return FoodHandler().deletePart(food_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/health', methods=['GET', 'POST'])
+def getAllHealth():
+    if request.method == 'POST':
+        # cambie a request.json pq el form no estaba bregando
+        # parece q estaba poseido por satanas ...
+        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
+        print("REQUEST: ", request.json)
+        return HealthHandler().insertHealthJson(request.json)
+    else:
+        if not request.args:
+            return HealthHandler().getAllHealth()
+        else:
+            return HealthHandler().search_Health(request.args)
+
+
+@app.route('/droots/resources/health/<int:health_id>', methods=['GET', 'PUT', 'DELETE'])
+def getHealthById(health_id):
+    if request.method == 'GET':
+        return HealthHandler().getHealthById(health_id)
+    elif request.method == 'PUT':
+        return HealthHandler().updateHealth(health_id, request.json)
+    elif request.method == 'DELETE':
+        return HealthHandler().deleteHealth(health_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/droots/resources/supplier', methods=['GET', 'POST'])
+def getAllSupplier():
+    if request.method == 'POST':
+        # cambie a request.json pq el form no estaba bregando
+        # parece q estaba poseido por satanas ...
+        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
+        print("REQUEST: ", request.json)
+        return SupplierHandler().insertSupplierJson(request.json)
+    else:
+        if not request.args:
+            return SupplierHandler().getAllSupplier()
+        else:
+            return SupplierHandler().search_Supplier(request.args)
+
+
+@app.route('/droots/resources/supplier/<int:supplier_id>', methods=['GET', 'PUT', 'DELETE'])
+def getSupplierById(supplier_id):
+    if request.method == 'GET':
+        return SupplierHandler().getSupplierById(supplier_id)
+    elif request.method == 'PUT':
+        return SupplierHandler().updateSupplier(supplier_id, request.json)
+    elif request.method == 'DELETE':
+        return SupplierHandler().deleteSupplier(supplier_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 

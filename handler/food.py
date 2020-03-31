@@ -23,8 +23,9 @@ class FoodHandler:
         self.food.pop(food_id-1)
         self.food.insert(food_id-1, (food_id, food_name, food_quantity, food_exp_date, food_type, food_description))
 
-    def delete_part(self, food_id):
-        self.food.pop(food_id - 1)
+    def delete_food(self, food_id):
+        f = self.getById(food_id)
+        self.food.remove(f)
     #--------------end utils-----------------
 
     def build_food_dict(self, row):
@@ -86,7 +87,7 @@ class FoodHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-    def updatePart(self, food_id, form):
+    def updateFood(self, food_id, form):
         # dao = PartsDAO()
         # if not dao.getPartById(pid):
         if not self.getFoodById(food_id):
@@ -109,12 +110,11 @@ class FoodHandler:
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def deletePart(self, food_id):
+    def deleteFood(self, food_id):
         # dao = PartsDAO()
         # if not dao.getPartById(pid):
         if not self.getFoodById(food_id):
             return jsonify(Error="Part not found."), 404
         else:
             # dao.delete(pid)
-            self.delete_part(food_id)
-            return jsonify(DeleteStatus="OK"), 200
+            self.delete_food(food_id)
