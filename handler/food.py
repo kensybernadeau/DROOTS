@@ -100,7 +100,7 @@ class FoodHandler:
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def deletePart(self, food_id):
+    def deleteFood(self, food_id):
         if not self.getFoodById(food_id):
             return jsonify(Error="Food not found."), 404
         else:

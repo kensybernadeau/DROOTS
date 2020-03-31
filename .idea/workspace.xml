@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a6b3eef5-8e67-4830-82f6-6d9495d46845" name="Default Changelist" comment="Dummy commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Batteries.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Batteries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Customer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/clothing.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/clothing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/food.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/food.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/resources.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -211,6 +210,10 @@
     </state>
     <state x="445" y="342" key="com.intellij.ide.util.TipDialog/65.24.1435.976@65.24.1435.976" timestamp="1584230578268" />
     <state x="556" y="326" key="com.intellij.ide.util.TipDialog/65.24.1855.926@65.24.1855.926" timestamp="1584890556704" />
+    <state x="640" y="40" width="704" height="867" key="find.popup" timestamp="1585698445066">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state x="640" y="40" width="704" height="867" key="find.popup/65.24.1855.926@65.24.1855.926" timestamp="1585698445066" />
     <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog" timestamp="1584244196465">
       <screen x="65" y="24" width="1435" height="976" />
     </state>
