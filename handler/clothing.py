@@ -44,8 +44,6 @@ class ClothingHandler:
         return result
 
     def getAllclothes(self):
-        # dao = SupplierDAO()
-        # suppliers_list = dao.getAllSuppliers()
         flist = self.give_me_clothes()
         result_list = []
         for row in flist:
@@ -54,11 +52,9 @@ class ClothingHandler:
         return jsonify(Clothes=result_list)
 
     def getClotheById(self, clothe_id):
-        # dao = PartsDAO()
-        # row = dao.getPartById(pid)
         row = self.getById(clothe_id)
         if not row:
-            return jsonify(Error="Part Not Found"), 404
+            return jsonify(Error="Clothe Not Found"), 404
         else:
             clothe = self.build_clothe_dict(row)
             return jsonify(Clothe=clothe)
@@ -72,19 +68,15 @@ class ClothingHandler:
             clothe_size = form['clothe_size']
             clothe_description = form['clothe_description']
             if clothe_type and clothe_size and clothe_description:
-                # dao = PartsDAO()
-                # pid = dao.insert(pname, pcolor, pmaterial, pprice)
                 clothe_id = self.insert_clothe(clothe_type, clothe_size, clothe_description)
                 result = self.build_clothe_attributes(clothe_id, clothe_type, clothe_size, clothe_description)
-                return jsonify(Part=result), 201
+                return jsonify(Clothe=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def updateClothe(self, clothe_id, form):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getClotheById(clothe_id):
-            return jsonify(Error = "Part not found."), 404
+            return jsonify(Error = "Clothe not found."), 404
         else:
             if len(form) != 5:
                 return jsonify(Error="Malformed update request"), 400
@@ -93,7 +85,6 @@ class ClothingHandler:
                 clothe_size = form['clothe_size']
                 clothe_description = form['clothe_description']
                 if clothe_type and clothe_size and clothe_description:
-                    # dao.update(pid, pname, pcolor, pmaterial, pprice)
                     self.update_clothe(clothe_id, clothe_type, clothe_size, clothe_description)
                     result = self.build_clothe_attributes(clothe_id, clothe_size, clothe_description)
                     return jsonify(Part=result), 200
@@ -101,10 +92,8 @@ class ClothingHandler:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
     def deleteClothe(self, clothe_id):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getClotheById(clothe_id):
-            return jsonify(Error="Part not found."), 404
+            return jsonify(Error="Clothe not found."), 404
         else:
             # dao.delete(pid)
             self.delete_clothe(clothe_id)

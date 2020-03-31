@@ -41,8 +41,6 @@ class HeavyEquipmentHandler:
         return result
 
     def getAllHEquipment(self):
-        # dao = SupplierDAO()
-        # suppliers_list = dao.getAllSuppliers()
         list = self.give_me_hequipment()
         result_list = []
         for row in list:
@@ -51,8 +49,6 @@ class HeavyEquipmentHandler:
         return jsonify(HeavyEquipment=result_list)
 
     def getHEquipmentById(self, hequipment_id):
-        # dao = PartsDAO()
-        # row = dao.getPartById(pid)
         row = self.getById(hequipment_id)
         if not row:
             return jsonify(Error="HeavyEquipment Not Found"), 404
@@ -68,8 +64,6 @@ class HeavyEquipmentHandler:
             hequipment_name = form['hequipment_name']
             hequipment_description = form['hequipment_description']
             if hequipment_name and hequipment_description:
-                # dao = PartsDAO()
-                # pid = dao.insert(pname, pcolor, pmaterial, pprice)
                 hequipment_id = self.insert_hequipment(hequipment_name, hequipment_description)
                 result = self.build_hequipment_attributes(hequipment_id, hequipment_name, hequipment_description)
                 return jsonify(HeavyEquipment=result), 201
@@ -77,8 +71,6 @@ class HeavyEquipmentHandler:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def updateHEquipment(self, hequipment_id, form):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getHEquipmentById(hequipment_id):
             return jsonify(Error = "HeavyEquipment not found."), 404
         else:
@@ -88,7 +80,6 @@ class HeavyEquipmentHandler:
                 hequipment_name = form['hequipment_name']
                 hequipment_description = form['hequipment_description']
                 if hequipment_name and hequipment_description:
-                    # dao.update(pid, pname, pcolor, pmaterial, pprice)
                     self.update_hequipment(hequipment_id, hequipment_name, hequipment_description)
                     result = self.build_hequipment_attributes(hequipment_id, hequipment_name, hequipment_description)
                     return jsonify(HeavyEquipment=result), 200
@@ -96,11 +87,8 @@ class HeavyEquipmentHandler:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
     def deleteHEquipment(self, hequipment_id):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getHEquipmentById(hequipment_id):
             return jsonify(Error="HeavyEquipment not found."), 404
         else:
-            # dao.delete(pid)
             self.delete_hequipment(hequipment_id)
             return jsonify(DeleteStatus="OK"), 200

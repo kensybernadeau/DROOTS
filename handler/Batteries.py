@@ -2,10 +2,9 @@ from flask import jsonify
 
 
 class BatteriesHandler:
+    batteries = [(1, 'AA', '1.5', '4'), (2, 'AAA', '1.5', '8'), (3, 'D', '9', '12')]
 
-    batteries = [(1,'AA','1.5','4'),(2,'AAA','1.5','8'),(3,'D','9','12')]
-
-    #----------------utils-------------------
+    # ----------------utils-------------------
     def give_me_batteries(self):
         return self.batteries
 
@@ -19,12 +18,13 @@ class BatteriesHandler:
         return len(self.batteries)
 
     def update_batteries(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
-        self.batteries.pop(batteries_id-1)
-        self.batteries.insert(batteries_id-1, (batteries_type, batteries_voltage, batteries_quantity))
+        self.batteries.pop(batteries_id - 1)
+        self.batteries.insert(batteries_id - 1, (batteries_type, batteries_voltage, batteries_quantity))
 
     def delete_batteries(self, batteries_id):
         self.batteries.pop(batteries_id - 1)
-    #--------------end utils-----------------
+
+    # --------------end utils-----------------
 
     def build_batteries_dict(self, list):
         result = {}
@@ -43,8 +43,6 @@ class BatteriesHandler:
         return result
 
     def getAllBatteries(self):
-        # dao = SupplierDAO()
-        # suppliers_list = dao.getAllSuppliers()
         list = self.give_me_batteries()
         result_list = []
         for row in list:
@@ -53,8 +51,6 @@ class BatteriesHandler:
         return jsonify(Batteries=result_list)
 
     def getBatteriesById(self, batteries_id):
-        # dao = PartsDAO()
-        # row = dao.getPartById(pid)
         row = self.getById(batteries_id)
         if not row:
             return jsonify(Error="Batteries Not Found"), 404
@@ -71,19 +67,16 @@ class BatteriesHandler:
             batteries_voltage = form['batteries_voltage']
             batteries_quantity = form['batteries_quantity']
             if batteries_type and batteries_voltage and batteries_quantity:
-                # dao = PartsDAO()
-                # pid = dao.insert(pname, pcolor, pmaterial, pprice)
                 batteries_id = self.insert_batteries(batteries_type, batteries_voltage, batteries_quantity)
-                result = self.build_batteries_attributes(batteries_id, batteries_type, batteries_voltage, batteries_quantity)
+                result = self.build_batteries_attributes(batteries_id, batteries_type, batteries_voltage,
+                                                         batteries_quantity)
                 return jsonify(Batteries=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def updateBatteries(self, batteries_id, form):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getBatteriesById(batteries_id):
-            return jsonify(Error = "Batteries not found."), 404
+            return jsonify(Error="Batteries not found."), 404
         else:
             if len(form) != 3:
                 return jsonify(Error="Malformed update request"), 400
@@ -92,19 +85,16 @@ class BatteriesHandler:
                 batteries_voltage = form['batteries_voltage']
                 batteries_quantity = form['batteries_quantity']
                 if batteries_type and batteries_voltage and batteries_quantity:
-                    # dao.update(pid, pname, pcolor, pmaterial, pprice)
                     self.update_batteries(batteries_id, batteries_type, batteries_voltage, batteries_quantity)
-                    result = self.build_batteries_attributes(batteries_id, batteries_type, batteries_voltage, batteries_quantity)
+                    result = self.build_batteries_attributes(batteries_id, batteries_type, batteries_voltage,
+                                                             batteries_quantity)
                     return jsonify(Batteries=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
     def deleteBatteries(self, batteries_id):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getBatteriesById(batteries_id):
             return jsonify(Error="Batteries not found."), 404
         else:
-            # dao.delete(pid)
             self.delete_batteries(batteries_id)
             return jsonify(DeleteStatus="OK"), 200

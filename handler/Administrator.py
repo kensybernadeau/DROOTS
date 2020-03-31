@@ -8,9 +8,9 @@ class AdministratorsHandler:
     def give_me_administrators(self):
         return self.administrators
 
-    def getById(self, user_id):
+    def getById(self, administrator_id):
         for f in self.administrators:
-            if user_id == f[0]:
+            if administrator_id == f[0]:
                 return f
 
     def insert_administrator(self, administrator_fname, administrator_lname):
@@ -21,8 +21,9 @@ class AdministratorsHandler:
         self.administrators.pop(administrator_id - 1)
         self.administrators.insert(administrator_id - 1, (administrator_id, administrator_fname, administrator_lname))
 
-    def delete_administrator(self, user_id):
-        self.administrators.pop(user_id - 1)
+    def delete_administrator(self, administrator_id):
+        result = self.getById(administrator_id)
+        self.administrators.remove(administrator_id)
 
         # --------------end utils-----------------
 

@@ -29,7 +29,8 @@ class FuelHandler:
         self.fuels.insert(fuel_id - 1, (fuel_id, fuel_type, fuel_liters))
 
     def delete_fuel(self, fuel_id):
-        self.fuels.pop(fuel_id - 1)
+        result = self.getById(fuel_id)
+        self.fuels.remove(result)
 
         # --------------end utils-----------------
 

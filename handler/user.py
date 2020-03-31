@@ -23,7 +23,8 @@ class UserHandler:
         self.users.insert(user_id - 1, (user_id, user_fname, user_lname, user_location, user_uname, user_passwd))
 
     def delete_user(self, user_id):
-        self.users.pop(user_id - 1)
+        result = self.getById(user_id)
+        self.users.remove(result)
 
         # --------------end utils-----------------
 

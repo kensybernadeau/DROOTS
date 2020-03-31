@@ -9,9 +9,9 @@ class PowerResourcesHandler:
     def give_me_power_resources(self):
         return self.power_resources
 
-    def getById(self, user_id):
+    def getById(self, power_resource_id):
         for f in self.power_resources:
-            if user_id == f[0]:
+            if power_resource_id == f[0]:
                 return f
 
     def getByCategory(self, pr_category):
@@ -40,7 +40,8 @@ class PowerResourcesHandler:
         power_resource_id, power_resource_category, power_resource_type, power_resource_description))
 
     def delete_power_resource(self, power_resource_id):
-        self.power_resources.pop(power_resource_id - 1)
+        result = self.getById(power_resource_id)
+        self.power_resources.remove(result)
 
         # --------------end utils-----------------
 
