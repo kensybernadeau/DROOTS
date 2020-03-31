@@ -67,7 +67,7 @@ class ToolsHandler:
             if tool_name and tool_description:
                 tool_id = self.insert_tool(tool_name, tool_description)
                 result = self.build_tool_attributes(tool_id, tool_name, tool_description)
-                return jsonify(Part=result), 201
+                return jsonify(Tool=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -89,11 +89,8 @@ class ToolsHandler:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
     def deleteTool(self, tool_id):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
         if not self.getToolById(tool_id):
-            return jsonify(Error="Part not found."), 404
+            return jsonify(Error="Tool not found."), 404
         else:
-            # dao.delete(pid)
             self.delete_tool(tool_id)
             return jsonify(DeleteStatus="OK"), 200

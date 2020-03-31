@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 # services on other ports on this machine or on other
 # machines to access this app
 from flask_cors import CORS, cross_origin
-#dhf
+# dhf
 # Activate
 from handler.Administrator import AdministratorsHandler
 from handler.Batteries import BatteriesHandler
@@ -21,7 +21,6 @@ from handler.clothing import ClothingHandler
 from handler.tools import ToolsHandler
 from handler.resources import ResourcesHandler
 
-
 app = Flask(__name__)
 # Apply CORS to this app
 CORS(app)
@@ -35,9 +34,6 @@ def greeting():
 @app.route('/droots/resources/', methods=['GET', 'POST'])
 def getAllResources():
     if request.method == 'POST':
-        # cambie a request.json pq el form no estaba bregando
-        # parece q estaba poseido por satanas ...
-        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
         print("REQUEST: ", request.json)
         return ResourcesHandler().insertResourceJson(request.json)
     else:
@@ -62,9 +58,6 @@ def getResourceById(resource_id):
 @app.route('/droots/resources/food', methods=['GET', 'POST'])
 def getAllFood():
     if request.method == 'POST':
-        # cambie a request.json pq el form no estaba bregando
-        # parece q estaba poseido por satanas ...
-        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
         print("REQUEST: ", request.json)
         return FoodHandler().insertFoodJson(request.json)
     else:
@@ -89,9 +82,6 @@ def getFoodById(food_id):
 @app.route('/droots/resources/health', methods=['GET', 'POST'])
 def getAllHealth():
     if request.method == 'POST':
-        # cambie a request.json pq el form no estaba bregando
-        # parece q estaba poseido por satanas ...
-        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
         print("REQUEST: ", request.json)
         return HealthHandler().insertHealthJson(request.json)
     else:
@@ -112,12 +102,10 @@ def getHealthById(health_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+
 @app.route('/droots/resources/supplier', methods=['GET', 'POST'])
 def getAllSupplier():
     if request.method == 'POST':
-        # cambie a request.json pq el form no estaba bregando
-        # parece q estaba poseido por satanas ...
-        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
         print("REQUEST: ", request.json)
         return SupplierHandler().insertSupplierJson(request.json)
     else:
@@ -220,13 +208,9 @@ def getFuelById(fuel_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-
 @app.route('/droots/resources/clothing', methods=['GET', 'POST'])
 def getAllClothes():
     if request.method == 'POST':
-        # cambie a request.json pq el form no estaba bregando
-        # parece q estaba poseido por satanas ...
-        # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
         print("REQUEST: ", request.json)
         return ClothingHandler().insertClotheJson(request.json)
     else:
@@ -247,30 +231,29 @@ def getClotheById(clothe_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+
 @app.route('/droots/resources/tools', methods=['GET', 'POST'])
 def getAllTools():
-        if request.method == 'POST':
-            # cambie a request.json pq el form no estaba bregando
-            # parece q estaba poseido por satanas ...
-            # DEBUG a ver q trae el json q manda el cliente con la nueva pieza
-            print("REQUEST: ", request.json)
-            return ToolsHandler().insertToolJson(request.json)
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ToolsHandler().insertToolJson(request.json)
+    else:
+        if not request.args:
+            return ToolsHandler().getAllTools()
         else:
-            if not request.args:
-                return ToolsHandler().getAllTools()
-            else:
-                return ToolsHandler().search_tools(request.args)
+            return ToolsHandler().search_tools(request.args)
+
 
 @app.route('/droots/resources/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])
 def getToolById(tool_id):
-        if request.method == 'GET':
-            return ToolsHandler().getToolById(tool_id)
-        elif request.method == 'PUT':
-            return ToolsHandler().updateTool(tool_id, request.json)
-        elif request.method == 'DELETE':
-            return ToolsHandler().deleteTool(tool_id)
-        else:
-            return jsonify(Error="Method not allowed."), 405
+    if request.method == 'GET':
+        return ToolsHandler().getToolById(tool_id)
+    elif request.method == 'PUT':
+        return ToolsHandler().updateTool(tool_id, request.json)
+    elif request.method == 'DELETE':
+        return ToolsHandler().deleteTool(tool_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 @app.route('/droots/administrators', methods=['GET', 'POST'])
@@ -297,6 +280,7 @@ def getAdministratorById(administrator_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+
 @app.route('/droots/customer/<int:customer_id>', methods=['GET', 'PUT', 'DELETE'])
 def getCustomerById(customer_id):
     if request.method == 'GET':
@@ -309,7 +293,6 @@ def getCustomerById(customer_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-
 @app.route('/droots/customer', methods=['GET', 'POST'])
 def getAllCustomer():
     if request.method == 'POST':
@@ -320,7 +303,7 @@ def getAllCustomer():
         return CustomerHandler().getAllCustomers()
 
 
-@app.route('/droots/customer/request/<int:request_id>', methods=['GET', 'POST','PUT'])
+@app.route('/droots/customer/request/<int:request_id>', methods=['GET', 'POST', 'PUT'])
 def getRequestById(request_id):
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -334,7 +317,7 @@ def getRequestById(request_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/customer/reservation/<int:reservation_id>', methods=['GET', 'POST','PUT'])
+@app.route('/droots/customer/reservation/<int:reservation_id>', methods=['GET', 'POST', 'PUT'])
 def getReservationById(reservation_id):
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -348,7 +331,7 @@ def getReservationById(reservation_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/resources/heavyequipment/', methods=['GET', 'POST',])
+@app.route('/droots/resources/heavyequipment/', methods=['GET', 'POST', ])
 def getAllHEquipment():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -360,7 +343,7 @@ def getAllHEquipment():
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/resources/heavyequipment/<int:hequipment_id>', methods=['GET', 'POST','PUT'])
+@app.route('/droots/resources/heavyequipment/<int:hequipment_id>', methods=['GET', 'POST', 'PUT'])
 def getHEquipmentById(hequipment_id):
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -386,7 +369,7 @@ def getBatteriesById(batteries_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/resources/batteries', methods=['GET','POST'])
+@app.route('/droots/resources/batteries', methods=['GET', 'POST'])
 def getAllBatteries():
     if request.method == 'GET':
         return BatteriesHandler().getAllBatteries()

@@ -19,7 +19,7 @@ class BatteriesHandler:
 
     def update_batteries(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
         self.batteries.pop(batteries_id - 1)
-        self.batteries.insert(batteries_id - 1, (batteries_type, batteries_voltage, batteries_quantity))
+        self.batteries.insert(batteries_id - 1, (batteries_id, batteries_type, batteries_voltage, batteries_quantity))
 
     def delete_batteries(self, batteries_id):
         self.batteries.pop(batteries_id - 1)
