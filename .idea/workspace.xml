@@ -2,26 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6b3eef5-8e67-4830-82f6-6d9495d46845" name="Default Changelist" comment="Dummy commit">
+      <change beforePath="$PROJECT_DIR$/.idea/dbproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbproject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Administrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Administrator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Batteries.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Batteries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/HeavyEquipment.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/HeavyEquipment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Request.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Request.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/Reservation.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/Reservation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/clothing.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/clothing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/food.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/food.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/fuel.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/fuel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/power_resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/power_resources.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/resources.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/handler/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -31,14 +34,43 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2873" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectId" id="1Z3Ahm80k5C1pNrc70cmaTzkj7q" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DROOTS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DROOTS" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DROOTS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DROOTS" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -56,6 +88,18 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -105,6 +149,8 @@
       <workItem from="1584902561337" duration="3655000" />
       <workItem from="1584978730601" duration="4751000" />
       <workItem from="1585416385443" duration="5510000" />
+      <workItem from="1585695813853" duration="241000" />
+      <workItem from="1585696467257" duration="366000" />
     </task>
     <task id="LOCAL-00001" summary="Added getAll, getById and post for Food.">
       <created>1584244138508</created>
@@ -129,6 +175,37 @@
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="607000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="2873" y="0" width="974" height="1047" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5131291" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="R Graphics" order="4" />
+      <window_info anchor="right" id="R Packages" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -244,5 +321,16 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DROOTS$main.coverage" NAME="main Coverage Results" MODIFIED="1585692725451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
