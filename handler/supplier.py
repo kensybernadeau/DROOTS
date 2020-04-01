@@ -18,7 +18,7 @@ class SupplierHandler:
         return len(self.supplier)
 
     def update_supplier(self, supplier_id, supplier_location):
-        self.supplier.pop(supplier_id - 1)
+        self.supplier.remove(self.getById(supplier_id))
         self.supplier.insert(supplier_id - 1, (supplier_id, supplier_location))
 
     def delete_supplier(self, supplier_id):

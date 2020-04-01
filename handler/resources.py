@@ -19,7 +19,7 @@ class ResourcesHandler:
         return len(self.resources)
 
     def update_resource(self, resource_id, resource_category, resource_availability):
-        self.resources.pop(resource_id - 1)
+        self.resources.remove(self.getById(resource_id))
         self.resources.insert(resource_id - 1, (resource_id, resource_category, resource_availability))
 
     def delete_resource(self, resource_id):

@@ -99,7 +99,7 @@ def getHealthById(health_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/resources/supplier', methods=['GET', 'POST'])
+@app.route('/droots/supplier', methods=['GET', 'POST'])
 def getAllSupplier():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -109,7 +109,7 @@ def getAllSupplier():
             return SupplierHandler().getAllSupplier()
 
 
-@app.route('/droots/resources/supplier/<int:supplier_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/droots/supplier/<int:supplier_id>', methods=['GET', 'PUT', 'DELETE'])
 def getSupplierById(supplier_id):
     if request.method == 'GET':
         return SupplierHandler().getSupplierById(supplier_id)

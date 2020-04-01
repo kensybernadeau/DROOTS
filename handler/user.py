@@ -19,7 +19,7 @@ class UserHandler:
         return len(self.users)
 
     def update_user(self, user_id, user_fname, user_lname, user_location, user_uname, user_passwd):
-        self.users.pop(user_id - 1)
+        self.users.remove(self.getById(user_id))
         self.users.insert(user_id - 1, (user_id, user_fname, user_lname, user_location, user_uname, user_passwd))
 
     def delete_user(self, user_id):
