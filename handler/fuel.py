@@ -25,7 +25,7 @@ class FuelHandler:
         return len(self.fuels)
 
     def update_fuel(self, fuel_id, fuel_type, fuel_liters):
-        self.fuels.pop(fuel_id - 1)
+        self.fuels.remove(self.getById(fuel_id))
         self.fuels.insert(fuel_id - 1, (fuel_id, fuel_type, fuel_liters))
 
     def delete_fuel(self, fuel_id):

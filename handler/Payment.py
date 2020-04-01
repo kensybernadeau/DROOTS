@@ -10,7 +10,7 @@ class PaymentHandler:
 
     def getById(self, payment_id):
         for f in self.payment:
-            if payment_id == f[0]:
+            if payment_id == f:
                 return f
 
     def insert_payment(self, payment_method):
@@ -18,7 +18,7 @@ class PaymentHandler:
         return len(self.payment)
 
     def update_payment(self, payment_id, payment_method):
-        self.payment.remove(self.getById(payment_id))
+        self.payment.pop(payment_id - 1)
         self.payment.insert(payment_id - 1, payment_method)
 
     def delete_payment(self, payment_id):
