@@ -18,7 +18,7 @@ class AdministratorsHandler:
         return len(self.administrators)
 
     def update_administrator(self, administrator_id, administrator_fname, administrator_lname):
-        self.administrators.pop(administrator_id - 1)
+        self.administrators.remove(self.getById(administrator_id))
         self.administrators.insert(administrator_id - 1, (administrator_id, administrator_fname, administrator_lname))
 
     def delete_administrator(self, administrator_id):

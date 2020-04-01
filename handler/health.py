@@ -20,7 +20,7 @@ class HealthHandler:
         return len(self.health)
 
     def update_health(self, health_id, health_name, health_quantity, health_exp_date, health_type, health_description):
-        self.health.pop(health_id - 1)
+        self.health.remove(self.getById(health_id))
         self.health.insert(health_id - 1,
                            (health_id, health_name, health_quantity, health_exp_date, health_type, health_description))
 
