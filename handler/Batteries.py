@@ -18,7 +18,7 @@ class BatteriesHandler:
         return len(self.batteries)
 
     def update_batteries(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
-        self.batteries.pop(batteries_id - 1)
+        self.batteries.remove(self.getById(batteries_id))
         self.batteries.insert(batteries_id - 1, (batteries_id, batteries_type, batteries_voltage, batteries_quantity))
 
     def delete_batteries(self, batteries_id):
