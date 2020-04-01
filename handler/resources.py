@@ -23,7 +23,7 @@ class ResourcesHandler:
         self.resources.insert(resource_id - 1, (resource_id, resource_category, resource_availability))
 
     def delete_resource(self, resource_id):
-        self.resources.pop(resource_id - 1)
+        self.resources.remove(self.getById(resource_id))
 
     # --------------end utils-----------------
 
@@ -59,7 +59,7 @@ class ResourcesHandler:
 
     def insertResourceJson(self, form):
         print("form: ", form)
-        if len(form) != 5:
+        if len(form) != 2:
             return jsonify(Error="Malformed post request"), 400
         else:
             resource_category = form['resource_category']
@@ -75,7 +75,7 @@ class ResourcesHandler:
         if not self.getResourceById(resource_id):
             return jsonify(Error="Resource not found."), 404
         else:
-            if len(form) != 5:
+            if len(form) != 2:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 resource_category = form['resource_category']
@@ -89,7 +89,7 @@ class ResourcesHandler:
 
     def deleteResource(self, resource_id):
         if not self.getResourceById(resource_id):
-            return jsonify(Error="Part not found."), 404
+            return jsonify(Error="Resource not found."), 404
         else:
             # dao.delete(pid)
             self.delete_resource(resource_id)

@@ -23,7 +23,7 @@ class ToolsHandler:
         self.tools.insert(tool_id - 1, (tool_id, tool_name, tool_description))
 
     def delete_tool(self, tool_id):
-        self.tools.pop(tool_id - 1)
+        self.tools.remove(self.getById(tool_id))
 
     # --------------end utils-----------------
 

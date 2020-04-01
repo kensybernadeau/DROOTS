@@ -24,7 +24,7 @@ class FoodHandler:
         self.food.insert(food_id-1, (food_id, food_name, food_quantity, food_exp_date, food_type, food_description))
 
     def delete_food(self, food_id):
-        self.food.pop(food_id - 1)
+        self.food.remove(self.getById(food_id))
     #--------------end utils-----------------
 
     def build_food_dict(self, row):
@@ -100,7 +100,7 @@ class FoodHandler:
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def deletePart(self, food_id):
+    def deleteFood(self, food_id):
         if not self.getFoodById(food_id):
             return jsonify(Error="Food not found."), 404
         else:
