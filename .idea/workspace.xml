@@ -2,29 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6b3eef5-8e67-4830-82f6-6d9495d46845" name="Default Changelist" comment="Dummy commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dbproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbproject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -34,43 +17,14 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="2873" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Z3Ahm80k5C1pNrc70cmaTzkj7q" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="DROOTS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DROOTS" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DROOTS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DROOTS" type="462c0819:PsiDirectoryNode" />
-              <item name="handler" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -149,8 +103,6 @@
       <workItem from="1584902561337" duration="3655000" />
       <workItem from="1584978730601" duration="4751000" />
       <workItem from="1585416385443" duration="5510000" />
-      <workItem from="1585695813853" duration="241000" />
-      <workItem from="1585696467257" duration="366000" />
     </task>
     <task id="LOCAL-00001" summary="Added getAll, getById and post for Food.">
       <created>1584244138508</created>
@@ -176,37 +128,6 @@
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="607000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="2873" y="0" width="974" height="1047" extended-state="0" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5131291" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="R Graphics" order="4" />
-      <window_info anchor="right" id="R Packages" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -216,121 +137,64 @@
     <option name="LAST_COMMIT_MESSAGE" value="Dummy commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="457" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584377382615">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="368" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1435.976@65.24.1435.976" timestamp="1584118335663" />
-    <state x="457" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1855.926@65.24.1855.926" timestamp="1584377382615" />
-    <state x="545" y="151" key="#xdebugger.evaluate" timestamp="1584319927095">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="545" y="151" key="#xdebugger.evaluate/65.24.1435.976@65.24.1435.976" timestamp="1584319927095" />
-    <state x="488" y="40" key="CommitChangelistDialog2" timestamp="1584379157999">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="392" y="43" key="CommitChangelistDialog2/65.24.1435.976@65.24.1435.976" timestamp="1584245327921" />
-    <state x="488" y="40" key="CommitChangelistDialog2/65.24.1855.926@65.24.1855.926" timestamp="1584379157999" />
-    <state x="208" y="94" key="DiffContextDialog" timestamp="1584245230896">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="208" y="94" key="DiffContextDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245230896" />
-    <state x="780" y="232" key="FileChooserDialogImpl" timestamp="1584377362967">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="618" y="243" key="FileChooserDialogImpl/65.24.1435.976@65.24.1435.976" timestamp="1584230536273" />
-    <state x="780" y="232" key="FileChooserDialogImpl/65.24.1855.926@65.24.1855.926" timestamp="1584377362967" />
-    <state width="1809" height="253" key="GridCell.Tab.0.bottom" timestamp="1585692725513">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.bottom/65.24.1435.976@65.24.1435.976" timestamp="1584321656063" />
-    <state width="1809" height="253" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" timestamp="1585692725513" />
-    <state width="1809" height="253" key="GridCell.Tab.0.center" timestamp="1585692725513">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.center/65.24.1435.976@65.24.1435.976" timestamp="1584321656062" />
-    <state width="1809" height="253" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" timestamp="1585692725513" />
-    <state width="1809" height="253" key="GridCell.Tab.0.left" timestamp="1585692725512">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.left/65.24.1435.976@65.24.1435.976" timestamp="1584321656061" />
-    <state width="1809" height="253" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" timestamp="1585692725512" />
-    <state width="1809" height="253" key="GridCell.Tab.0.right" timestamp="1585692725513">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state width="1412" height="260" key="GridCell.Tab.0.right/65.24.1435.976@65.24.1435.976" timestamp="1584321656062" />
-    <state width="1809" height="253" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1585692725513" />
-    <state width="1412" height="344" key="GridCell.Tab.1.bottom" timestamp="1584319960827">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state width="1412" height="344" key="GridCell.Tab.1.bottom/65.24.1435.976@65.24.1435.976" timestamp="1584319960827" />
-    <state width="1412" height="344" key="GridCell.Tab.1.center" timestamp="1584319960826">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state width="1412" height="344" key="GridCell.Tab.1.center/65.24.1435.976@65.24.1435.976" timestamp="1584319960826" />
-    <state width="1412" height="344" key="GridCell.Tab.1.left" timestamp="1584319960826">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state width="1412" height="344" key="GridCell.Tab.1.left/65.24.1435.976@65.24.1435.976" timestamp="1584319960826" />
-    <state width="1412" height="344" key="GridCell.Tab.1.right" timestamp="1584319960827">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state width="1412" height="344" key="GridCell.Tab.1.right/65.24.1435.976@65.24.1435.976" timestamp="1584319960827" />
-    <state x="209" y="94" key="MergeDialog" timestamp="1584245276099">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="209" y="94" key="MergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245276099" />
-    <state x="492" y="217" key="MultipleFileMergeDialog" timestamp="1584245276105">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="492" y="217" key="MultipleFileMergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245276105" />
-    <state x="338" y="128" key="SettingsEditor" timestamp="1584378822308">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="276" y="134" key="SettingsEditor/65.24.1435.976@65.24.1435.976" timestamp="1584118247757" />
-    <state x="338" y="128" key="SettingsEditor/65.24.1855.926@65.24.1855.926" timestamp="1584378822308" />
-    <state x="382" y="235" key="Vcs.Push.Dialog.v2" timestamp="1584245348167">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="382" y="235" key="Vcs.Push.Dialog.v2/65.24.1435.976@65.24.1435.976" timestamp="1584245348167" />
-    <state x="556" y="326" key="com.intellij.ide.util.TipDialog" timestamp="1584890556704">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="445" y="342" key="com.intellij.ide.util.TipDialog/65.24.1435.976@65.24.1435.976" timestamp="1584230578268" />
-    <state x="556" y="326" key="com.intellij.ide.util.TipDialog/65.24.1855.926@65.24.1855.926" timestamp="1584890556704" />
-    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog" timestamp="1584244196465">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244196465" />
-    <state x="656" y="278" key="git4idea.merge.GitMergeDialog" timestamp="1584379939062">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="522" y="292" key="git4idea.merge.GitMergeDialog/65.24.1435.976@65.24.1435.976" timestamp="1584245307264" />
-    <state x="656" y="278" key="git4idea.merge.GitMergeDialog/65.24.1855.926@65.24.1855.926" timestamp="1584379939062" />
-    <state x="443" y="292" key="git4idea.merge.GitPullDialog" timestamp="1584244860038">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="443" y="292" key="git4idea.merge.GitPullDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244860038" />
-    <state x="535" y="401" key="git4idea.ui.GitStashDialog" timestamp="1584244425291">
-      <screen x="65" y="24" width="1435" height="976" />
-    </state>
-    <state x="535" y="401" key="git4idea.ui.GitStashDialog/65.24.1435.976@65.24.1435.976" timestamp="1584244425291" />
-    <state x="742" y="117" key="refactoring.ChangeSignatureDialog" timestamp="1585418285042">
-      <screen x="65" y="24" width="1855" height="926" />
-    </state>
-    <state x="742" y="117" key="refactoring.ChangeSignatureDialog/65.24.1855.926@65.24.1855.926" timestamp="1585418285042" />
+    <state x="457" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="368" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="457" y="132" key="#com.intellij.execution.impl.EditConfigurationsDialog/65.24.1855.926@65.24.1855.926" />
+    <state x="545" y="151" key="#xdebugger.evaluate" />
+    <state x="545" y="151" key="#xdebugger.evaluate/65.24.1435.976@65.24.1435.976" />
+    <state x="488" y="40" key="CommitChangelistDialog2" />
+    <state x="392" y="43" key="CommitChangelistDialog2/65.24.1435.976@65.24.1435.976" />
+    <state x="488" y="40" key="CommitChangelistDialog2/65.24.1855.926@65.24.1855.926" />
+    <state x="208" y="94" key="DiffContextDialog" />
+    <state x="208" y="94" key="DiffContextDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="780" y="232" key="FileChooserDialogImpl" />
+    <state x="618" y="243" key="FileChooserDialogImpl/65.24.1435.976@65.24.1435.976" />
+    <state x="780" y="232" key="FileChooserDialogImpl/65.24.1855.926@65.24.1855.926" />
+    <state width="1809" height="253" key="GridCell.Tab.0.bottom" />
+    <state width="1412" height="260" key="GridCell.Tab.0.bottom/65.24.1435.976@65.24.1435.976" />
+    <state width="1809" height="253" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" />
+    <state width="1809" height="253" key="GridCell.Tab.0.center" />
+    <state width="1412" height="260" key="GridCell.Tab.0.center/65.24.1435.976@65.24.1435.976" />
+    <state width="1809" height="253" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" />
+    <state width="1809" height="253" key="GridCell.Tab.0.left" />
+    <state width="1412" height="260" key="GridCell.Tab.0.left/65.24.1435.976@65.24.1435.976" />
+    <state width="1809" height="253" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" />
+    <state width="1809" height="253" key="GridCell.Tab.0.right" />
+    <state width="1412" height="260" key="GridCell.Tab.0.right/65.24.1435.976@65.24.1435.976" />
+    <state width="1809" height="253" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" />
+    <state width="1412" height="344" key="GridCell.Tab.1.bottom" />
+    <state width="1412" height="344" key="GridCell.Tab.1.bottom/65.24.1435.976@65.24.1435.976" />
+    <state width="1412" height="344" key="GridCell.Tab.1.center" />
+    <state width="1412" height="344" key="GridCell.Tab.1.center/65.24.1435.976@65.24.1435.976" />
+    <state width="1412" height="344" key="GridCell.Tab.1.left" />
+    <state width="1412" height="344" key="GridCell.Tab.1.left/65.24.1435.976@65.24.1435.976" />
+    <state width="1412" height="344" key="GridCell.Tab.1.right" />
+    <state width="1412" height="344" key="GridCell.Tab.1.right/65.24.1435.976@65.24.1435.976" />
+    <state x="209" y="94" key="MergeDialog" />
+    <state x="209" y="94" key="MergeDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="492" y="217" key="MultipleFileMergeDialog" />
+    <state x="492" y="217" key="MultipleFileMergeDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="338" y="128" key="SettingsEditor" />
+    <state x="276" y="134" key="SettingsEditor/65.24.1435.976@65.24.1435.976" />
+    <state x="338" y="128" key="SettingsEditor/65.24.1855.926@65.24.1855.926" />
+    <state x="382" y="235" key="Vcs.Push.Dialog.v2" />
+    <state x="382" y="235" key="Vcs.Push.Dialog.v2/65.24.1435.976@65.24.1435.976" />
+    <state x="556" y="326" key="com.intellij.ide.util.TipDialog" />
+    <state x="445" y="342" key="com.intellij.ide.util.TipDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="556" y="326" key="com.intellij.ide.util.TipDialog/65.24.1855.926@65.24.1855.926" />
+    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog" />
+    <state x="513" y="162" key="git4idea.branch.GitSmartOperationDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="656" y="278" key="git4idea.merge.GitMergeDialog" />
+    <state x="522" y="292" key="git4idea.merge.GitMergeDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="656" y="278" key="git4idea.merge.GitMergeDialog/65.24.1855.926@65.24.1855.926" />
+    <state x="443" y="292" key="git4idea.merge.GitPullDialog" />
+    <state x="443" y="292" key="git4idea.merge.GitPullDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="535" y="401" key="git4idea.ui.GitStashDialog" />
+    <state x="535" y="401" key="git4idea.ui.GitStashDialog/65.24.1435.976@65.24.1435.976" />
+    <state x="742" y="117" key="refactoring.ChangeSignatureDialog" />
+    <state x="742" y="117" key="refactoring.ChangeSignatureDialog/65.24.1855.926@65.24.1855.926" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DROOTS$main.coverage" NAME="main Coverage Results" MODIFIED="1585692725451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <SUITE FILE_PATH="coverage/DROOTS$main.coverage" NAME="main Coverage Results" MODIFIED="1585695481249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

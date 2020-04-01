@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class CustomerHandler:
-    customers = [(1), (2), (3)]
+    customers =    [(1), (2), (3)]
 
     # ----------------utils-------------------
     def give_me_customers(self):

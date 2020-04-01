@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class PaymentHandler:
-    payment = [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
+    payment =   [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
 
     # ----------------utils-------------------
     def give_me_payment(self):
@@ -18,7 +18,7 @@ class PaymentHandler:
         return len(self.payment)
 
     def update_payment(self, payment_id, payment_method):
-        self.payment.pop(payment_id - 1)
+        self.payment.remove(self.getById(payment_id))
         self.payment.insert(payment_id - 1, payment_method)
 
     def delete_payment(self, payment_id):

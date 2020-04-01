@@ -9,6 +9,7 @@ from handler.Administrator import AdministratorsHandler
 from handler.Batteries import BatteriesHandler
 from handler.Customer import CustomerHandler
 from handler.HeavyEquipment import HeavyEquipmentHandler
+from handler.Payment import PaymentHandler
 from handler.Request import RequestHandler
 from handler.Reservation import ReservationHandler
 from handler.food import FoodHandler
@@ -367,6 +368,35 @@ def getAllBatteries():
 
     else:
         return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/payment/<int:payment_id>', methods=['GET', 'PUT', 'DELETE'])
+def getPaymentById(payment_id):
+    if request.method == 'GET':
+        return PaymentHandler().getPaymentById(payment_id)
+    elif request.method == 'PUT':
+        return PaymentHandler().updatePayment(payment_id, request.form)
+    elif request.method == 'DELETE':
+        return PaymentHandler().deletePayment(payment_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/payment', methods=['GET', 'POST'])
+def getAllPayment():
+    if request.method == 'GET':
+        return PaymentHandler().getAllPayment()
+
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return PaymentHandler().insertPaymentJson(request.json)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+
+
 
 
 if __name__ == '__main__':

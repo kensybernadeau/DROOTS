@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class AdministratorsHandler:
-    administrators = [(1, "Tito", "Trinidad"), (2, "Benito", "Martinez"), (3, "Javier", "Perez")]
+    administrators =  [(1, "Tito", "Trinidad"), (2, "Benito", "Martinez"), (3, "Javier", "Perez")]
 
     # ----------------utils-------------------
     def give_me_administrators(self):
