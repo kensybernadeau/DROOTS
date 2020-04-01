@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class PaymentHandler:
-    payment = [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
+    payment =   [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
 
     # ----------------utils-------------------
     def give_me_payment(self):

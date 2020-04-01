@@ -3,7 +3,7 @@ from flask import jsonify
 
 class HeavyEquipmentHandler:
 
-    hequipment = [(1,'Carpa','30 metros'),(2,'Digger','1500Lbs'),(3,'Cama','Ortopedica')]
+    hequipment =   [(1,'Carpa','30 metros'),(2,'Digger','1500Lbs'),(3,'Cama','Ortopedica')]
 
     #----------------utils-------------------
     def give_me_hequipment(self):

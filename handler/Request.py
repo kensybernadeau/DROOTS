@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class RequestHandler:
-    request = [(1), (2), (3)]
+    request =   [(1), (2), (3)]
 
     # ----------------utils-------------------
     def give_me_request(self):
