@@ -59,7 +59,7 @@ class ToolsHandler:
 
     def insertToolJson(self, form):
         print("form: ", form)
-        if len(form) != 5:
+        if len(form) != 2:
             return jsonify(Error="Malformed post request"), 400
         else:
             tool_name = form['tool_name']
@@ -75,15 +75,14 @@ class ToolsHandler:
         if not self.getToolById(tool_id):
             return jsonify(Error="Tool not found."), 404
         else:
-            if len(form) != 5:
+            if len(form) != 2:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 tool_name = form['tool_name']
-                tool_type = form['tool_type']
                 tool_description = form['tool_description']
-                if tool_name and tool_type and tool_description:
-                    self.update_tool(tool_id, tool_name, tool_type, tool_description)
-                    result = self.build_tool_attributes(tool_id, tool_name, tool_type, tool_description)
+                if tool_name  and tool_description:
+                    self.update_tool(tool_id, tool_name, tool_description)
+                    result = self.build_tool_attributes(tool_id, tool_name, tool_description)
                     return jsonify(Tool=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
