@@ -23,7 +23,7 @@ class HeavyEquipmentHandler:
         self.hequipment.insert(hequipment_id-1, (hequipment_name, hequipment_description))
 
     def delete_hequipment(self, hequipment_id):
-        self.hequipment.pop(hequipment_id - 1)
+        self.hequipment.remove(self.getById(hequipment_id))
     #--------------end utils-----------------
 
     def build_hequipment_dict(self, list):

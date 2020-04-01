@@ -22,7 +22,7 @@ class CustomerHandler:
         self.customers.insert(customers_id - 1, customers_id)
 
     def delete_customers(self, customers_id):
-        self.customers.pop(customers_id - 1)
+        self.customers.remove(self.getById(customers_id))
 
     # --------------end utils-----------------
 

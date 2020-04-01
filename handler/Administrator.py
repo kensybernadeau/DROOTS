@@ -22,8 +22,7 @@ class AdministratorsHandler:
         self.administrators.insert(administrator_id - 1, (administrator_id, administrator_fname, administrator_lname))
 
     def delete_administrator(self, administrator_id):
-        result = self.getById(administrator_id)
-        self.administrators.remove(administrator_id)
+        self.administrators.remove(self.getById(administrator_id))
 
         # --------------end utils-----------------
 

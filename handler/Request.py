@@ -22,7 +22,7 @@ class RequestHandler:
         self.request.insert(request_id - 1, request_id)
 
     def delete_request(self, request_id):
-        self.request.pop(request_id - 1)
+        self.request.remove(self.getById(request_id))
 
     # --------------end utils-----------------
 

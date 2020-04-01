@@ -22,7 +22,7 @@ class ReservationHandler:
         self.reservation.insert(reservation_id - 1, reservation_id)
 
     def delete_reservation(self, reservation_id):
-        self.reservation.pop(reservation_id - 1)
+        self.reservation.remove(self.getById(reservation_id))
 
     # --------------end utils-----------------
 
