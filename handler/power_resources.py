@@ -35,7 +35,7 @@ class PowerResourcesHandler:
 
     def update_power_resource(self, power_resource_id, power_resource_category, power_resource_type,
                               power_resource_description):
-        self.power_resources.pop(power_resource_id - 1)
+        self.power_resources.remove(self.getById(power_resource_id))
         self.power_resources.insert(power_resource_id - 1, (
         power_resource_id, power_resource_category, power_resource_type, power_resource_description))
 
