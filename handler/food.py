@@ -20,11 +20,11 @@ class FoodHandler:
         return len(self.food)
 
     def update_food(self, food_id, food_name, food_quantity, food_exp_date, food_type, food_description):
-        self.food.pop(food_id-1)
+        self.food.remove(self.getById(food_id))
         self.food.insert(food_id-1, (food_id, food_name, food_quantity, food_exp_date, food_type, food_description))
 
-    def delete_part(self, food_id):
-        self.food.pop(food_id - 1)
+    def delete_food(self, food_id):
+        self.food.remove(self.getById(food_id))
     #--------------end utils-----------------
 
     def build_food_dict(self, row):
@@ -37,7 +37,7 @@ class FoodHandler:
         result['food_description'] = row[5]
         return result
 
-    def build_part_attributes(self, food_id, food_name, food_quantity, food_exp_date, food_type, food_description):
+    def build_food_attributes(self, food_id, food_name, food_quantity, food_exp_date, food_type, food_description):
         result = {}
         result['food_id'] = food_id
         result['food_name'] = food_name
@@ -48,8 +48,6 @@ class FoodHandler:
         return result
 
     def getAllFood(self):
-        # dao = SupplierDAO()
-        # suppliers_list = dao.getAllSuppliers()
         flist = self.give_me_food()
         result_list = []
         for row in flist:
@@ -58,11 +56,9 @@ class FoodHandler:
         return jsonify(Food=result_list)
 
     def getFoodById(self, food_id):
-        # dao = PartsDAO()
-        # row = dao.getPartById(pid)
         row = self.getById(food_id)
         if not row:
-            return jsonify(Error="Part Not Found"), 404
+            return jsonify(Error="Food Not Found"), 404
         else:
             food = self.build_food_dict(row)
             return jsonify(Food=food)
@@ -78,19 +74,15 @@ class FoodHandler:
             food_type = form['food_type']
             food_description = form['food_description']
             if food_name and food_quantity and food_exp_date and food_type  and food_description:
-                # dao = PartsDAO()
-                # pid = dao.insert(pname, pcolor, pmaterial, pprice)
                 food_id = self.insert_food(food_name, food_quantity, food_exp_date, food_type, food_description)
-                result = self.build_part_attributes(food_id, food_name, food_quantity, food_exp_date, food_type, food_description)
-                return jsonify(Part=result), 201
+                result = self.build_food_attributes(food_id, food_name, food_quantity, food_exp_date, food_type, food_description)
+                return jsonify(Food=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-    def updatePart(self, food_id, form):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
+    def updateFood(self, food_id, form):
         if not self.getFoodById(food_id):
-            return jsonify(Error = "Part not found."), 404
+            return jsonify(Error = "Food not found."), 404
         else:
             if len(form) != 5:
                 return jsonify(Error="Malformed update request"), 400
@@ -101,20 +93,16 @@ class FoodHandler:
                 food_type = form['food_type']
                 food_description = form['food_description']
                 if food_name and food_quantity and food_exp_date and food_type  and food_description:
-                    # dao.update(pid, pname, pcolor, pmaterial, pprice)
                     self.update_food(food_id, food_name, food_quantity, food_exp_date, food_type, food_description)
-                    result = self.build_part_attributes(food_id, food_name, food_quantity, food_exp_date, food_type,
+                    result = self.build_food_attributes(food_id, food_name, food_quantity, food_exp_date, food_type,
                                                         food_description)
-                    return jsonify(Part=result), 200
+                    return jsonify(food=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def deletePart(self, food_id):
-        # dao = PartsDAO()
-        # if not dao.getPartById(pid):
+    def deleteFood(self, food_id):
         if not self.getFoodById(food_id):
-            return jsonify(Error="Part not found."), 404
+            return jsonify(Error="Food not found."), 404
         else:
-            # dao.delete(pid)
-            self.delete_part(food_id)
+            self.delete_food(food_id)
             return jsonify(DeleteStatus="OK"), 200

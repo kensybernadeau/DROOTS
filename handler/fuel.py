@@ -20,16 +20,17 @@ class FuelHandler:
                 result.append(row)
         return result
 
-    def insert_fuel(self, fuel_type, fuel_quantity):
-        self.fuels.append((len(self.fuels) + 1, fuel_type, fuel_quantity))
+    def insert_fuel(self, fuel_type, fuel_liters):
+        self.fuels.append((len(self.fuels) + 1, fuel_type, fuel_liters))
         return len(self.fuels)
 
-    def update_fuel(self, fuel_id, fuel_type, fuel_quantity):
-        self.fuels.pop(fuel_id - 1)
-        self.fuels.insert(fuel_id - 1, (fuel_id, fuel_type, fuel_quantity))
+    def update_fuel(self, fuel_id, fuel_type, fuel_liters):
+        self.fuels.remove(self.getById(fuel_id))
+        self.fuels.insert(fuel_id - 1, (fuel_id, fuel_type, fuel_liters))
 
     def delete_fuel(self, fuel_id):
-        self.fuels.pop(fuel_id - 1)
+        result = self.getById(fuel_id)
+        self.fuels.remove(result)
 
         # --------------end utils-----------------
 
@@ -37,15 +38,15 @@ class FuelHandler:
         result = {}
         result['fuel_id'] = row[0]
         result['fuel_type'] = row[1]
-        result['fuel_quantity'] = row[2]
+        result['fuel_liters'] = row[2]
 
         return result
 
-    def build_fuel_attributes(self, fuel_id, fuel_type, fuel_quantity):
+    def build_fuel_attributes(self, fuel_id, fuel_type, fuel_liters):
         result = {}
         result['fuel_id'] = fuel_id
         result['fuel_type'] = fuel_type
-        result['fuel_quantity'] = fuel_quantity
+        result['fuel_liters'] = fuel_liters
         return result
 
     def getAllFuels(self):
@@ -69,11 +70,11 @@ class FuelHandler:
         if len(json) != 2:
             return jsonify(Error="Malformed post request"), 400
         fuel_type = json['fuel_type']
-        fuel_quantity = json['fuel_quantity']
+        fuel_liters = json['fuel_liters']
 
-        if fuel_type and fuel_quantity:
-            fuel_id = self.insert_fuel(fuel_type, fuel_quantity)
-            result = self.build_fuel_attributes(fuel_id, fuel_type, fuel_quantity)
+        if fuel_type and fuel_liters:
+            fuel_id = self.insert_fuel(fuel_type, fuel_liters)
+            result = self.build_fuel_attributes(fuel_id, fuel_type, fuel_liters)
             return jsonify(Fuel=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
@@ -82,14 +83,14 @@ class FuelHandler:
         if not self.getById(fuel_id):
             return jsonify(Error="Fuel not found."), 404
         else:
-            if len(form) != 3:
+            if len(form) != 2:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 fuel_type = form['fuel_type']
-                fuel_quantity = form['fuel_quantity']
-                if fuel_type and fuel_quantity:
-                    self.update_fuel(fuel_id, fuel_type, fuel_quantity)
-                    result = self.build_fuel_attributes(fuel_id, fuel_type, fuel_quantity)
+                fuel_liters = form['fuel_liters']
+                if fuel_type and fuel_liters:
+                    self.update_fuel(fuel_id, fuel_type, fuel_liters)
+                    result = self.build_fuel_attributes(fuel_id, fuel_type, fuel_liters)
                     return jsonify(Fuel=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
@@ -103,13 +104,13 @@ class FuelHandler:
 
     def searchFuels(self, args):
         f_type = args.get("fuel_type")
-        parts_list = []
+        fuels_list = []
         if (len(args) == 1) and f_type:
-            parts_list = self.getByType(f_type)
+            fuels_list = self.getByType(f_type)
         else:
             return jsonify(Error="Malformed query string"), 400
         result_list = []
-        for row in parts_list:
+        for row in fuels_list:
             result = self.build_fuel_dict(row)
             result_list.append(result)
         return jsonify(Fuels=result_list)

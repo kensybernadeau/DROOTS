@@ -2,15 +2,15 @@ from flask import jsonify
 
 
 class AdministratorsHandler:
-    administrators = [(1, "Tito", "Trinidad"), (2, "Benito", "Martinez"), (3, "Javier", "Perez")]
+    administrators =  [(1, "Tito", "Trinidad"), (2, "Benito", "Martinez"), (3, "Javier", "Perez")]
 
     # ----------------utils-------------------
     def give_me_administrators(self):
         return self.administrators
 
-    def getById(self, user_id):
+    def getById(self, administrator_id):
         for f in self.administrators:
-            if user_id == f[0]:
+            if administrator_id == f[0]:
                 return f
 
     def insert_administrator(self, administrator_fname, administrator_lname):
@@ -18,11 +18,11 @@ class AdministratorsHandler:
         return len(self.administrators)
 
     def update_administrator(self, administrator_id, administrator_fname, administrator_lname):
-        self.administrators.pop(administrator_id - 1)
+        self.administrators.remove(self.getById(administrator_id))
         self.administrators.insert(administrator_id - 1, (administrator_id, administrator_fname, administrator_lname))
 
-    def delete_administrator(self, user_id):
-        self.administrators.pop(user_id - 1)
+    def delete_administrator(self, administrator_id):
+        self.administrators.remove(self.getById(administrator_id))
 
         # --------------end utils-----------------
 
