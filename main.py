@@ -26,7 +26,7 @@ from handler.resources import ResourcesHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
-CORS(app)
+# CORS(app)
 
 
 @app.route('/')
