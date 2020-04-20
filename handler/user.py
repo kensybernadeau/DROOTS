@@ -1,32 +1,9 @@
 from flask import jsonify
 
+from dao.users import UsersDAO
+
 
 class UserHandler:
-    users = [(1, "Pedro", "Gonzalez", "???", "pedro123", "1234"), (2, "Miguel", "Lopez", "???", "miguel123", "1234"),
-             (3, "Jose", "Perez", "???", "jose123", "1234")]
-
-    # ----------------utils-------------------
-    def give_me_users(self):
-        return self.users
-
-    def getById(self, user_id):
-        for f in self.users:
-            if user_id == f[0]:
-                return f
-
-    def insert_user(self, user_fname, user_lname, user_location, user_uname, user_passwd):
-        self.users.append((len(self.users) + 1, user_fname, user_lname, user_location, user_uname, user_passwd))
-        return len(self.users)
-
-    def update_user(self, user_id, user_fname, user_lname, user_location, user_uname, user_passwd):
-        self.users.remove(self.getById(user_id))
-        self.users.insert(user_id - 1, (user_id, user_fname, user_lname, user_location, user_uname, user_passwd))
-
-    def delete_user(self, user_id):
-        result = self.getById(user_id)
-        self.users.remove(result)
-
-        # --------------end utils-----------------
 
     def build_user_dict(self, row):
         result = {}
@@ -50,15 +27,16 @@ class UserHandler:
         return result
 
     def getAllUsers(self):
-        ulist = self.give_me_users()
+        udao = UsersDAO()
         result_list = []
-        for row in ulist:
+        for row in udao.getAllUsers():
             result = self.build_user_dict(row)
             result_list.append(result)
         return jsonify(Users=result_list)
 
     def getUserById(self, user_id):
-        row = self.getById(user_id)
+        udao = UsersDAO()
+        row = udao.getUserById(user_id)
         if not row:
             return jsonify(Error="User Not Found"), 404
         else:
@@ -76,7 +54,8 @@ class UserHandler:
             user_uname = json['user_uname']
             user_passwd = json['user_passwd']
             if user_fname and user_lname and user_location and user_uname and user_passwd:
-                user_id = self.insert_user(user_fname, user_lname, user_location, user_uname, user_passwd)
+                udao = UsersDAO()
+                user_id = udao.insert(user_fname, user_lname, user_location, user_uname, user_passwd)
                 result = self.build_user_attributes(user_id, user_fname, user_lname, user_location, user_uname,
                                                     user_passwd)
                 return jsonify(User=result), 201
@@ -84,7 +63,8 @@ class UserHandler:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def updateUser(self, user_id, form):
-        if not self.getById(user_id):
+        udao = UsersDAO()
+        if not udao.getUserById(user_id):
             return jsonify(Error="User not found."), 404
         else:
             if len(form) != 5:
@@ -96,7 +76,7 @@ class UserHandler:
                 user_uname = form['user_uname']
                 user_passwd = form['user_passwd']
                 if user_fname and user_lname and user_location and user_uname and user_passwd:
-                    self.update_user(user_id, user_fname, user_lname, user_location, user_uname, user_passwd)
+                    udao.update(user_id, user_fname, user_lname, user_location, user_uname, user_passwd)
                     result = self.build_user_attributes(user_id, user_fname, user_lname, user_location, user_uname,
                                                         user_passwd)
                     return jsonify(User=result), 200
@@ -104,9 +84,9 @@ class UserHandler:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
     def deleteUser(self, user_id):
-
-        if not self.getById(user_id):
+        udao = UsersDAO()
+        udelete = udao.delete(user_id)
+        if not udelete:
             return jsonify(Error="User not found."), 404
         else:
-            self.delete_user(user_id)
             return jsonify(DeleteStatus="OK"), 200
