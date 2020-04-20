@@ -87,7 +87,7 @@ class ClothingHandler:
                 if clothe_type and clothe_size and clothe_description:
                     self.update_clothe(clothe_id, clothe_type, clothe_size, clothe_description)
                     result = self.build_clothe_attributes(clothe_id, clothe_size, clothe_description)
-                    return jsonify(Clothe=result), 200
+                    return jsonify(Part=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 

@@ -37,7 +37,10 @@ def getAllResources():
         print("REQUEST: ", request.json)
         return ResourcesHandler().insertResourceJson(request.json)
     else:
-        return ResourcesHandler().getAllResources()
+        if not request.args:
+            return ResourcesHandler().getAllResources()
+        else:
+            return ResourcesHandler().search_resource(request.args)
 
 
 @app.route('/droots/resources/<int:resource_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -58,7 +61,10 @@ def getAllFood():
         print("REQUEST: ", request.json)
         return FoodHandler().insertFoodJson(request.json)
     else:
-        return FoodHandler().getAllFood()
+        if not request.args:
+            return FoodHandler().getAllFood()
+        else:
+            return FoodHandler().search_food(request.args)
 
 
 @app.route('/droots/resources/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -66,9 +72,9 @@ def getFoodById(food_id):
     if request.method == 'GET':
         return FoodHandler().getFoodById(food_id)
     elif request.method == 'PUT':
-        return FoodHandler().updateFood(food_id, request.json)
+        return FoodHandler().updatePart(food_id, request.json)
     elif request.method == 'DELETE':
-        return FoodHandler().deleteFood(food_id)
+        return FoodHandler().deletePart(food_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -79,7 +85,10 @@ def getAllHealth():
         print("REQUEST: ", request.json)
         return HealthHandler().insertHealthJson(request.json)
     else:
-        return HealthHandler().getAllHealth()
+        if not request.args:
+            return HealthHandler().getAllHealth()
+        else:
+            return HealthHandler().search_Health(request.args)
 
 
 @app.route('/droots/resources/health/<int:health_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -100,8 +109,10 @@ def getAllSupplier():
         print("REQUEST: ", request.json)
         return SupplierHandler().insertSupplierJson(request.json)
     else:
-        return SupplierHandler().getAllSupplier()
-
+        if not request.args:
+            return SupplierHandler().getAllSupplier()
+        else:
+            return SupplierHandler().search_Supplier(request.args)
 
 
 @app.route('/droots/resources/supplier/<int:supplier_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -203,7 +214,10 @@ def getAllClothes():
         print("REQUEST: ", request.json)
         return ClothingHandler().insertClotheJson(request.json)
     else:
-        return ClothingHandler().getAllclothes()
+        if not request.args:
+            return ClothingHandler().getAllclothes()
+        else:
+            return ClothingHandler().search_clothes(request.args)
 
 
 @app.route('/droots/resources/clothing/<int:clothe_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -224,8 +238,10 @@ def getAllTools():
         print("REQUEST: ", request.json)
         return ToolsHandler().insertToolJson(request.json)
     else:
-        return ToolsHandler().getAllTools()
-
+        if not request.args:
+            return ToolsHandler().getAllTools()
+        else:
+            return ToolsHandler().search_tools(request.args)
 
 
 @app.route('/droots/resources/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])

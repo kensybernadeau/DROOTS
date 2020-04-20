@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class BatteriesHandler:
-    batteries = [(1, 'AA', '1.5', '4'), (2, 'AAA', '1.5', '8'), (3, 'D', '9', '12')]
+    batteries =  [(1, 'Lithium Ion', '1.5', '4'), (2, 'Acid', '1.5', '8'), (3, 'Lead Acid', '9', '12')]
 
     # ----------------utils-------------------
     def give_me_batteries(self):
@@ -18,11 +18,11 @@ class BatteriesHandler:
         return len(self.batteries)
 
     def update_batteries(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
-        self.batteries.pop(batteries_id - 1)
+        self.batteries.remove(self.getById(batteries_id))
         self.batteries.insert(batteries_id - 1, (batteries_id, batteries_type, batteries_voltage, batteries_quantity))
 
     def delete_batteries(self, batteries_id):
-        self.batteries.pop(batteries_id - 1)
+        self.batteries.remove(self.getById(batteries_id))
 
     # --------------end utils-----------------
 

@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class ReservationHandler:
-    reservation = [(1), (2), (3)]
+    reservation =   [(1), (2), (3)]
 
     # ----------------utils-------------------
     def give_me_reservation(self):
@@ -18,11 +18,11 @@ class ReservationHandler:
         return len(self.reservation)
 
     def update_reservation(self, reservation_id):
-        self.reservation.pop(reservation_id - 1)
+        self.reservation.remove(self.getById(reservation_id))
         self.reservation.insert(reservation_id - 1, reservation_id)
 
     def delete_reservation(self, reservation_id):
-        self.reservation.pop(reservation_id - 1)
+        self.reservation.remove(self.getById(reservation_id))
 
     # --------------end utils-----------------
 

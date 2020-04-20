@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class RequestHandler:
-    request = [(1), (2), (3)]
+    request =   [(1), (2), (3)]
 
     # ----------------utils-------------------
     def give_me_request(self):
@@ -18,11 +18,11 @@ class RequestHandler:
         return len(self.request)
 
     def update_request(self, request_id):
-        self.request.pop(request_id - 1)
+        self.request.remove(self.getById(request_id))
         self.request.insert(request_id - 1, request_id)
 
     def delete_request(self, request_id):
-        self.request.pop(request_id - 1)
+        self.request.remove(self.getById(request_id))
 
     # --------------end utils-----------------
 

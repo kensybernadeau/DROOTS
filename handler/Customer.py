@@ -2,7 +2,7 @@ from flask import jsonify
 
 
 class CustomerHandler:
-    customers = [(1), (2), (3)]
+    customers =    [(1), (2), (3)]
 
     # ----------------utils-------------------
     def give_me_customers(self):
@@ -18,11 +18,11 @@ class CustomerHandler:
         return len(self.customers)
 
     def update_customers(self, customers_id):
-        self.customers.pop(customers_id - 1)
+        self.customers.remove(self.getById(customers_id))
         self.customers.insert(customers_id - 1, customers_id)
 
     def delete_customers(self, customers_id):
-        self.customers.pop(customers_id - 1)
+        self.customers.remove(self.getById(customers_id))
 
     # --------------end utils-----------------
 
@@ -54,7 +54,7 @@ class CustomerHandler:
 
     def insertCustomersJson(self, form):
         print("form: ", form)
-        if len(form) != 1:
+        if form:
             return jsonify(Error="Malformed post request"), 400
         else:
             customer_id = self.insert_customers()
@@ -65,7 +65,7 @@ class CustomerHandler:
         if not self.getCustomersById(customers_id):
             return jsonify(Error="Customer not found."), 404
         else:
-            if len(form) != 1:
+            if form:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 self.update_customers(customers_id)

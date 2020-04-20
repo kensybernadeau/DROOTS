@@ -3,7 +3,7 @@ from flask import jsonify
 
 class HeavyEquipmentHandler:
 
-    hequipment = [(1,'Carpa','30 metros'),(2,'Digger','1500Lbs'),(3,'Cama','Ortopedica')]
+    hequipment =   [(1,'Carpa','30 metros'),(2,'Digger','1500Lbs'),(3,'Cama','Ortopedica')]
 
     #----------------utils-------------------
     def give_me_hequipment(self):
@@ -19,11 +19,11 @@ class HeavyEquipmentHandler:
         return len(self.hequipment)
 
     def update_hequipment(self, hequipment_id, hequipment_name, hequipment_description):
-        self.hequipment.pop(hequipment_id-1)
+        self.hequipment.remove(self.getById(hequipment_id))
         self.hequipment.insert(hequipment_id-1, (hequipment_name, hequipment_description))
 
     def delete_hequipment(self, hequipment_id):
-        self.hequipment.pop(hequipment_id - 1)
+        self.hequipment.remove(self.getById(hequipment_id))
     #--------------end utils-----------------
 
     def build_hequipment_dict(self, list):
