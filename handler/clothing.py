@@ -3,8 +3,8 @@ from flask import jsonify
 
 class ClothingHandler:
 
-    clothes = [(1, "top", 20, "small",),
-            (2, "bottom", 30, "05/30/2020", "romana", "for babies")]
+    clothes = [(1, "top", "sm","for babies"),
+              (2, "bottom", "md", "for babies")]
 
     #----------------utils-------------------
     def give_me_clothes(self):
@@ -20,11 +20,11 @@ class ClothingHandler:
         return len(self.clothes)
 
     def update_clothe(self, clothe_id, clothe_type, clothe_size_, clothe_description):
-        self.clothes.pop(clothe_id-1)
+        self.clothes.remove(self.getById(clothe_id))
         self.clothes.insert(clothe_id-1, (clothe_id, clothe_type, clothe_size_, clothe_description))
 
     def delete_clothe(self, clothe_id):
-        self.clothes.pop(clothe_id - 1)
+        self.clothes.remove(self.getById(clothe_id))
     #--------------end utils-----------------
 
     def build_clothe_dict(self, row):
@@ -87,7 +87,7 @@ class ClothingHandler:
                 if clothe_type and clothe_size and clothe_description:
                     self.update_clothe(clothe_id, clothe_type, clothe_size, clothe_description)
                     result = self.build_clothe_attributes(clothe_id, clothe_size, clothe_description)
-                    return jsonify(Part=result), 200
+                    return jsonify(Cloth=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 

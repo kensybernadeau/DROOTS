@@ -43,24 +43,24 @@ class UserHandler:
             user = self.build_user_dict(row)
             return jsonify(User=user)
 
-    def insertUserJson(self, json):
-        print("json ", json)
-        if len(json) != 5:
-            return jsonify(Error="Malformed post request"), 400
-        else:
-            user_fname = json['user_fname']
-            user_lname = json['user_lname']
-            user_location = json['user_location']
-            user_uname = json['user_uname']
-            user_passwd = json['user_passwd']
-            if user_fname and user_lname and user_location and user_uname and user_passwd:
-                udao = UsersDAO()
-                user_id = udao.insert(user_fname, user_lname, user_location, user_uname, user_passwd)
-                result = self.build_user_attributes(user_id, user_fname, user_lname, user_location, user_uname,
-                                                    user_passwd)
-                return jsonify(User=result), 201
-            else:
-                return jsonify(Error="Unexpected attributes in post request"), 400
+    #def insertUserJson(self, json):
+        #print("json ", json)
+        #if len(json) != 5:
+            #return jsonify(Error="Malformed post request"), 400
+        #else:
+            #user_fname = json['user_fname']
+            #user_lname = json['user_lname']
+            #user_location = json['user_location']
+            #user_uname = json['user_uname']
+            #user_passwd = json['user_passwd']
+            #if user_fname and user_lname and user_location and user_uname and user_passwd:
+                #udao = UsersDAO()
+                #user_id = udao.insert(user_fname, user_lname, user_location, user_uname, user_passwd)
+                #result = self.build_user_attributes(user_id, user_fname, user_lname, user_location, user_uname,
+                                                    #user_passwd)
+                #return jsonify(User=result), 201
+            #else:
+                #return jsonify(Error="Unexpected attributes in post request"), 400
 
     def updateUser(self, user_id, form):
         udao = UsersDAO()
@@ -83,10 +83,10 @@ class UserHandler:
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def deleteUser(self, user_id):
-        udao = UsersDAO()
-        udelete = udao.delete(user_id)
-        if not udelete:
-            return jsonify(Error="User not found."), 404
-        else:
-            return jsonify(DeleteStatus="OK"), 200
+    #def deleteUser(self, user_id):
+        #udao = UsersDAO()
+        #udelete = udao.delete(user_id)
+        #if not udelete:
+            #return jsonify(Error="User not found."), 404
+        #else:
+            #return jsonify(DeleteStatus="OK"), 200
