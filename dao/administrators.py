@@ -32,8 +32,8 @@ class AdministratorsDAO:
 
     def insert(self, user_id):
         cursor = self.conn.cursor()
-        query = "insert into administrators(user_id) values (%d) returning admin_id;"
-        cursor.execute(query, user_id)
+        query = "insert into administrators(user_id) values (%s) returning admin_id;"
+        cursor.execute(query, (user_id,))
         admin_id = cursor.fetchone()[0]
         self.conn.commit()
         return admin_id
@@ -42,7 +42,7 @@ class AdministratorsDAO:
         cursor = self.conn.cursor()
         query = "delete from administrators where admin_id = %s returning user_id;"
         cursor.execute(query, (admin_id,))
-        user_id = cursor.fetchone[0]
+        user_id = cursor.fetchone()[0]
         self.conn.commit()
         return user_id
 
