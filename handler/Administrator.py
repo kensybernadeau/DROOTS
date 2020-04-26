@@ -8,8 +8,13 @@ class AdministratorsHandler:
 
     def build_administrator_dict(self, row):
         result = {}
-        result['administrator_id'] = row[0]
-        result['user_id'] = row[1]
+        result['user_id'] = row[0]
+        result['administrator_id'] = row[1]
+        result['administrator_fname'] = row[2]
+        result['administrator_lname'] = row[3]
+        result['administrator_location'] = row[4]
+        result['administrator_uname'] = row[5]
+        result['administrator_passwd'] = row[6]
 
         return result
 
@@ -18,11 +23,11 @@ class AdministratorsHandler:
         result = {}
         result['administrator_id'] = administrator_id
         result['user_id'] = user_id
-        result['user_fname'] = user_fname
-        result['user_lname'] = user_lname
-        result['user_location'] = user_location
-        result['user_uname'] = user_uname
-        result['user_passwd'] = user_passwd
+        result['administrator_fname'] = user_fname
+        result['administrator_lname'] = user_lname
+        result['administrator_location'] = user_location
+        result['administrator_uname'] = user_uname
+        result['administrator_passwd'] = user_passwd
         return result
 
     def getAllAdministrators(self):
