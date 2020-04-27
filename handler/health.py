@@ -67,16 +67,16 @@ class HealthHandler:
             health = self.build_health_dict(row)
             return jsonify(Health=health)
 
-    def insertHealthJson(self, form):
-        print("form: ", form)
-        if len(form) != 5:
+    def insertHealthJson(self, json):
+        print("json: ", json)
+        if len(json) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
-            health_name = form['health_name']
-            health_quantity = form['health_quantity']
-            health_exp_date = form['health_exp_date']
-            health_type = form['health_type']
-            health_description = form['health_description']
+            health_name = json['health_name']
+            health_quantity = json['health_quantity']
+            health_exp_date = json['health_exp_date']
+            health_type = json['health_type']
+            health_description = json['health_description']
             if health_name and health_quantity and health_exp_date and health_type and health_description:
                 health_id = self.insert_health(health_name, health_quantity, health_exp_date, health_type,
                                                health_description)

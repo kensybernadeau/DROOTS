@@ -56,13 +56,13 @@ class HeavyEquipmentHandler:
             hequipment = self.build_hequipment_dict(row)
             return jsonify(HeavyEquipment=hequipment)
 
-    def insertHEquipmentJson(self, form):
-        print("form: ", form)
-        if len(form) != 2:
+    def insertHEquipmentJson(self, json):
+        print("json: ", json)
+        if len(json) != 2:
             return jsonify(Error="Malformed post request"), 400
         else:
-            hequipment_name = form['hequipment_name']
-            hequipment_description = form['hequipment_description']
+            hequipment_name = json['hequipment_name']
+            hequipment_description = json['hequipment_description']
             if hequipment_name and hequipment_description:
                 hequipment_id = self.insert_hequipment(hequipment_name, hequipment_description)
                 result = self.build_hequipment_attributes(hequipment_id, hequipment_name, hequipment_description)

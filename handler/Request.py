@@ -1,60 +1,44 @@
 from flask import jsonify
 
+from dao.request import RequestDAO
+
 
 class RequestHandler:
-    request =   [(1), (2), (3)]
 
-    # ----------------utils-------------------
-    def give_me_request(self):
-        return self.request
-
-    def getById(self, request_id):
-        for f in self.request:
-            if request_id == f:
-                return f
-
-    def insert_request(self):
-        self.request.append(len(self.request) + 1)
-        return len(self.request)
-
-    def update_request(self, request_id):
-        self.request.remove(self.getById(request_id))
-        self.request.insert(request_id - 1, request_id)
-
-    def delete_request(self, request_id):
-        self.request.remove(self.getById(request_id))
-
-    # --------------end utils-----------------
-
-    def build_request_dict(self, list):
+    def build_request_dict(self, row):
         result = {}
-        result['request_id'] = list
+        result['request_id'] = row[0]
+        result['costumer_id'] = row[1]
+        result['resource_id'] = row[2]
         return result
 
-    def build_request_attributes(self, request_id):
+    def build_request_attributes(self, request_id, costumer_id, resource_id):
         result = {}
         result['request_id'] = request_id
+        result['costumer_id'] = costumer_id
+        result['resource_id'] = resource_id
         return result
 
-    def getAllRequest(self):
-        list = self.give_me_request()
+    def getAllRequests(self):
+        rdao = RequestDAO()
         result_list = []
-        for row in list:
+        for row in rdao.getAllRequest():
             result = self.build_request_dict(row)
             result_list.append(result)
         return jsonify(Request=result_list)
 
     def getRequestById(self, request_id):
-        row = self.getById(request_id)
+        rdao = RequestDAO()
+        row = rdao.getRequestById(request_id)
         if not row:
             return jsonify(Error="Request Not Found"), 404
         else:
-            batteries = self.build_request_dict(row)
-            return jsonify(Request=batteries)
+            result = self.build_request_dict(row)
+            return jsonify(Request=result)
 
-    def insertRequestJson(self, form):
-        print("form: ", form)
-        if len(form) != 1:
+    def insertRequestJson(self, json):
+        print("form: ", json)
+        if len(json) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
             request_id = self.insert_request()

@@ -59,14 +59,14 @@ class ClothingHandler:
             clothe = self.build_clothe_dict(row)
             return jsonify(Clothe=clothe)
 
-    def insertClotheJson(self, form):
-        print("form: ", form)
-        if len(form) != 3:
+    def insertClotheJson(self, json):
+        print("json: ", json)
+        if len(json) != 3:
             return jsonify(Error="Malformed post request"), 400
         else:
-            clothe_type = form['clothe_type']
-            clothe_size = form['clothe_size']
-            clothe_description = form['clothe_description']
+            clothe_type = json['clothe_type']
+            clothe_size = json['clothe_size']
+            clothe_description = json['clothe_description']
             if clothe_type and clothe_size and clothe_description:
                 clothe_id = self.insert_clothe(clothe_type, clothe_size, clothe_description)
                 result = self.build_clothe_attributes(clothe_id, clothe_type, clothe_size, clothe_description)

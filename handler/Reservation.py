@@ -52,9 +52,9 @@ class ReservationHandler:
             reservation = self.build_reservation_dict(row)
             return jsonify(Reservation=reservation)
 
-    def insertReservationJson(self, form):
-        print("form: ", form)
-        if len(form) != 1:
+    def insertReservationJson(self, json):
+        print("json: ", json)
+        if len(json) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
             reservation_id = self.insert_reservation()

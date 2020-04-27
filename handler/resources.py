@@ -57,13 +57,13 @@ class ResourcesHandler:
             resource = self.build_resource_dict(row)
             return jsonify(Resource=resource)
 
-    def insertResourceJson(self, form):
-        print("form: ", form)
-        if len(form) != 2:
+    def insertResourceJson(self, json):
+        print("json: ", json)
+        if len(json) != 2:
             return jsonify(Error="Malformed post request"), 400
         else:
-            resource_category = form['resource_category']
-            resource_availability = form['resource_availability']
+            resource_category = json['resource_category']
+            resource_availability = json['resource_availability']
             if resource_category and resource_availability:
                 resource_id = self.insert_resource(resource_category, resource_availability)
                 result = self.build_resource_attributes(resource_id, resource_category, resource_availability)

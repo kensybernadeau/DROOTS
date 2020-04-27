@@ -57,13 +57,13 @@ class ToolsHandler:
             tool = self.build_tool_dict(row)
             return jsonify(Tool=tool)
 
-    def insertToolJson(self, form):
-        print("form: ", form)
-        if len(form) != 2:
+    def insertToolJson(self, json):
+        print("json: ", json)
+        if len(json) != 2:
             return jsonify(Error="Malformed post request"), 400
         else:
-            tool_name = form['tool_name']
-            tool_description = form['tool_description']
+            tool_name = json['tool_name']
+            tool_description = json['tool_description']
             if tool_name and tool_description:
                 tool_id = self.insert_tool(tool_name, tool_description)
                 result = self.build_tool_attributes(tool_id, tool_name, tool_description)

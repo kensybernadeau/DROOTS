@@ -55,12 +55,12 @@ class SupplierHandler:
             supplier = self.build_supplier_dict(row)
             return jsonify(Supplier=supplier)
 
-    def insertSupplierJson(self, form):
-        print("form: ", form)
-        if len(form) != 1:
+    def insertSupplierJson(self, json):
+        print("json: ", json)
+        if len(json) != 1:
             return jsonify(Error="Malformed post request"), 400
         else:
-            supplier_location = form['supplier_location']
+            supplier_location = json['supplier_location']
             if supplier_location:
                 supplier_id = self.insert_supplier(supplier_location)
                 result = self.build_supplier_attributes(supplier_id, supplier_location)

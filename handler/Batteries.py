@@ -58,14 +58,14 @@ class BatteriesHandler:
             batteries = self.build_batteries_dict(row)
             return jsonify(Batteries=batteries)
 
-    def insertBatteriesJson(self, form):
-        print("form: ", form)
-        if len(form) != 3:
+    def insertBatteriesJson(self, json):
+        print("json: ", json)
+        if len(json) != 3:
             return jsonify(Error="Malformed post request"), 400
         else:
-            batteries_type = form['batteries_type']
-            batteries_voltage = form['batteries_voltage']
-            batteries_quantity = form['batteries_quantity']
+            batteries_type = json['batteries_type']
+            batteries_voltage = json['batteries_voltage']
+            batteries_quantity = json['batteries_quantity']
             if batteries_type and batteries_voltage and batteries_quantity:
                 batteries_id = self.insert_batteries(batteries_type, batteries_voltage, batteries_quantity)
                 result = self.build_batteries_attributes(batteries_id, batteries_type, batteries_voltage,

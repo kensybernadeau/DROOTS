@@ -63,16 +63,16 @@ class FoodHandler:
             food = self.build_food_dict(row)
             return jsonify(Food=food)
 
-    def insertFoodJson(self, form):
-        print("form: ", form)
-        if len(form) != 5:
+    def insertFoodJson(self, json):
+        print("json: ", json)
+        if len(json) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
-            food_name = form['food_name']
-            food_quantity = form['food_quantity']
-            food_exp_date = form['food_exp_date']
-            food_type = form['food_type']
-            food_description = form['food_description']
+            food_name = json['food_name']
+            food_quantity = json['food_quantity']
+            food_exp_date = json['food_exp_date']
+            food_type = json['food_type']
+            food_description = json['food_description']
             if food_name and food_quantity and food_exp_date and food_type  and food_description:
                 food_id = self.insert_food(food_name, food_quantity, food_exp_date, food_type, food_description)
                 result = self.build_food_attributes(food_id, food_name, food_quantity, food_exp_date, food_type, food_description)
