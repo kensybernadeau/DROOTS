@@ -1,5 +1,11 @@
 from flask import jsonify
 
+from dao.food import FoodDAO
+from dao.health import HealthDAO
+from dao.resources import ResourcesDAO
+from handler.food import FoodHandler
+from handler.health import HealthHandler
+
 
 class ResourcesHandler:
     resources = [(1, "baby food", "false"),
@@ -94,3 +100,14 @@ class ResourcesHandler:
             # dao.delete(pid)
             self.delete_resource(resource_id)
             return jsonify(DeleteStatus="OK"), 200
+
+    def get_available_resources(self):
+        handler_health = HealthHandler()
+        hanler_food = FoodHandler()
+        handler_list = [hanler_food, handler_health]
+        resources_list = []
+        for hanler in handler_list:
+            resources_list.extend(hanler.get_available_resources())
+        return jsonify(Resources_Available=resources_list)
+
+

@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.health import HealthDAO
+
 
 class HealthHandler:
     health = [(1, "panadol", 20, "05/30/2020", "pm", "for people"),
@@ -34,27 +36,28 @@ class HealthHandler:
         result = {}
         result['health_id'] = row[0]
         result['health_name'] = row[1]
-        result['health_quantity'] = row[2]
-        result['health_exp_date'] = row[3]
-        result['health_type'] = row[4]
-        result['health_description'] = row[5]
+        result['health_exp_date'] = row[2]
+        result['health_type'] = row[3]
+        result['health_description'] = row[4]
+        result['resource_quantity'] = row[5]
         return result
 
-    def build_health_attributes(self, health_id, health_name, health_quantity, health_exp_date, health_type,
-                                health_description):
+    def build_health_attributes(self, health_id, health_name, health_exp_date, health_type,
+                                health_description, resource_quantity):
         result = {}
         result['health_id'] = health_id
         result['health_name'] = health_name
-        result['health_quantity'] = health_quantity
         result['health_exp_date'] = health_exp_date
         result['health_type'] = health_type
         result['health_description'] = health_description
+        result['resource_quantity'] = resource_quantity
         return result
 
     def getAllHealth(self):
-        hlist = self.give_me_health()
+        dao = HealthDAO()
+        health_list = dao.getAllHealth()
         result_list = []
-        for row in hlist:
+        for row in health_list:
             result = self.build_health_dict(row)
             result_list.append(result)
         return jsonify(Health=result_list)
@@ -73,15 +76,16 @@ class HealthHandler:
             return jsonify(Error="Malformed post request"), 400
         else:
             health_name = form['health_name']
-            health_quantity = form['health_quantity']
             health_exp_date = form['health_exp_date']
             health_type = form['health_type']
             health_description = form['health_description']
-            if health_name and health_quantity and health_exp_date and health_type and health_description:
-                health_id = self.insert_health(health_name, health_quantity, health_exp_date, health_type,
-                                               health_description)
-                result = self.build_health_attributes(health_id, health_name, health_quantity, health_exp_date,
-                                                      health_type, health_description)
+            resource_quantity = form["resource_quantity"]
+            if health_name and health_exp_date and health_type and health_description and resource_quantity is not None:
+                dao = HealthDAO()
+                health_id = dao.insert_health(health_name, health_exp_date, health_type, health_description,
+                                              resource_quantity)
+                result = self.build_health_attributes(health_id, health_name, health_exp_date,
+                                                      health_type, health_description, resource_quantity)
                 return jsonify(Health=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
@@ -113,3 +117,13 @@ class HealthHandler:
         else:
             self.delete_health(health_id)
             return jsonify(DeleteStatus="OK"), 200
+
+    def get_available_resources(self):
+        dao = HealthDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_health_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list

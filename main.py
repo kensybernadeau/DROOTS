@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 # Import Cross-Origin Resource Sharing to enable
 # services on other ports on this machine or on other
 # machines to access this app
-# from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 # dhf
 # Activate
 from handler.Administrator import AdministratorsHandler
@@ -24,7 +24,7 @@ from handler.resources import ResourcesHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
-# CORS(app)
+CORS(app)
 
 
 @app.route('/')
@@ -40,6 +40,16 @@ def getAllResources():
     else:
         if not request.args:
             return ResourcesHandler().getAllResources()
+
+
+@app.route('/droots/resources/available', methods=['GET', 'POST'])
+def get_available_resources():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ResourcesHandler().insertResourceJson(request.json)
+    else:
+        if not request.args:
+            return ResourcesHandler().get_available_resources()
 
 
 @app.route('/droots/resources/<int:resource_id>', methods=['GET', 'PUT', 'DELETE'])
