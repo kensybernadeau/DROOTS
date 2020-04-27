@@ -78,7 +78,8 @@ class FuelHandler:
         f_type = args.get("fuel_type")
         fuels_list = []
         if (len(args) == 1) and f_type:
-            fuels_list = self.getByType(f_type)
+            fdao = FuelDAO()
+            fuels_list = fdao.getFuelByType(f_type)
         else:
             return jsonify(Error="Malformed query string"), 400
         result_list = []

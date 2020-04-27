@@ -27,6 +27,15 @@ class FuelDAO:
         result = cursor.fetchone()
         return result
 
+    def getFuelByType(self, fuel_type):
+        cursor = self.conn.cursor()
+        query = "select * from fuel where fuel_type = %s;"
+        cursor.execute(query, (fuel_type,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
 
     def insert(self, fuel_type, fuel_liters):
         cursor = self.conn.cursor()
@@ -49,4 +58,6 @@ class FuelDAO:
         cursor.execute(query, (fuel_type, fuel_liters, fuel_id,))
         self.conn.commit()
         return fuel_id
+
+
 

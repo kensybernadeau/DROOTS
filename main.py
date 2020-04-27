@@ -275,8 +275,8 @@ def getAdministratorById(administrator_id):
 def getCustomerById(customer_id):
     if request.method == 'GET':
         return CustomerHandler().getCustomersById(customer_id)
-    elif request.method == 'PUT':
-        return CustomerHandler().updateCustomers(customer_id, request.form)
+    #elif request.method == 'PUT':
+        #return CustomerHandler().updateCustomers(customer_id, request.form)
     elif request.method == 'DELETE':
         return CustomerHandler().deleteCustomers(customer_id)
     else:
