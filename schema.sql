@@ -1,0 +1,3 @@
+-- tablas con atributos atomicos se mapean directamente a tablas
+--atributos compuestos se vuelven partes atomicas
+--
