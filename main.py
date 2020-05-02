@@ -15,6 +15,7 @@ from handler.Reservation import ReservationHandler
 from handler.food import FoodHandler
 from handler.fuel import FuelHandler
 from handler.health import HealthHandler
+from handler.ice import IceHandler
 from handler.power_resources import PowerResourcesHandler
 from handler.supplier import SupplierHandler
 from handler.user import UserHandler
@@ -110,6 +111,28 @@ def getWaterById(water_id):
         return jsonify(Error="Method not allowed."), 405
 
 
+@app.route('/droots/resources/ice', methods=['GET', 'POST'])
+def getAllIce():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return IceHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return IceHandler().getAllIce()
+
+
+@app.route('/droots/resources/ice/<int:ice_id>', methods=['GET', 'PUT', 'DELETE'])
+def getIceById(ice_id):
+    if request.method == 'GET':
+        return IceHandler().getIceById(ice_id)
+    elif request.method == 'PUT':
+        return IceHandler().updateIce(ice_id, request.json)
+    elif request.method == 'DELETE':
+        return IceHandler().deleteIce(ice_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
 @app.route('/droots/resources/health', methods=['GET', 'POST'])
 def getAllHealth():
     if request.method == 'POST':
@@ -118,7 +141,6 @@ def getAllHealth():
     else:
         if not request.args:
             return HealthHandler().getAllHealth()
-
 
 
 @app.route('/droots/resources/health/<int:health_id>', methods=['GET', 'PUT', 'DELETE'])
