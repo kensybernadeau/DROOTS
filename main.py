@@ -236,7 +236,7 @@ def getAllFuels():
 
     else:
         if not request.args:
-            return FuelHandler().getAllFuels()
+            return FuelHandler().getAllFuel()
 
 
 @app.route('/droots/resources/fuel/<int:fuel_id>', methods=['GET', 'PUT', 'DELETE'])
