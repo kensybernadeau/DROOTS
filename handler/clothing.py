@@ -1,31 +1,9 @@
 from flask import jsonify
 
+from dao.clothing import ClothingDAO
+
 
 class ClothingHandler:
-
-    clothes = [(1, "top", "sm","for babies"),
-              (2, "bottom", "md", "for babies")]
-
-    #----------------utils-------------------
-    def give_me_clothes(self):
-        return self.clothes
-
-    def getById(self, clothes_id):
-        for f in self.clothes:
-            if clothes_id == f[0]:
-                return f
-
-    def insert_clothe(self, clothe_type, clothe_size_, clothe_description):
-        self.clothes.append((len(self.clothes) + 1, clothe_type, clothe_size_, clothe_description))
-        return len(self.clothes)
-
-    def update_clothe(self, clothe_id, clothe_type, clothe_size_, clothe_description):
-        self.clothes.remove(self.getById(clothe_id))
-        self.clothes.insert(clothe_id-1, (clothe_id, clothe_type, clothe_size_, clothe_description))
-
-    def delete_clothe(self, clothe_id):
-        self.clothes.remove(self.getById(clothe_id))
-    #--------------end utils-----------------
 
     def build_clothe_dict(self, row):
         result = {}
@@ -44,20 +22,32 @@ class ClothingHandler:
         return result
 
     def getAllclothes(self):
-        flist = self.give_me_clothes()
+        dao = ClothingDAO()
+        clothing_list = dao.getAllClothing()
         result_list = []
-        for row in flist:
+        for row in clothing_list:
             result = self.build_clothe_dict(row)
             result_list.append(result)
         return jsonify(Clothes=result_list)
 
     def getClotheById(self, clothe_id):
-        row = self.getById(clothe_id)
+        dao = ClothingDAO()
+        row = dao.getClothingById(clothe_id)
         if not row:
-            return jsonify(Error="Clothe Not Found"), 404
+            return jsonify(Error="Clothe not found"), 404
         else:
-            clothe = self.build_clothe_dict(row)
-            return jsonify(Clothe=clothe)
+            food = self.build_clothe_dict(row)
+            return jsonify(Clothing=food)
+
+    def get_available_resources(self):
+        dao = ClothingDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_clothe_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list
 
     def insertClotheJson(self, form):
         print("form: ", form)

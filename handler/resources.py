@@ -3,6 +3,7 @@ from flask import jsonify
 from dao.food import FoodDAO
 from dao.health import HealthDAO
 from dao.resources import ResourcesDAO
+from handler.clothing import ClothingHandler
 from handler.food import FoodHandler
 from handler.health import HealthHandler
 from handler.ice import IceHandler
@@ -48,6 +49,20 @@ class ResourcesHandler:
         result['resource_category'] = resource_category
         result['resource_availability'] = resource_availability
         return result
+
+    def get_available_resources(self):
+        handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler()]
+        resources_list = []
+        for handler in handler_list:
+            resources_list.extend(handler.get_available_resources())
+        return jsonify(Resources_Available=resources_list)
+
+    # def get_resources_by_name(self):
+    #     handler_list = [FoodHandler(), HealthHandler()]
+    #     resources_list = []
+    #     for handler in handler_list:
+    #         resources_list.extend(handler.)
+    #     return jsonify(Resources=resources_list)
 
     def getAllResources(self):
         flist = self.give_me_resource()
@@ -103,18 +118,5 @@ class ResourcesHandler:
             self.delete_resource(resource_id)
             return jsonify(DeleteStatus="OK"), 200
 
-    def get_available_resources(self):
-        handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler()]
-        resources_list = []
-        for handler in handler_list:
-            resources_list.extend(handler.get_available_resources())
-        return jsonify(Resources_Available=resources_list)
-
-    def get_resources_by_name(self):
-        handler_list = [FoodHandler(), HealthHandler()]
-        resources_list = []
-        for handler in handler_list:
-            resources_list.extend(handler.)
-        return jsonify(Resources=resources_list)
 
 

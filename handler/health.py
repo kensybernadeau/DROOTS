@@ -60,14 +60,6 @@ class HealthHandler:
             result_list.append(result)
         return jsonify(Health=result_list)
 
-    # def getHealthById(self, health_id):
-    #     row = self.getById(health_id)
-    #     if not row:
-    #         return jsonify(Error="Health Not Found"), 404
-    #     else:
-    #         health = self.build_health_dict(row)
-    #         return jsonify(Health=health)
-
     def getHealthById(self, health_id):
         dao = HealthDAO()
         row = dao.getHealthById(health_id)
