@@ -39,7 +39,6 @@ class HealthHandler:
         result['health_exp_date'] = row[2]
         result['health_type'] = row[3]
         result['health_description'] = row[4]
-        result['resource_quantity'] = row[5]
         return result
 
     def build_health_attributes(self, health_id, health_name, health_exp_date, health_type,
@@ -50,7 +49,6 @@ class HealthHandler:
         result['health_exp_date'] = health_exp_date
         result['health_type'] = health_type
         result['health_description'] = health_description
-        result['resource_quantity'] = resource_quantity
         return result
 
     def getAllHealth(self):
@@ -62,10 +60,19 @@ class HealthHandler:
             result_list.append(result)
         return jsonify(Health=result_list)
 
+    # def getHealthById(self, health_id):
+    #     row = self.getById(health_id)
+    #     if not row:
+    #         return jsonify(Error="Health Not Found"), 404
+    #     else:
+    #         health = self.build_health_dict(row)
+    #         return jsonify(Health=health)
+
     def getHealthById(self, health_id):
-        row = self.getById(health_id)
+        dao = HealthDAO()
+        row = dao.getHealthById(health_id)
         if not row:
-            return jsonify(Error="Health Not Found"), 404
+            return jsonify(Error="Part Not Found"), 404
         else:
             health = self.build_health_dict(row)
             return jsonify(Health=health)

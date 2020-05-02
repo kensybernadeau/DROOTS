@@ -5,29 +5,6 @@ from dao.food import FoodDAO
 
 class FoodHandler:
 
-    food = [(1, "water", 20, "05/30/2020", "16oz", "for people"),
-            (2, "lechuga", 30, "05/30/2020", "romana", "for babies")]
-
-    #----------------utils-------------------
-    def give_me_food(self):
-        return self.food
-
-    def getById(self, food_id):
-        for f in self.food:
-            if food_id == f[0]:
-                return f
-
-    def insert_food(self, food_name, food_quantity, food_exp_date, food_type, food_description):
-        self.food.append((len(self.food) + 1, food_name, food_quantity, food_exp_date, food_type, food_description))
-        return len(self.food)
-
-    def update_food(self, food_id, food_name, food_quantity, food_exp_date, food_type, food_description):
-        self.food.remove(self.getById(food_id))
-        self.food.insert(food_id-1, (food_id, food_name, food_quantity, food_exp_date, food_type, food_description))
-
-    def delete_food(self, food_id):
-        self.food.remove(self.getById(food_id))
-    #--------------end utils-----------------
 
     def build_food_dict(self, row):
         result = {}
@@ -36,17 +13,15 @@ class FoodHandler:
         result['food_exp_date'] = row[2]
         result['food_type'] = row[3]
         result['food_description'] = row[4]
-        result['resource_availability'] = row[5]
         return result
 
-    def build_food_attributes(self, food_id, food_name, food_exp_date, food_type, food_description, resource_availability):
+    def build_food_attributes(self, food_id, food_name, food_exp_date, food_type, food_description):
         result = {}
         result['food_id'] = food_id
         result['food_name'] = food_name
         result['food_exp_date'] = food_exp_date
         result['food_type'] = food_type
         result['food_description'] = food_description
-        result['resource_availability'] = resource_availability
         return result
 
     def getAllFood(self):
@@ -58,22 +33,21 @@ class FoodHandler:
             result_list.append(result)
         return jsonify(Food=result_list)
 
-    # def getAllFood(self):
-    #     flist = self.give_me_food()
-    #     result_list = []
-    #     for row in flist:
-    #         result = self.build_food_dict(row)
-    #         result_list.append(result)
-    #     return jsonify(Food=result_list)
 
     def getFoodById(self, food_id):
-        row = self.getById(food_id)
+        dao = FoodDAO()
+        row = dao.getFoodById(food_id)
         if not row:
-            return jsonify(Error="Food Not Found"), 404
+            return jsonify(Error="Part Not Found"), 404
         else:
             food = self.build_food_dict(row)
             return jsonify(Food=food)
 
+
+
+
+
+#----------------inserts------------------------------------------
     def insertFoodJson(self, form):
         print("form: ", form)
         if len(form) != 5:
