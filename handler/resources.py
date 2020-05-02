@@ -3,6 +3,7 @@ from flask import jsonify
 from dao.food import FoodDAO
 from dao.health import HealthDAO
 from dao.resources import ResourcesDAO
+from handler.Batteries import BatteriesHandler
 from handler.clothing import ClothingHandler
 from handler.food import FoodHandler
 from handler.health import HealthHandler
@@ -51,7 +52,8 @@ class ResourcesHandler:
         return result
 
     def get_available_resources(self):
-        handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler()]
+        handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler(),
+                        BatteriesHandler()]
         resources_list = []
         for handler in handler_list:
             resources_list.extend(handler.get_available_resources())

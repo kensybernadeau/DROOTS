@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.batteries import BatteriesDAO
+
 
 class BatteriesHandler:
     batteries =  [(1, 'Lithium Ion', '1.5', '4'), (2, 'Acid', '1.5', '8'), (3, 'Lead Acid', '9', '12')]
@@ -26,37 +28,50 @@ class BatteriesHandler:
 
     # --------------end utils-----------------
 
-    def build_batteries_dict(self, list):
+    def build_battery_dict(self, list):
         result = {}
-        result['batteries_id'] = list[0]
-        result['batteries_type'] = list[1]
-        result['batteries_voltage'] = list[2]
-        result['batteries_quantity'] = list[3]
+        result['battery_id'] = list[0]
+        result['battery_name'] = list[1]
+        result['battery'] = list[2]
+        result['battery_type'] = list[3]
+        result['battery_voltage'] = list[4]
         return result
 
     def build_batteries_attributes(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
         result = {}
-        result['batteries_id'] = batteries_id
-        result['batteries_type'] = batteries_type
-        result['batteries_voltage'] = batteries_voltage
-        result['batteries_quantity'] = batteries_quantity
+        result['battery_id'] = batteries_id
+        result['battery_type'] = batteries_type
+        result['battery_voltage'] = batteries_voltage
+        result['battery_quantity'] = batteries_quantity
         return result
 
     def getAllBatteries(self):
-        list = self.give_me_batteries()
+        dao = BatteriesDAO()
+        battery_list = dao.getAllBatteries()
         result_list = []
-        for row in list:
-            result = self.build_batteries_dict(row)
+        for row in battery_list:
+            result = self.build_battery_dict(row)
             result_list.append(result)
         return jsonify(Batteries=result_list)
 
-    def getBatteriesById(self, batteries_id):
-        row = self.getById(batteries_id)
+    def getBatteriesById(self, battery_id):
+        dao = BatteriesDAO()
+        row = dao.getBatteriesById(battery_id)
         if not row:
-            return jsonify(Error="Batteries Not Found"), 404
+            return jsonify(Error="Part Not Found"), 404
         else:
-            batteries = self.build_batteries_dict(row)
-            return jsonify(Batteries=batteries)
+            battery = self.build_battery_dict(row)
+            return jsonify(Batteries=battery)
+
+    def get_available_resources(self):
+        dao = BatteriesDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_battery_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list
 
     def insertBatteriesJson(self, form):
         print("form: ", form)
