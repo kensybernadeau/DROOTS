@@ -28,3 +28,13 @@ class IceDAO:
         cursor.execute(query, (ice_id,))
         result = cursor.fetchone()
         return result
+
+    def get_available_resources(self):
+        cursor = self.conn.cursor()
+        query = "select ice_id, resource_name, ice_description " \
+                "from ice natural inner join resources"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

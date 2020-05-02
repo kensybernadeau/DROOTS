@@ -28,3 +28,13 @@ class WaterDAO:
         cursor.execute(query, (water_id,))
         result = cursor.fetchone()
         return result
+
+    def get_available_resources(self):
+        cursor = self.conn.cursor()
+        query = "select water_id, resource_name, water_oz, water_type " \
+                "from water natural inner join resources;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

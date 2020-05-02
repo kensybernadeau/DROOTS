@@ -5,6 +5,8 @@ from dao.health import HealthDAO
 from dao.resources import ResourcesDAO
 from handler.food import FoodHandler
 from handler.health import HealthHandler
+from handler.ice import IceHandler
+from handler.water import WaterHandler
 
 
 class ResourcesHandler:
@@ -102,12 +104,17 @@ class ResourcesHandler:
             return jsonify(DeleteStatus="OK"), 200
 
     def get_available_resources(self):
-        handler_health = HealthHandler()
-        hanler_food = FoodHandler()
-        handler_list = [hanler_food, handler_health]
+        handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler()]
         resources_list = []
-        for hanler in handler_list:
-            resources_list.extend(hanler.get_available_resources())
+        for handler in handler_list:
+            resources_list.extend(handler.get_available_resources())
         return jsonify(Resources_Available=resources_list)
+
+    def get_resources_by_name(self):
+        handler_list = [FoodHandler(), HealthHandler()]
+        resources_list = []
+        for handler in handler_list:
+            resources_list.extend(handler.)
+        return jsonify(Resources=resources_list)
 
 
