@@ -21,6 +21,7 @@ from handler.user import UserHandler
 from handler.clothing import ClothingHandler
 from handler.tools import ToolsHandler
 from handler.resources import ResourcesHandler
+from handler.water import WaterHandler
 
 app = Flask(__name__)
 # Apply CORS to this app
@@ -83,6 +84,28 @@ def getFoodById(food_id):
         return FoodHandler().updateFood(food_id, request.json)
     elif request.method == 'DELETE':
         return FoodHandler().deleteFood(food_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/water', methods=['GET', 'POST'])
+def getAllWater():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return WaterHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return WaterHandler().getAllWater()
+
+
+@app.route('/droots/resources/water/<int:water_id>', methods=['GET', 'PUT', 'DELETE'])
+def getWaterById(water_id):
+    if request.method == 'GET':
+        return WaterHandler().getWaterById(water_id)
+    elif request.method == 'PUT':
+        return WaterHandler().updateWater(water_id, request.json)
+    elif request.method == 'DELETE':
+        return WaterHandler().deleteWater(water_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
