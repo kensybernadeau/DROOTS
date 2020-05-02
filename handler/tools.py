@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.tools import ToolsDAO
+
 
 class ToolsHandler:
     tools = [(1, "destornillador", "de estrias"),
@@ -42,20 +44,32 @@ class ToolsHandler:
         return result
 
     def getAllTools(self):
-        flist = self.give_me_tool()
+        dao = ToolsDAO()
+        tools_list = dao.getAllTools()
         result_list = []
-        for row in flist:
+        for row in tools_list:
             result = self.build_tool_dict(row)
             result_list.append(result)
         return jsonify(Tools=result_list)
 
-    def getToolById(self, tool_id):
-        row = self.getById(tool_id)
+    def getToolsById(self, tools_id):
+        dao = ToolsDAO()
+        row = dao.getToolsById(tools_id)
         if not row:
             return jsonify(Error="Tool Not Found"), 404
         else:
-            tool = self.build_tool_dict(row)
-            return jsonify(Tool=tool)
+            tools = self.build_tool_dict(row)
+            return jsonify(Tools=tools)
+
+    def get_available_resources(self):
+        dao = ToolsDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_tools_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list
 
     def insertToolJson(self, form):
         print("form: ", form)

@@ -290,7 +290,7 @@ def getAllTools():
 @app.route('/droots/resources/tools/<int:tool_id>', methods=['GET', 'PUT', 'DELETE'])
 def getToolById(tool_id):
     if request.method == 'GET':
-        return ToolsHandler().getToolById(tool_id)
+        return ToolsHandler().getToolsById(tool_id)
     elif request.method == 'PUT':
         return ToolsHandler().updateTool(tool_id, request.json)
     elif request.method == 'DELETE':
