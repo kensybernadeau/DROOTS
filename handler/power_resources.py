@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.power_resources import PowerResourcesDAO
+
 
 class PowerResourcesHandler:
     power_resources = [(1, "batteries", "AA", "5v batteries"), (2, "fuel", "diesel", ""),
@@ -48,10 +50,9 @@ class PowerResourcesHandler:
     def build_power_resources_dict(self, row):
         result = {}
         result['power_resource_id'] = row[0]
-        result['power_resource_category'] = row[1]
+        result['power_resource_name'] = row[1]
         result['power_resource_type'] = row[2]
         result['power_resource_description'] = row[3]
-
         return result
 
     def build_power_resources_attributes(self, power_resource_id, power_resource_category, power_resource_type,
@@ -64,20 +65,32 @@ class PowerResourcesHandler:
         return result
 
     def getAllPowerResources(self):
-        prlist = self.give_me_power_resources()
+        dao = PowerResourcesDAO()
+        power_resources_list = dao.getAllPowerResources()
         result_list = []
-        for row in prlist:
+        for row in power_resources_list:
             result = self.build_power_resources_dict(row)
             result_list.append(result)
-        return jsonify(Power_Resources=result_list)
+        return jsonify(PowerResources=result_list)
 
-    def getPowerResourceById(self, power_resource_id):
-        row = self.getById(power_resource_id)
+    def getPowerResourcesById(self, power_resources_id):
+        dao = PowerResourcesDAO()
+        row = dao.getPowerResourcesById(power_resources_id)
         if not row:
             return jsonify(Error="Power Resource Not Found"), 404
         else:
-            power_resource = self.build_power_resources_dict(row)
-            return jsonify(Power_Resource=power_resource)
+            power_resources = self.build_power_resources_dict(row)
+            return jsonify(PowerResources=power_resources)
+
+    def get_available_resources(self):
+        dao = PowerResourcesDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_power_resources_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list
 
     def insertPowerResourceJson(self, json):
         print("json ", json)

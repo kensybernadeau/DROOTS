@@ -216,7 +216,7 @@ def getAllPowerResources():
 @app.route('/droots/resources/powerresources/<int:power_resource_id>', methods=['GET', 'PUT', 'DELETE'])
 def getPowerResourceById(power_resource_id):
     if request.method == 'GET':
-        return PowerResourcesHandler().getPowerResourceById(power_resource_id)
+        return PowerResourcesHandler().getPowerResourcesById(power_resource_id)
 
     elif request.method == 'PUT':
         return PowerResourcesHandler().updatePowerResource(power_resource_id, request.form)

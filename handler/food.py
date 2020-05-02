@@ -43,7 +43,15 @@ class FoodHandler:
             food = self.build_food_dict(row)
             return jsonify(Food=food)
 
-
+    def get_available_resources(self):
+        dao = FoodDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_food_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list
 
 
 
@@ -94,12 +102,3 @@ class FoodHandler:
             self.delete_food(food_id)
             return jsonify(DeleteStatus="OK"), 200
 
-    def get_available_resources(self):
-        dao = FoodDAO()
-        resources_list = dao.get_available_resources()
-        result_list = []
-        for row in resources_list:
-            result = self.build_food_dict(row)
-            result_list.append(result)
-        # return jsonify(Resource=result_list)
-        return result_list
