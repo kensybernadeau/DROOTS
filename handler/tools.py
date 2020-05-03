@@ -66,7 +66,7 @@ class ToolsHandler:
         resources_list = dao.get_available_resources()
         result_list = []
         for row in resources_list:
-            result = self.build_tools_dict(row)
+            result = self.build_tool_dict(row)
             result_list.append(result)
         # return jsonify(Resource=result_list)
         return result_list

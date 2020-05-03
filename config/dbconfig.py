@@ -2,6 +2,6 @@
 
 pg_config = {
     'user': 'droots',
-    'passwd': 'Vipc0597($)',
+    'passwd': 'droots',
     'dbname': 'drootsdb'
 }

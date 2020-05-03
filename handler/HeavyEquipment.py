@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.heavy_equipment import HeavyEquipmentDAO
+
 
 class HeavyEquipmentHandler:
 
@@ -26,35 +28,47 @@ class HeavyEquipmentHandler:
         self.hequipment.remove(self.getById(hequipment_id))
     #--------------end utils-----------------
 
-    def build_hequipment_dict(self, list):
+    def build_heavy_dict(self, list):
         result = {}
         result['hequipment_id'] = list[0]
         result['hequipment_name'] = list[1]
         result['hequipment_description'] = list[2]
         return result
 
-    def build_hequipment_attributes(self, hequipment_id, hequipment_name, hequipment_description):
+    def build_heavy_attributes(self, hequipment_id, hequipment_name, hequipment_description):
         result = {}
         result['hequipment_id'] = hequipment_id
         result['hequipment_name'] = hequipment_name
         result['hequipment_description'] = hequipment_description
         return result
 
-    def getAllHEquipment(self):
-        list = self.give_me_hequipment()
+    def getAllHeavyEquipment(self):
+        dao = HeavyEquipmentDAO()
+        heavy_list = dao.getAllHeavyEquipment()
         result_list = []
-        for row in list:
-            result = self.build_hequipment_dict(row)
+        for row in heavy_list:
+            result = self.build_heavy_dict(row)
             result_list.append(result)
         return jsonify(HeavyEquipment=result_list)
 
-    def getHEquipmentById(self, hequipment_id):
-        row = self.getById(hequipment_id)
+    def getHeavyEquipmentById(self, heavy_id):
+        dao = HeavyEquipmentDAO()
+        row = dao.getHeavyEquipmentById(heavy_id)
         if not row:
-            return jsonify(Error="HeavyEquipment Not Found"), 404
+            return jsonify(Error="Equipment Not Found"), 404
         else:
-            hequipment = self.build_hequipment_dict(row)
-            return jsonify(HeavyEquipment=hequipment)
+            heavy = self.build_heavy_dict(row)
+            return jsonify(HeavyEquipment=heavy)
+
+    def get_available_resources(self):
+        dao = HeavyEquipmentDAO()
+        resources_list = dao.get_available_resources()
+        result_list = []
+        for row in resources_list:
+            result = self.build_heavy_dict(row)
+            result_list.append(result)
+        # return jsonify(Resource=result_list)
+        return result_list
 
     def insertHEquipmentJson(self, form):
         print("form: ", form)

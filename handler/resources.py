@@ -5,6 +5,7 @@ from dao.health import HealthDAO
 from dao.power_resources import PowerResourcesDAO
 from dao.resources import ResourcesDAO
 from handler.Batteries import BatteriesHandler
+from handler.HeavyEquipment import HeavyEquipmentHandler
 from handler.clothing import ClothingHandler
 from handler.food import FoodHandler
 from handler.fuel import FuelHandler
@@ -57,7 +58,8 @@ class ResourcesHandler:
 
     def get_available_resources(self):
         handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler(),
-                        BatteriesHandler(), PowerResourcesHandler(), FuelHandler(), ToolsHandler()]
+                        BatteriesHandler(), PowerResourcesHandler(), FuelHandler(), ToolsHandler(),
+                        HeavyEquipmentHandler()]
         resources_list = []
         for handler in handler_list:
             resources_list.extend(handler.get_available_resources())

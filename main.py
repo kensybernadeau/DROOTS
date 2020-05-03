@@ -380,7 +380,7 @@ def getAllHEquipment():
         print("REQUEST: ", request.json)
         return HeavyEquipmentHandler().insertHEquipmentJson(request.json)
     elif request.method == 'GET':
-        return HeavyEquipmentHandler().getAllHEquipment()
+        return HeavyEquipmentHandler().getAllHeavyEquipment()
 
     else:
         return jsonify(Error="Method not allowed."), 405
@@ -392,7 +392,7 @@ def getHEquipmentById(hequipment_id):
         print("REQUEST: ", request.json)
         return HeavyEquipmentHandler().insertHEquipmentJson(request.json)
     elif request.method == 'GET':
-        return HeavyEquipmentHandler().getHEquipmentById(hequipment_id)
+        return HeavyEquipmentHandler().getHeavyEquipmentById(hequipment_id)
     elif request.method == 'PUT':
         return HeavyEquipmentHandler().updateHEquipment(hequipment_id, request.form)
 
