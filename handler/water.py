@@ -50,3 +50,13 @@ class WaterHandler:
             result_list.append(result)
         # return jsonify(Resource=result_list)
         return result_list
+
+    def get_resources_by_name(self, resource_name):
+        dao = WaterDAO()
+        water_list = []
+        water_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in water_list:
+            result = self.build_water_dict(row)
+            result_list.append(result)
+        return result_list

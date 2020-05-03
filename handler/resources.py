@@ -68,14 +68,14 @@ class ResourcesHandler:
     def searchResources(self, args):
         resource_name = args.get("resource_name")
         handler_list = [FoodHandler(), HealthHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(),
-                        HeavyEquipmentHandler(), IceHandler()]
+                        HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
         result_list = []
         if (len(args) == 1) and resource_name:
             for handler in handler_list:
                 result_list.extend(handler.get_resources_by_name(resource_name))
         else:
             return jsonify(Error="Malformed query string"), 400
-        return jsonify(Resource=result_list)
+        return jsonify(Resources=result_list)
 
     def getAllResources(self):
         flist = self.give_me_resource()

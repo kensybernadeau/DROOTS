@@ -8,9 +8,10 @@ class ClothingHandler:
     def build_clothe_dict(self, row):
         result = {}
         result['clothe_id'] = row[0]
-        result['clothe_type'] = row[1]
+        result['clothe_name'] = row[1]
         result['clothe_size'] = row[2]
-        result['clothe_description'] = row[3]
+        result['clothe_type'] = row[3]
+        result['clothe_description'] = row[4]
         return result
 
     def build_clothe_attributes(self, clothe_id, clothe_type, clothe_size, clothe_description):

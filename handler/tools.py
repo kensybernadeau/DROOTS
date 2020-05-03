@@ -71,6 +71,16 @@ class ToolsHandler:
         # return jsonify(Resource=result_list)
         return result_list
 
+    def get_resources_by_name(self, resource_name):
+        dao = ToolsDAO()
+        tool_list = []
+        tool_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in tool_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return result_list
+
     def insertToolJson(self, form):
         print("form: ", form)
         if len(form) != 2:

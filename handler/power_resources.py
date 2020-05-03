@@ -92,6 +92,16 @@ class PowerResourcesHandler:
         # return jsonify(Resource=result_list)
         return result_list
 
+    def get_resources_by_name(self, resource_name):
+        dao = PowerResourcesDAO()
+        power_resources_list = []
+        power_resources_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in power_resources_list:
+            result = self.build_power_resources_dict(row)
+            result_list.append(result)
+        return result_list
+
     def insertPowerResourceJson(self, json):
         print("json ", json)
         if len(json) != 3:
