@@ -79,6 +79,16 @@ class FuelHandler:
         # return jsonify(Resource=result_list)
         return result_list
 
+    def get_resources_by_name(self, resource_name):
+        dao = FuelDAO()
+        fuel_list = []
+        fuel_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return result_list
+
     def insertFuelJson(self, json):
         print("json ", json)
         if len(json) != 2:

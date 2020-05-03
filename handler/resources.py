@@ -67,7 +67,8 @@ class ResourcesHandler:
 
     def searchResources(self, args):
         resource_name = args.get("resource_name")
-        handler_list = [FoodHandler(), HealthHandler(), BatteriesHandler(), ClothingHandler()]
+        handler_list = [FoodHandler(), HealthHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(),
+                        HeavyEquipmentHandler(), IceHandler()]
         result_list = []
         if (len(args) == 1) and resource_name:
             for handler in handler_list:
