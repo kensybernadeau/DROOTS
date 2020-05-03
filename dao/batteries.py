@@ -38,3 +38,13 @@ class BatteriesDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def get_resources_by_name(self, resource_name):
+        cursor = self.conn.cursor()
+        query = "select battery_id, resource_name, battery_material, battery_voltage, battery_type, battery_description " \
+                "from batteries natural inner join resources where resource_name = %s;"
+        cursor.execute(query, (resource_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

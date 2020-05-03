@@ -73,6 +73,16 @@ class BatteriesHandler:
         # return jsonify(Resource=result_list)
         return result_list
 
+    def get_resources_by_name(self, resource_name):
+        dao = BatteriesDAO()
+        batteries_list = []
+        batteries_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in batteries_list:
+            result = self.build_battery_dict(row)
+            result_list.append(result)
+        return result_list
+
     def insertBatteriesJson(self, form):
         print("form: ", form)
         if len(form) != 3:

@@ -33,8 +33,17 @@ class ClothingDAO:
         cursor = self.conn.cursor()
         query = "select clothe_id, resource_name, clothe_type, clothe_description " \
                 "from clothing natural inner join resources;"
-
         cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def get_resources_by_name(self, resource_name):
+        cursor = self.conn.cursor()
+        query = "select clothe_id, resource_name, clothe_type, clothe_description " \
+                "from clothing natural inner join resources where resource_name = %s;"
+        cursor.execute(query, (resource_name,))
         result = []
         for row in cursor:
             result.append(row)
