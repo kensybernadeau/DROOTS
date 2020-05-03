@@ -69,6 +69,17 @@ class HealthHandler:
             health = self.build_health_dict(row)
             return jsonify(Health=health)
 
+    def get_resources_by_name(self, resource_name):
+        dao = HealthDAO()
+        health_list = []
+        health_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in health_list:
+            result = self.build_health_dict(row)
+            result_list.append(result)
+        return result_list
+
+
     def insertHealthJson(self, form):
         print("form: ", form)
         if len(form) != 5:

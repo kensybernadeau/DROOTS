@@ -38,7 +38,7 @@ class FoodHandler:
         dao = FoodDAO()
         row = dao.getFoodById(food_id)
         if not row:
-            return jsonify(Error="Part Not Found"), 404
+            return jsonify(Error="Food Not Found"), 404
         else:
             food = self.build_food_dict(row)
             return jsonify(Food=food)
@@ -53,7 +53,15 @@ class FoodHandler:
         # return jsonify(Resource=result_list)
         return result_list
 
-
+    def get_resources_by_name(self, resource_name):
+        dao = FoodDAO()
+        food_list = []
+        food_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in food_list:
+            result = self.build_food_dict(row)
+            result_list.append(result)
+        return result_list
 
 #----------------inserts------------------------------------------
     def insertFoodJson(self, form):

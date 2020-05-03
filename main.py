@@ -52,6 +52,8 @@ def get_available_resources():
     else:
         if not request.args:
             return ResourcesHandler().get_available_resources()
+        else:
+            return ResourcesHandler().searchResources(request.args)
 
 
 @app.route('/droots/resources/<int:resource_id>', methods=['GET', 'PUT', 'DELETE'])
