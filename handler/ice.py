@@ -39,6 +39,14 @@ class IceHandler:
             ice = self.build_ice_dict(row)
             return jsonify(Ice=ice)
 
+    def getResourceById(self, resource_id):
+        dao = IceDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_ice_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = IceDAO()
         resources_list = dao.get_available_resources()

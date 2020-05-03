@@ -41,6 +41,14 @@ class WaterHandler:
             water = self.build_water_dict(row)
             return jsonify(Water=water)
 
+    def getResourceById(self, resource_id):
+        dao = WaterDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_water_dict(row)
+            # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = WaterDAO()
         resources_list = dao.get_available_resources()

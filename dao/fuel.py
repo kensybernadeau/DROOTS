@@ -29,6 +29,14 @@ class FuelDAO:
         result = cursor.fetchone()
         return result
 
+    def getResourceById(self, resource_id):
+        cursor = self.conn.cursor()
+        query = "select fuel_id, resource_name, fuel_type, fuel_liters " \
+                "from fuel natural inner join resources where resource_id = %s;"
+        cursor.execute(query, (resource_id,))
+        result = cursor.fetchone()
+        return result
+
     def get_available_resources(self):
         cursor = self.conn.cursor()
         query = "select fuel_id, resource_name, fuel_type, fuel_liters " \

@@ -61,6 +61,14 @@ class ToolsHandler:
             tools = self.build_tool_dict(row)
             return jsonify(Tools=tools)
 
+    def getResourceById(self, resource_id):
+        dao = ToolsDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_tool_dict(row)
+            # jsonify(Food=food)
+            return result
+
     def get_resources_supplied(self):
         dao = ToolsDAO()
         resources_list = dao.get_resources_supplied()

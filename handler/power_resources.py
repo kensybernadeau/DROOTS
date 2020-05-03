@@ -82,6 +82,14 @@ class PowerResourcesHandler:
             power_resources = self.build_power_resources_dict(row)
             return jsonify(PowerResources=power_resources)
 
+    def getResourceById(self, resource_id):
+        dao = PowerResourcesDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_power_resources_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = PowerResourcesDAO()
         resources_list = dao.get_available_resources()

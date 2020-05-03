@@ -69,6 +69,14 @@ class FuelHandler:
             fuel = self.build_fuel_dict(row)
             return jsonify(Fuel=fuel)
 
+    def getResourceById(self, resource_id):
+        dao = FuelDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_fuel_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = FuelDAO()
         resources_list = dao.get_available_resources()

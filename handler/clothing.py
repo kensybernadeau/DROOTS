@@ -40,6 +40,14 @@ class ClothingHandler:
             food = self.build_clothe_dict(row)
             return jsonify(Clothing=food)
 
+    def getResourceById(self, resource_id):
+        dao = ClothingDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_clothe_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = ClothingDAO()
         resources_list = dao.get_available_resources()

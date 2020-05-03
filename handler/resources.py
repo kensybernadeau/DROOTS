@@ -56,6 +56,17 @@ class ResourcesHandler:
         result['resource_availability'] = resource_availability
         return result
 
+    def getResourceById(self, resource_id):
+        handler_list = [FoodHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(), HealthHandler(),
+                        HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
+        for handler in handler_list:
+            row = handler.getResourceById(resource_id)
+            if row:
+                return jsonify(Resource=row)
+        return jsonify(Error="Resource Not Found"), 404
+
+
+
     def get_available_resources(self):
         handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler(),
                         BatteriesHandler(), PowerResourcesHandler(), FuelHandler(), ToolsHandler(),
@@ -93,13 +104,6 @@ class ResourcesHandler:
             result_list.append(result)
         return jsonify(Resource=result_list)
 
-    def getResourceById(self, resource_id):
-        row = self.getById(resource_id)
-        if not row:
-            return jsonify(Error="Resource Not Found"), 404
-        else:
-            resource = self.build_resource_dict(row)
-            return jsonify(Resource=resource)
 
     def insertResourceJson(self, form):
         print("form: ", form)

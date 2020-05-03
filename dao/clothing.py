@@ -29,6 +29,14 @@ class ClothingDAO:
         result = cursor.fetchone()
         return result
 
+    def getResourceById(self, resource_id):
+        cursor = self.conn.cursor()
+        query = "select clothe_id, resource_name, clothe_size, clothe_type, clothe_description " \
+                "from clothing natural inner join resources where resource_id = %s;"
+        cursor.execute(query, (resource_id,))
+        result = cursor.fetchone()
+        return result
+
     def get_available_resources(self):
         cursor = self.conn.cursor()
         query = "select clothe_id, resource_name, clothe_size, clothe_type, clothe_description " \

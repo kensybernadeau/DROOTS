@@ -69,6 +69,14 @@ class HealthHandler:
             health = self.build_health_dict(row)
             return jsonify(Health=health)
 
+    def getResourceById(self, resource_id):
+        dao = HealthDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_health_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = HealthDAO()
         resources_list = dao.get_available_resources()

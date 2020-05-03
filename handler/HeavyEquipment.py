@@ -60,6 +60,14 @@ class HeavyEquipmentHandler:
             heavy = self.build_heavy_dict(row)
             return jsonify(HeavyEquipment=heavy)
 
+    def getResourceById(self, resource_id):
+        dao = HeavyEquipmentDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_heavy_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = HeavyEquipmentDAO()
         resources_list = dao.get_available_resources()

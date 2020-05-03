@@ -63,6 +63,14 @@ class BatteriesHandler:
             battery = self.build_battery_dict(row)
             return jsonify(Batteries=battery)
 
+    def getResourceById(self, resource_id):
+        dao = BatteriesDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_battery_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = BatteriesDAO()
         resources_list = dao.get_available_resources()

@@ -34,17 +34,17 @@ def greeting():
     return 'Hello, this is the Disaster Relief Oriented One-on-one Technology Services ( DROOTS) DB App!'
 
 
-@app.route('/droots/resources/', methods=['GET', 'POST'])
-def getAllResources():
-    if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return ResourcesHandler().insertResourceJson(request.json)
-    else:
-        if not request.args:
-            return ResourcesHandler().getAllResources()
+# @app.route('/droots/resources/', methods=['GET', 'POST'])
+# def getAllResources():
+#     if request.method == 'POST':
+#         print("REQUEST: ", request.json)
+#         return ResourcesHandler().insertResourceJson(request.json)
+#     else:
+#         if not request.args:
+#             return ResourcesHandler().getAllResources()
 
 
-@app.route('/droots/resources/available', methods=['GET', 'POST'])
+@app.route('/droots/resources', methods=['GET', 'POST'])
 def get_available_resources():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -54,18 +54,6 @@ def get_available_resources():
             return ResourcesHandler().get_available_resources()
         else:
             return ResourcesHandler().searchResources(request.args)
-
-
-@app.route('/droots/resources/supplied', methods=['GET', 'POST'])
-def get_resources_supplied():
-    if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return ResourcesHandler().insertResourceJson(request.json)
-    else:
-        if not request.args:
-            return ResourcesHandler().get_resources_supplied()
-        else:
-            return ResourcesHandler().searchResources(request.rgs)
 
 
 @app.route('/droots/resources/<int:resource_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -79,6 +67,17 @@ def getResourceById(resource_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+
+@app.route('/droots/resources/supplied', methods=['GET', 'POST'])
+def get_resources_supplied():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ResourcesHandler().insertResourceJson(request.json)
+    else:
+        if not request.args:
+            return ResourcesHandler().get_resources_supplied()
+        else:
+            return ResourcesHandler().searchResources(request.rgs)
 
 @app.route('/droots/resources/food', methods=['GET', 'POST'])
 def getAllFood():

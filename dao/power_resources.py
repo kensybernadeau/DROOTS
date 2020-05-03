@@ -29,6 +29,14 @@ class PowerResourcesDAO:
         result = cursor.fetchone()
         return result
 
+    def getResourceById(self, resource_id):
+        cursor = self.conn.cursor()
+        query = "select power_id, resource_name, power_type, power_description " \
+                "from power_resources natural inner join resources where resource_id = %s;"
+        cursor.execute(query, (resource_id,))
+        result = cursor.fetchone()
+        return result
+
     def get_available_resources(self):
         cursor = self.conn.cursor()
         query = "select power_id, resource_name, power_type, power_description " \
