@@ -39,6 +39,16 @@ class WaterDAO:
             result.append(row)
         return result
 
+    def get_resources_supplied(self):
+        cursor = self.conn.cursor()
+        query = "select water_id, resource_name, water_oz, water_type " \
+                "from suppliers natural inner join supplies natural inner join resources natural inner join water;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def get_resources_by_name(self, resource_name):
         cursor = self.conn.cursor()
         query = "select water_id, resource_name, water_oz, water_type " \

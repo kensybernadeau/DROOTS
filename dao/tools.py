@@ -39,6 +39,16 @@ class ToolsDAO:
             result.append(row)
         return result
 
+    def get_resources_supplied(self):
+        cursor = self.conn.cursor()
+        query = "select tool_id, resource_name, tool_description " \
+                "from suppliers natural inner join supplies natural inner join resources natural inner join tools;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def get_resources_by_name(self, resource_name):
         cursor = self.conn.cursor()
         query = "select tool_id, resource_name, tool_description " \

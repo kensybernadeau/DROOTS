@@ -39,6 +39,16 @@ class BatteriesDAO:
             result.append(row)
         return result
 
+    def get_resources_supplied(self):
+        cursor = self.conn.cursor()
+        query = "select battery_id, resource_name, battery_material, battery_voltage, battery_type, battery_description " \
+                "from suppliers natural inner join supplies natural inner join resources natural inner join batteries;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def get_resources_by_name(self, resource_name):
         cursor = self.conn.cursor()
         query = "select battery_id, resource_name, battery_material, battery_voltage, battery_type, battery_description " \

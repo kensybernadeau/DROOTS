@@ -39,6 +39,16 @@ class FuelDAO:
             result.append(row)
         return result
 
+    def get_resources_supplied(self):
+        cursor = self.conn.cursor()
+        query = "select fuel_id, resource_name, fuel_type, fuel_liters " \
+                "from suppliers natural inner join supplies natural inner join resources natural inner join fuel;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def get_resources_by_name(self, resource_name):
         cursor = self.conn.cursor()
         query = "select fuel_id, resource_name, fuel_type, fuel_liters " \

@@ -78,6 +78,15 @@ class HealthHandler:
             result_list.append(result)
         return result_list
 
+    def get_resources_supplied(self):
+        dao = HealthDAO()
+        resources_list = dao.get_resources_supplied()
+        result_list = []
+        for row in resources_list:
+            result = self.build_health_dict(row)
+            result_list.append(result)
+        return result_list
+
     def get_resources_by_name(self, resource_name):
         dao = HealthDAO()
         health_list = []

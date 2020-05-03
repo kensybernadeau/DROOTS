@@ -40,6 +40,16 @@ class FoodDAO:
             result.append(row)
         return result
 
+    def get_resources_supplied(self):
+        cursor = self.conn.cursor()
+        query = "select food_id, resource_name, food_exp_date, food_type, food_description " \
+                "from suppliers natural inner join supplies natural inner join resources natural inner join food;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def get_resources_by_name(self, resource_name):
         cursor = self.conn.cursor()
         query = "select food_id, resource_name, food_exp_date, food_type, food_description " \

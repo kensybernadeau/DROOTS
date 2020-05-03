@@ -49,6 +49,15 @@ class IceHandler:
         # return jsonify(Resource=result_list)
         return result_list
 
+    def get_resources_supplied(self):
+        dao = IceDAO()
+        resources_list = dao.get_resources_supplied()
+        result_list = []
+        for row in resources_list:
+            result = self.build_ice_dict(row)
+            result_list.append(result)
+        return result_list
+
     def get_resources_by_name(self, resource_name):
         dao = IceDAO()
         ice_list = []

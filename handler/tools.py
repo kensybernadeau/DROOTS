@@ -61,6 +61,15 @@ class ToolsHandler:
             tools = self.build_tool_dict(row)
             return jsonify(Tools=tools)
 
+    def get_resources_supplied(self):
+        dao = ToolsDAO()
+        resources_list = dao.get_resources_supplied()
+        result_list = []
+        for row in resources_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return result_list
+
     def get_available_resources(self):
         dao = ToolsDAO()
         resources_list = dao.get_available_resources()

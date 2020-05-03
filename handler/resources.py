@@ -65,6 +65,14 @@ class ResourcesHandler:
             resources_list.extend(handler.get_available_resources())
         return jsonify(Resources_Available=resources_list)
 
+    def get_resources_supplied(self):
+        handler_list = [FoodHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(), HealthHandler(),
+                        HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
+        resources_list = []
+        for handler in handler_list:
+            resources_list.extend(handler.get_resources_supplied())
+        return jsonify(Resources_Supplied=resources_list)
+
     def searchResources(self, args):
         resource_name = args.get("resource_name")
         handler_list = [FoodHandler(), HealthHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(),
