@@ -63,6 +63,16 @@ class FoodDAO:
             result.append(row)
         return result
 
+    def get_food_by_type(self, food_type):
+        cursor = self.conn.cursor()
+        query = self.select_statement + "from food natural inner join resources where food_type = %s;"
+        cursor.execute(query, (food_type,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
 #----------------------------------Inserts------------------------------------------------------------------------------
     # def insert_resource(self, resource_name, resource_category, resource_availability):
     #     cursor = self.conn.cursor()

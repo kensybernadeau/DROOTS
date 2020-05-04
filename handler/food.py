@@ -80,6 +80,17 @@ class FoodHandler:
             result_list.append(result)
         return result_list
 
+    def get_food_by_type(self, food_type):
+        dao = FoodDAO()
+        food_list = []
+        food_list = dao.get_food_by_type(food_type)
+        result_list = []
+        for row in food_list:
+            result = self.build_food_dict(row)
+            result_list.append(result)
+        return jsonify(Food=result_list)
+
+
 #----------------inserts------------------------------------------
     def insertFoodJson(self, form):
         print("form: ", form)
