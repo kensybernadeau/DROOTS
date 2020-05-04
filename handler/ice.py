@@ -5,12 +5,12 @@ from dao.ice import IceDAO
 
 class IceHandler:
 
-
     def build_ice_dict(self, row):
         result = {}
         result['ice_id'] = row[0]
         result['ice_name'] = row[1]
         result['ice_description'] = row[2]
+        result['resource_id'] = row[3]
         return result
 
     def build_ice_attributes(self, ice_id, ice_name, ice_oz, ice_description):

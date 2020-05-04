@@ -39,6 +39,7 @@ class HealthHandler:
         result['health_exp_date'] = row[2]
         result['health_type'] = row[3]
         result['health_description'] = row[4]
+        result['resource_id'] = row[5]
         return result
 
     def build_health_attributes(self, health_id, health_name, health_exp_date, health_type,

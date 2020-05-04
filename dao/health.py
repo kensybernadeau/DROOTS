@@ -9,12 +9,12 @@ class HealthDAO:
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2.connect(connection_url)
+        self.select_statement = "select health_id, resource_name, health_exp_date, health_type, health_description, resource_id " \
 
 
     def getAllHealth(self):
         cursor = self.conn.cursor()
-        query = "select health_id, resource_name, health_exp_date, health_type, health_description " \
-                "from health natural inner join resources;"
+        query = self.select_statement + "from health natural inner join resources;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -23,24 +23,21 @@ class HealthDAO:
 
     def getHealthById(self, health_id):
         cursor = self.conn.cursor()
-        query = "select health_id, resource_name, health_exp_date, health_type, health_description " \
-                "from health natural inner join resources where health_id = %s;"
+        query = self.select_statement + "from health natural inner join resources where health_id = %s;"
         cursor.execute(query, (health_id,))
         result = cursor.fetchone()
         return result
 
     def getResourceById(self, resource_id):
         cursor = self.conn.cursor()
-        query = "select health_id, resource_name, health_exp_date, health_type, health_description " \
-                "from health natural inner join resources where resource_id = %s;"
+        query = self.select_statement + "from health natural inner join resources where resource_id = %s;"
         cursor.execute(query, (resource_id,))
         result = cursor.fetchone()
         return result
 
     def get_available_resources(self):
         cursor = self.conn.cursor()
-        query = "select health_id, resource_name, health_exp_date, health_type, health_description " \
-                "from health natural inner join resources;"
+        query = self.select_statement + "from health natural inner join resources;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -49,8 +46,7 @@ class HealthDAO:
 
     def get_resources_supplied(self):
         cursor = self.conn.cursor()
-        query = "select health_id, resource_name, health_exp_date, health_type, health_description " \
-                "from suppliers natural inner join supplies natural inner join resources natural inner join health;"
+        query = self.select_statement + "from suppliers natural inner join supplies natural inner join resources natural inner join health;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -59,8 +55,7 @@ class HealthDAO:
 
     def get_resources_by_name(self, name):
         cursor = self.conn.cursor()
-        query = "select health_id, resource_name, health_exp_date, health_type, health_description " \
-                "from health natural inner join resources where resource_name = %s;"
+        query = self.select_statement + "from health natural inner join resources where resource_name = %s;"
         cursor.execute(query, (name,))
         result = []
         for row in cursor:

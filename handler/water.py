@@ -12,6 +12,7 @@ class WaterHandler:
         result['water_name'] = row[1]
         result['water_oz'] = row[2]
         result['water_type'] = row[3]
+        result['resource_id'] = row[4]
         return result
 
     def build_water_attributes(self, water_id, water_name, water_oz, water_type, water_description):

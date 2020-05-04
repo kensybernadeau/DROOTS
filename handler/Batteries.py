@@ -32,10 +32,11 @@ class BatteriesHandler:
         result = {}
         result['battery_id'] = list[0]
         result['battery_name'] = list[1]
-        result['battery'] = list[2]
-        result['battery_type'] = list[3]
-        result['battery_voltage'] = list[4]
-        result['resource_id'] = list[5]
+        result['battery_material'] = list[2]
+        result['battery_voltage'] = list[3]
+        result['battery_type'] = list[4]
+        result['battery_description'] = list[5]
+        result['resource_id'] = list[6]
         return result
 
     def build_batteries_attributes(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):

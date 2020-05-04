@@ -5,34 +5,12 @@ from dao.heavy_equipment import HeavyEquipmentDAO
 
 class HeavyEquipmentHandler:
 
-    hequipment =   [(1,'Carpa','30 metros'),(2,'Digger','1500Lbs'),(3,'Cama','Ortopedica')]
-
-    #----------------utils-------------------
-    def give_me_hequipment(self):
-        return self.hequipment
-
-    def getById(self, hequipment_id):
-        for f in self.hequipment:
-            if hequipment_id == f[0]:
-                return f
-
-    def insert_hequipment(self, hequipment_name, hequipment_description):
-        self.hequipment.append((len(self.hequipment) + 1, hequipment_name, hequipment_description))
-        return len(self.hequipment)
-
-    def update_hequipment(self, hequipment_id, hequipment_name, hequipment_description):
-        self.hequipment.remove(self.getById(hequipment_id))
-        self.hequipment.insert(hequipment_id-1, (hequipment_name, hequipment_description))
-
-    def delete_hequipment(self, hequipment_id):
-        self.hequipment.remove(self.getById(hequipment_id))
-    #--------------end utils-----------------
-
     def build_heavy_dict(self, list):
         result = {}
         result['hequipment_id'] = list[0]
         result['hequipment_name'] = list[1]
         result['hequipment_description'] = list[2]
+        result['resource_id'] = list[3]
         return result
 
     def build_heavy_attributes(self, hequipment_id, hequipment_name, hequipment_description):

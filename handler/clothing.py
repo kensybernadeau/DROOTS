@@ -12,6 +12,7 @@ class ClothingHandler:
         result['clothe_size'] = row[2]
         result['clothe_type'] = row[3]
         result['clothe_description'] = row[4]
+        result['resource_id'] = row[5]
         return result
 
     def build_clothe_attributes(self, clothe_id, clothe_type, clothe_size, clothe_description):
