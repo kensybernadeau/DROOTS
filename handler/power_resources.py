@@ -4,48 +4,6 @@ from dao.power_resources import PowerResourcesDAO
 
 
 class PowerResourcesHandler:
-    power_resources = [(1, "batteries", "AA", "5v batteries"), (2, "fuel", "diesel", ""),
-                       (3, "solar", "panels", "Tesla")]
-
-    # ----------------utils-------------------
-    def give_me_power_resources(self):
-        return self.power_resources
-
-    def getById(self, power_resource_id):
-        for f in self.power_resources:
-            if power_resource_id == f[0]:
-                return f
-
-    def getByCategory(self, pr_category):
-        result = []
-        for row in self.power_resources:
-            if row[1] == pr_category:
-                result.append(row)
-        return result
-
-    def getByCategoryAndType(self, pr_category, pr_type):
-        result = []
-        for row in self.power_resources:
-            if row[1] == pr_category and row[2] == pr_type:
-                result.append(row)
-        return result
-
-    def insert_power_resource(self, power_resource_category, power_resource_type, power_resource_description):
-        self.power_resources.append(
-            (len(self.power_resources) + 1, power_resource_category, power_resource_type, power_resource_description))
-        return len(self.power_resources)
-
-    def update_power_resource(self, power_resource_id, power_resource_category, power_resource_type,
-                              power_resource_description):
-        self.power_resources.remove(self.getById(power_resource_id))
-        self.power_resources.insert(power_resource_id - 1, (
-        power_resource_id, power_resource_category, power_resource_type, power_resource_description))
-
-    def delete_power_resource(self, power_resource_id):
-        result = self.getById(power_resource_id)
-        self.power_resources.remove(result)
-
-        # --------------end utils-----------------
 
     def build_power_resources_dict(self, row):
         result = {}
@@ -53,6 +11,7 @@ class PowerResourcesHandler:
         result['power_resource_name'] = row[1]
         result['power_resource_type'] = row[2]
         result['power_resource_description'] = row[3]
+        result['resource_id'] = row[4]
         return result
 
     def build_power_resources_attributes(self, power_resource_id, power_resource_category, power_resource_type,

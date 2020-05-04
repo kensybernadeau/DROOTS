@@ -13,6 +13,7 @@ class FoodHandler:
         result['food_exp_date'] = row[2]
         result['food_type'] = row[3]
         result['food_description'] = row[4]
+        result['resource_id'] = row[5]
         return result
 
     def build_food_attributes(self, food_id, food_name, food_exp_date, food_type, food_description):
@@ -78,6 +79,17 @@ class FoodHandler:
             result = self.build_food_dict(row)
             result_list.append(result)
         return result_list
+
+    def get_food_by_type(self, food_type):
+        dao = FoodDAO()
+        food_list = []
+        food_list = dao.get_food_by_type(food_type)
+        result_list = []
+        for row in food_list:
+            result = self.build_food_dict(row)
+            result_list.append(result)
+        return jsonify(Food=result_list)
+
 
 #----------------inserts------------------------------------------
     def insertFoodJson(self, form):

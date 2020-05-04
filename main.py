@@ -35,16 +35,6 @@ def greeting():
     return 'Hello, this is the Disaster Relief Oriented One-on-one Technology Services ( DROOTS) DB App!'
 
 
-# @app.route('/droots/resources/', methods=['GET', 'POST'])
-# def getAllResources():
-#     if request.method == 'POST':
-#         print("REQUEST: ", request.json)
-#         return ResourcesHandler().insertResourceJson(request.json)
-#     else:
-#         if not request.args:
-#             return ResourcesHandler().getAllResources()
-
-
 @app.route('/droots/resources', methods=['GET', 'POST'])
 def get_available_resources():
     if request.method == 'POST':
@@ -101,6 +91,33 @@ def getFoodById(food_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+@app.route('/droots/resources/food/canned', methods=['GET', 'POST'])
+def getCannedFood():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return FoodHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return FoodHandler().get_food_by_type('canned')
+
+@app.route('/droots/resources/food/dry', methods=['GET', 'POST'])
+def getDryFood():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return FoodHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return FoodHandler().get_food_by_type('dry')
+
+@app.route('/droots/resources/food/baby', methods=['GET', 'POST'])
+def getBabyFood():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return FoodHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return FoodHandler().get_food_by_type('baby')
+
 
 @app.route('/droots/resources/water', methods=['GET', 'POST'])
 def getAllWater():
@@ -122,6 +139,24 @@ def getWaterById(water_id):
         return WaterHandler().deleteWater(water_id)
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/droots/resources/water/smallbottle', methods=['GET', 'POST'])
+def getSmallBottleWater():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return WaterHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return WaterHandler().get_water_by_type('sb')
+
+@app.route('/droots/resources/water/onegallon', methods=['GET', 'POST'])
+def getOneGallonWater():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return WaterHandler().insertFoodJson(request.json)
+    else:
+        if not request.args:
+            return WaterHandler().get_water_by_type('1g')
 
 
 @app.route('/droots/resources/ice', methods=['GET', 'POST'])

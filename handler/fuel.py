@@ -4,37 +4,6 @@ from dao.fuel import FuelDAO
 
 
 class FuelHandler:
-    fuels = [(1, "diesel", 20), (2, "gas", 40), (3, "biodiesel", 10),(4, "diesel", 50),(5, "diesel", 100),(6, "diesel", 40)]
-
-    # ----------------utils-------------------
-    def give_me_fuels(self):
-        return self.fuels
-
-    def getById(self, fuel_id):
-        for f in self.fuels:
-            if fuel_id == f[0]:
-                return f
-
-    def getByType(self, f_type):
-        result = []
-        for row in self.fuels:
-            if row[1] == f_type:
-                result.append(row)
-        return result
-
-    def insert_fuel(self, fuel_type, fuel_liters):
-        self.fuels.append((len(self.fuels) + 1, fuel_type, fuel_liters))
-        return len(self.fuels)
-
-    def update_fuel(self, fuel_id, fuel_type, fuel_liters):
-        self.fuels.remove(self.getById(fuel_id))
-        self.fuels.insert(fuel_id - 1, (fuel_id, fuel_type, fuel_liters))
-
-    def delete_fuel(self, fuel_id):
-        result = self.getById(fuel_id)
-        self.fuels.remove(result)
-
-        # --------------end utils-----------------
 
     def build_fuel_dict(self, row):
         result = {}
@@ -42,6 +11,7 @@ class FuelHandler:
         result['fuel_name'] = row[1]
         result['fuel_type'] = row[2]
         result['fuel_liters'] = row[3]
+        result['resource_id'] = row[4]
         return result
 
     def build_fuel_attributes(self, fuel_id, fuel_type, fuel_liters):
