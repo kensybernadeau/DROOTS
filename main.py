@@ -397,11 +397,11 @@ def getAllRequest():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
         return RequestHandler().insertRequestJson(request.json)
-    elif request.method == 'GET':
-        return RequestHandler().getAllRequest()
-
     else:
-        return jsonify(Error="Method not allowed."), 405
+        if not request.args:
+            return RequestHandler().getAllRequest()
+        else:
+            return RequestHandler().searchRequest(request.args)
 
 
 @app.route('/droots/customer/request/<int:request_id>', methods=['GET', 'POST', 'PUT'])

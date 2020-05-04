@@ -4,30 +4,6 @@ from dao.request import requestDAO
 
 
 class RequestHandler:
-    request =   [(1), (2), (3)]
-
-    # ----------------utils-------------------
-    def give_me_request(self):
-        return self.request
-
-    def getById(self, request_id):
-        for f in self.request:
-            if request_id == f:
-                return f
-
-    def insert_request(self):
-        self.request.append(len(self.request) + 1)
-        return len(self.request)
-
-    def update_request(self, request_id):
-        self.request.remove(self.getById(request_id))
-        self.request.insert(request_id - 1, request_id)
-
-    def delete_request(self, request_id):
-        self.request.remove(self.getById(request_id))
-
-    # --------------end utils-----------------
-
     def build_request_dict(self, list):
         result = {}
         result['request_id'] = list
@@ -55,6 +31,20 @@ class RequestHandler:
         else:
             request = self.build_request_dict(row)
             return jsonify(Request=request)
+
+    def searchRequest(self, args):
+        resource_name = args.get("resource_name")
+        dao = requestDAO()
+        request_list = []
+        if (len(args) == 1) and resource_name:
+            request_list = dao.get_request_by_resource_name(resource_name)
+        else:
+            return jsonify(Error="Malformed query string"), 400
+        result_list = []
+        for row in request_list:
+            result = self.build_request_dict(row)
+            result_list.append(result)
+        return jsonify(Request=result_list)
 
     def insertRequestJson(self, form):
         print("form: ", form)

@@ -29,6 +29,16 @@ class requestDAO:
         result = cursor.fetchone()
         return result
 
+    def get_request_by_resource_name(self, resource_name):
+        cursor = self.conn.cursor()
+        query =  "select request_id, customer_id, resource_id, resource_name   " \
+                "from customer natural inner join request natural inner join resources where resource_name = %s;"
+        cursor.execute(query, (resource_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
 # CREATE TABLE child_table(
 #   c1 INTEGER PRIMARY KEY,
 #   c2 INTEGER,
