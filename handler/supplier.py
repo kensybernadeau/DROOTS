@@ -1,69 +1,87 @@
 from flask import jsonify
 
+from dao.address import AddressDAO
+from dao.supplier import SupplierDAO
+from dao.users import UsersDAO
+
 
 class SupplierHandler:
-    supplier = [(1, "San Lorezo"), (2, "San Juan")]
-
-    # ----------------utils-------------------
-    def give_me_supplier(self):
-        return self.supplier
-
-    def getById(self, supplier_id):
-        for f in self.supplier:
-            if supplier_id == f[0]:
-                return f
-
-    def insert_supplier(self, supplier_location):
-        self.supplier.append((len(self.supplier) + 1, supplier_location))
-        return len(self.supplier)
-
-    def update_supplier(self, supplier_id, supplier_location):
-        self.supplier.remove(self.getById(supplier_id))
-        self.supplier.insert(supplier_id - 1, (supplier_id, supplier_location))
-
-    def delete_supplier(self, supplier_id):
-        f = self.getById(supplier_id)
-        self.supplier.remove(f)
-
-    # --------------end utils-----------------
 
     def build_supplier_dict(self, row):
         result = {}
         result['supplier_id'] = row[0]
-        result['supplier_location'] = row[1]
+        result['user_id'] = row[1]
+        result['supplier_fname'] = row[2]
+        result['supplier_lname'] = row[3]
+        result['supplier_uname'] = row[4]
+        result['supplier_passwd'] = row[5]
+        result['address_id'] = row[6]
+        result['supplier_country'] = row[7]
+        result['supplier_city'] = row[8]
+        result['supplier_street_address'] = row[9]
+        result['supplier_zipcode'] = row[10]
+
         return result
 
-    def build_supplier_attributes(self, supplier_id, supplier_location):
+    def build_supplier_attributes(self, supplier_id, user_id, user_fname, user_lname,
+                                  user_uname, user_passwd, address_id, supplier_country, supplier_city,
+                                  supplier_street_address, supplier_zipcode):
         result = {}
         result['supplier_id'] = supplier_id
-        result['supplier_location'] = supplier_location
+        result['user_id'] = user_id
+        result['supplier_fname'] = user_fname
+        result['supplier_lname'] = user_lname
+        result['supplier_uname'] = user_uname
+        result['supplier_passwd'] = user_passwd
+        result['address_id'] = address_id
+        result['supplier_country'] = supplier_country
+        result['supplier_city'] = supplier_city
+        result['supplier_street_address'] = supplier_street_address
+        result['supplier_zipcode'] = supplier_zipcode
         return result
 
     def getAllSupplier(self):
-        flist = self.give_me_supplier()
+        sdao = SupplierDAO()
         result_list = []
-        for row in flist:
+        for row in sdao.getAllSuppliers():
             result = self.build_supplier_dict(row)
             result_list.append(result)
         return jsonify(Supplier=result_list)
 
     def getSupplierById(self, supplier_id):
-        row = self.getById(supplier_id)
+        sdao = SupplierDAO()
+        row = sdao.getSupplierById(supplier_id)
         if not row:
             return jsonify(Error="Supplier Not Found"), 404
         else:
             supplier = self.build_supplier_dict(row)
             return jsonify(Supplier=supplier)
 
-    def insertSupplierJson(self, form):
-        print("form: ", form)
-        if len(form) != 1:
+    def insertSupplierJson(self, json):
+        print("json: ", json)
+        if len(json) != 8:
             return jsonify(Error="Malformed post request"), 400
         else:
-            supplier_location = form['supplier_location']
-            if supplier_location:
-                supplier_id = self.insert_supplier(supplier_location)
-                result = self.build_supplier_attributes(supplier_id, supplier_location)
+            supplier_fname = json['supplier_fname']
+            supplier_lname = json['supplier_lname']
+            supplier_uname = json['supplier_uname']
+            supplier_passwd = json['supplier_passwd']
+            supplier_country = json['supplier_country']
+            supplier_city = json['supplier_city']
+            supplier_street_address = json['supplier_street_address']
+            supplier_zipcode = json['supplier_zipcode']
+            if supplier_fname and supplier_lname and supplier_uname and supplier_passwd and supplier_country\
+                    and supplier_city and supplier_street_address and supplier_zipcode:
+                udao = UsersDAO()
+                sdao = SupplierDAO()
+                addao = AddressDAO()
+                user_id = udao.insert(supplier_fname, supplier_lname, supplier_uname, supplier_passwd)
+                supplier_id = sdao.insert(user_id)
+                address_id = addao.insert(supplier_country, supplier_city, supplier_street_address,
+                                          supplier_zipcode, user_id)
+                result = self.build_supplier_attributes(supplier_id, user_id, supplier_fname, supplier_lname,
+                                                        supplier_uname, supplier_passwd, address_id, supplier_country,
+                                                        supplier_city, supplier_street_address, supplier_zipcode)
                 return jsonify(Supplier=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
