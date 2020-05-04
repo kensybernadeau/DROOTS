@@ -35,6 +35,7 @@ class BatteriesHandler:
         result['battery'] = list[2]
         result['battery_type'] = list[3]
         result['battery_voltage'] = list[4]
+        result['resource_id'] = list[5]
         return result
 
     def build_batteries_attributes(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
