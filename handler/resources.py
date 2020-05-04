@@ -56,6 +56,17 @@ class ResourcesHandler:
         result['resource_availability'] = resource_availability
         return result
 
+    def getResourceById(self, resource_id):
+        handler_list = [FoodHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(), HealthHandler(),
+                        HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
+        for handler in handler_list:
+            row = handler.getResourceById(resource_id)
+            if row:
+                return jsonify(Resource=row)
+        return jsonify(Error="Resource Not Found"), 404
+
+
+
     def get_available_resources(self):
         handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler(),
                         BatteriesHandler(), PowerResourcesHandler(), FuelHandler(), ToolsHandler(),
@@ -65,16 +76,25 @@ class ResourcesHandler:
             resources_list.extend(handler.get_available_resources())
         return jsonify(Resources_Available=resources_list)
 
+    def get_resources_supplied(self):
+        handler_list = [FoodHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(), HealthHandler(),
+                        HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
+        resources_list = []
+        for handler in handler_list:
+            resources_list.extend(handler.get_resources_supplied())
+        return jsonify(Resources_Supplied=resources_list)
+
     def searchResources(self, args):
         resource_name = args.get("resource_name")
-        handler_list = [FoodHandler(), HealthHandler()]
+        handler_list = [FoodHandler(), HealthHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(),
+                        HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
         result_list = []
         if (len(args) == 1) and resource_name:
             for handler in handler_list:
                 result_list.extend(handler.get_resources_by_name(resource_name))
         else:
             return jsonify(Error="Malformed query string"), 400
-        return jsonify(Resource=result_list)
+        return jsonify(Resources=result_list)
 
     def getAllResources(self):
         flist = self.give_me_resource()
@@ -84,13 +104,6 @@ class ResourcesHandler:
             result_list.append(result)
         return jsonify(Resource=result_list)
 
-    def getResourceById(self, resource_id):
-        row = self.getById(resource_id)
-        if not row:
-            return jsonify(Error="Resource Not Found"), 404
-        else:
-            resource = self.build_resource_dict(row)
-            return jsonify(Resource=resource)
 
     def insertResourceJson(self, form):
         print("form: ", form)

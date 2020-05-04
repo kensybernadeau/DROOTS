@@ -61,6 +61,23 @@ class ToolsHandler:
             tools = self.build_tool_dict(row)
             return jsonify(Tools=tools)
 
+    def getResourceById(self, resource_id):
+        dao = ToolsDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_tool_dict(row)
+            # jsonify(Food=food)
+            return result
+
+    def get_resources_supplied(self):
+        dao = ToolsDAO()
+        resources_list = dao.get_resources_supplied()
+        result_list = []
+        for row in resources_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
+        return result_list
+
     def get_available_resources(self):
         dao = ToolsDAO()
         resources_list = dao.get_available_resources()
@@ -69,6 +86,16 @@ class ToolsHandler:
             result = self.build_tool_dict(row)
             result_list.append(result)
         # return jsonify(Resource=result_list)
+        return result_list
+
+    def get_resources_by_name(self, resource_name):
+        dao = ToolsDAO()
+        tool_list = []
+        tool_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in tool_list:
+            result = self.build_tool_dict(row)
+            result_list.append(result)
         return result_list
 
     def insertToolJson(self, form):

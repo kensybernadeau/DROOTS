@@ -60,6 +60,14 @@ class HeavyEquipmentHandler:
             heavy = self.build_heavy_dict(row)
             return jsonify(HeavyEquipment=heavy)
 
+    def getResourceById(self, resource_id):
+        dao = HeavyEquipmentDAO()
+        row = dao.getResourceById(resource_id)
+        if row:
+            result = self.build_heavy_dict(row)
+        # jsonify(Food=food)
+            return result
+
     def get_available_resources(self):
         dao = HeavyEquipmentDAO()
         resources_list = dao.get_available_resources()
@@ -68,6 +76,25 @@ class HeavyEquipmentHandler:
             result = self.build_heavy_dict(row)
             result_list.append(result)
         # return jsonify(Resource=result_list)
+        return result_list
+
+    def get_resources_supplied(self):
+        dao = HeavyEquipmentDAO()
+        resources_list = dao.get_resources_supplied()
+        result_list = []
+        for row in resources_list:
+            result = self.build_heavy_dict(row)
+            result_list.append(result)
+        return result_list
+
+    def get_resources_by_name(self, resource_name):
+        dao = HeavyEquipmentDAO()
+        heavy_list = []
+        heavy_list = dao.get_resources_by_name(resource_name)
+        result_list = []
+        for row in heavy_list:
+            result = self.build_heavy_dict(row)
+            result_list.append(result)
         return result_list
 
     def insertHEquipmentJson(self, form):

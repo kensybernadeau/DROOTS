@@ -12,6 +12,7 @@ from handler.HeavyEquipment import HeavyEquipmentHandler
 from handler.Payment import PaymentHandler
 from handler.Request import RequestHandler
 from handler.Reservation import ReservationHandler
+from handler.address import AddressHandler
 from handler.food import FoodHandler
 from handler.fuel import FuelHandler
 from handler.health import HealthHandler
@@ -34,17 +35,17 @@ def greeting():
     return 'Hello, this is the Disaster Relief Oriented One-on-one Technology Services ( DROOTS) DB App!'
 
 
-@app.route('/droots/resources/', methods=['GET', 'POST'])
-def getAllResources():
-    if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return ResourcesHandler().insertResourceJson(request.json)
-    else:
-        if not request.args:
-            return ResourcesHandler().getAllResources()
+# @app.route('/droots/resources/', methods=['GET', 'POST'])
+# def getAllResources():
+#     if request.method == 'POST':
+#         print("REQUEST: ", request.json)
+#         return ResourcesHandler().insertResourceJson(request.json)
+#     else:
+#         if not request.args:
+#             return ResourcesHandler().getAllResources()
 
 
-@app.route('/droots/resources/available', methods=['GET', 'POST'])
+@app.route('/droots/resources', methods=['GET', 'POST'])
 def get_available_resources():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
@@ -68,6 +69,17 @@ def getResourceById(resource_id):
         return jsonify(Error="Method not allowed."), 405
 
 
+@app.route('/droots/resources/supplied', methods=['GET', 'POST'])
+def get_resources_supplied():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ResourcesHandler().insertResourceJson(request.json)
+    else:
+        if not request.args:
+            return ResourcesHandler().get_resources_supplied()
+        else:
+            return ResourcesHandler().searchResources(request.rgs)
+
 @app.route('/droots/resources/food', methods=['GET', 'POST'])
 def getAllFood():
     if request.method == 'POST':
@@ -76,7 +88,6 @@ def getAllFood():
     else:
         if not request.args:
             return FoodHandler().getAllFood()
-
 
 
 @app.route('/droots/resources/food/<int:food_id>', methods=['GET', 'PUT', 'DELETE'])
@@ -266,7 +277,6 @@ def getAllClothes():
             return ClothingHandler().getAllclothes()
 
 
-
 @app.route('/droots/resources/clothing/<int:clothe_id>', methods=['GET', 'PUT', 'DELETE'])
 def getClotheById(clothe_id):
     if request.method == 'GET':
@@ -454,7 +464,7 @@ def getPaymentById(payment_id):
     if request.method == 'GET':
         return PaymentHandler().getPaymentById(payment_id)
     elif request.method == 'PUT':
-        return PaymentHandler().updatePayment(payment_id, request.form)
+        return PaymentHandler().updatePayment(payment_id, request.json)
     elif request.method == 'DELETE':
         return PaymentHandler().deletePayment(payment_id)
     else:
@@ -474,8 +484,26 @@ def getAllPayment():
         return jsonify(Error="Method not allowed."), 405
 
 
+@app.route('/droots/address', methods=['GET', 'POST'])
+def getAllAddress():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return AddressHandler().insertAddressJson(request.json)
+
+    else:
+        return AddressHandler().getAllAddress()
 
 
+@app.route('/droots/address/<int:address_id>', methods=['GET', 'PUT', 'DELETE'])
+def getAddressById(address_id):
+    if request.method == 'GET':
+        return AddressHandler().getAddressById(address_id)
+    elif request.method == 'PUT':
+        return AddressHandler().updateAddress(address_id, request.json)
+    elif request.method == 'DELETE':
+        return AddressHandler().deleteAddress(address_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 if __name__ == '__main__':
