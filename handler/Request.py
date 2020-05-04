@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.request import requestDAO
+
 
 class RequestHandler:
     request =   [(1), (2), (3)]
@@ -37,20 +39,22 @@ class RequestHandler:
         return result
 
     def getAllRequest(self):
-        list = self.give_me_request()
+        dao = requestDAO()
+        request_list = dao.getAllRequest()
         result_list = []
-        for row in list:
+        for row in request_list:
             result = self.build_request_dict(row)
             result_list.append(result)
-        return jsonify(Request=result_list)
+        return jsonify(Reservation=result_list)
 
     def getRequestById(self, request_id):
-        row = self.getById(request_id)
+        dao = requestDAO()
+        row = dao.getRequestById(request_id)
         if not row:
             return jsonify(Error="Request Not Found"), 404
         else:
-            batteries = self.build_request_dict(row)
-            return jsonify(Request=batteries)
+            request = self.build_request_dict(row)
+            return jsonify(Request=request)
 
     def insertRequestJson(self, form):
         print("form: ", form)

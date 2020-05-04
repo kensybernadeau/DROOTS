@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from dao.payment import paymentDAO
+
 
 class PaymentHandler:
     payment =   [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
@@ -10,7 +12,7 @@ class PaymentHandler:
 
     def getById(self, payment_id):
         for f in self.payment:
-            if payment_id == f:
+            if payment_id == f[0]:
                 return f
 
     def insert_payment(self, payment_method):
@@ -41,15 +43,17 @@ class PaymentHandler:
         return result
 
     def getAllPayment(self):
-        list = self.give_me_payment()
+        dao = paymentDAO()
+        payment_list = dao.getAllPayment()
         result_list = []
-        for row in list:
+        for row in payment_list:
             result = self.build_payment_dict(row)
             result_list.append(result)
         return jsonify(Payment=result_list)
 
     def getPaymentById(self, payment_id):
-        row = self.getById(payment_id)
+        dao = paymentDAO()
+        row = dao.getPaymentById(payment_id)
         if not row:
             return jsonify(Error="Payment Not Found"), 404
         else:

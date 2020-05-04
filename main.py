@@ -347,6 +347,17 @@ def getAllCustomer():
     else:
         return CustomerHandler().getAllCustomers()
 
+@app.route('/droots/customer/request', methods=['GET', 'POST', ])
+def getAllRequest():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return RequestHandler().insertRequestJson(request.json)
+    elif request.method == 'GET':
+        return RequestHandler().getAllRequest()
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 
 @app.route('/droots/customer/request/<int:request_id>', methods=['GET', 'POST', 'PUT'])
 def getRequestById(request_id):
@@ -357,6 +368,17 @@ def getRequestById(request_id):
         return RequestHandler().getAllRequest()
     elif request.method == 'PUT':
         return RequestHandler().updateRequest(request_id, request.form)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/droots/customer/reservation', methods=['GET', 'POST', ])
+def getAllReservation():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return ReservationHandler().insertReservationJson(request.json)
+    elif request.method == 'GET':
+        return ReservationHandler().getAllReservation()
 
     else:
         return jsonify(Error="Method not allowed."), 405
@@ -376,7 +398,7 @@ def getReservationById(reservation_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/resources/heavyequipment/', methods=['GET', 'POST', ])
+@app.route('/droots/resources/heavyequipment', methods=['GET', 'POST', ])
 def getAllHEquipment():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
