@@ -13,7 +13,7 @@ class requestDAO:
 
     def getAllRequest(self):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, resource_id   " \
+        query = "select request_id, customer_id, resource_id, resource_name  " \
                 "from  customer natural inner join request natural inner join resources;"
         cursor.execute(query)
         result = []
@@ -23,7 +23,7 @@ class requestDAO:
 
     def getRequestById(self, request_id):
         cursor = self.conn.cursor()
-        query = "select request_id, customer_id, resource_id  " \
+        query = "select request_id, customer_id, resource_id, resource_name  " \
                 "from request natural inner join customer natural inner join resources where request_id = %s;"
         cursor.execute(query, (request_id,))
         result = cursor.fetchone()

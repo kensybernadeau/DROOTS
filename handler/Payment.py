@@ -6,7 +6,7 @@ from handler.card import cardHandler
 
 
 class PaymentHandler:
-    payment =   [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
+    payment =  [(1,'visa'), (2,'efectivo'), (3,'efectivo')]
 
     # ----------------utils-------------------
     def give_me_payment(self):
@@ -56,14 +56,14 @@ class PaymentHandler:
             payment_list.extend(handler.getAllPayment())
         return jsonify(Payments=payment_list)
 
-    def getPaymentById(self, payment_id):
-        dao = paymentDAO()
-        row = dao.getPaymentById(payment_id)
-        if not row:
-            return jsonify(Error="Payment Not Found"), 404
-        else:
-            payment = self.build_payment_dict(row)
-            return jsonify(Payment=payment)
+    def getAllPaymentById(self, payment_id):
+        handler_list = [athmovilHandler(), cardHandler()]
+        payment_list = []
+        for handler in handler_list:
+            row = handler.getAllById(payment_id)
+            if row:
+                return jsonify(Resource=row)
+        return jsonify(Error="Resource Not Found"), 404
 
     def insertPaymentJson(self, form):
         print("form: ", form)

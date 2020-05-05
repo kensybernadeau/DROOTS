@@ -6,7 +6,10 @@ from dao.request import requestDAO
 class RequestHandler:
     def build_request_dict(self, list):
         result = {}
-        result['request_id'] = list
+        result['request_id'] = list[0]
+        result['customer_id'] = list[1]
+        result['resource_id'] = list[2]
+        result['resource_name'] = list[3]
         return result
 
     def build_request_attributes(self, request_id):

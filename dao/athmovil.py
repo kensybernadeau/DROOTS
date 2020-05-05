@@ -13,7 +13,7 @@ class athmovilDAO:
 
     def getAllAthmovil(self):
         cursor = self.conn.cursor()
-        query = "select payment_id, payment_date, payment_amount, supplier_id, resource_id, resource_name, athmovil_id, athmovil_transaction_num, athmovil_phone_number     " \
+        query = "select payment_id, payment_date, payment_amount, customer_id, supplier_id, resource_id, resource_name, athmovil_id, athmovil_transaction_num, athmovil_phone_number     " \
                 "from athmovil natural inner join payment natural inner join supplies natural inner join resources;"
         cursor.execute(query)
         result = []
@@ -24,8 +24,8 @@ class athmovilDAO:
 
     def getAthmovilById(self, athmovil_id):
         cursor = self.conn.cursor()
-        query = "select athmovil_id, athmovil_transaction_num, athmovil_phone_number, payment_id" \
-                "from athmovil natural inner join payment where athmovil_id = %s;"
+        query = "select payment_id, payment_date, payment_amount, customer_id, supplier_id, resource_id, resource_name, athmovil_id, athmovil_transaction_num, athmovil_phone_number   " \
+                "from athmovil natural inner join payment natural inner join supplies natural inner join resources where payment_id = %s;"
         cursor.execute(query, (athmovil_id,))
         result = cursor.fetchone()
         return result

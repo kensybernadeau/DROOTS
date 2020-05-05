@@ -13,7 +13,7 @@ class cardDAO:
 
     def getAllCard(self):
         cursor = self.conn.cursor()
-        query = "select payment_id, payment_date, payment_amount, supplier_id, resource_id, resource_name, card_id, card_type, card_number, card_security_code  " \
+        query = "select payment_id, payment_date, payment_amount, customer_id, supplier_id, resource_id, resource_name, card_id, card_type, card_number, card_security_code  " \
                 "from card natural inner join payment natural inner join supplies natural inner join resources;"
         cursor.execute(query)
         result = []
@@ -23,8 +23,8 @@ class cardDAO:
 
     def getCardById(self, card_id):
         cursor = self.conn.cursor()
-        query = "select card_id, card_type, card_number, card_security_code, payment_id " \
-                "from card natural inner join payment where card_id = %s;"
+        query = "select payment_id, payment_date, payment_amount, customer_id, supplier_id, resource_id, resource_name, card_id, card_type, card_number, card_security_code  " \
+                "from card natural inner join payment natural inner join supplies natural inner join resources where payment_id = %s;"
         cursor.execute(query, (card_id,))
         result = cursor.fetchone()
         return result

@@ -410,7 +410,7 @@ def getRequestById(request_id):
         print("REQUEST: ", request.json)
         return RequestHandler().insertRequestJson(request.json)
     elif request.method == 'GET':
-        return RequestHandler().getAllRequest()
+        return RequestHandler().getRequestById(request_id)
     elif request.method == 'PUT':
         return RequestHandler().updateRequest(request_id, request.form)
 
@@ -497,7 +497,7 @@ def getAllBatteries():
 @app.route('/droots/payment/<int:payment_id>', methods=['GET', 'PUT', 'DELETE'])
 def getPaymentById(payment_id):
     if request.method == 'GET':
-        return PaymentHandler().getPaymentById(payment_id)
+        return PaymentHandler().getAllPaymentById(payment_id)
     elif request.method == 'PUT':
         return PaymentHandler().updatePayment(payment_id, request.json)
     elif request.method == 'DELETE':

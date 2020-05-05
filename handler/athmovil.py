@@ -11,13 +11,13 @@ class athmovilHandler:
         result['payment_id'] = list[0]
         result['payment_date'] = list[1]
         result['payment_amount'] = list[2]
-        result['supplier_id'] = list[3]
-        result['resource_id'] = list[4]
-        result['resource_name'] = list[5]
-        result['athmovil_id'] = list[6]
-        result['athmovil_transaction_num'] = list[7]
-        result['athmovil_phone_number'] = list[8]
-        # select payment_id, payment_date, payment_amount, supplier_id, resource_id, resource_name, athmovil_id, athmovil_transaction_num, athmovil_phone_number
+        result['customer_id'] = list[3]
+        result['supplier_id'] = list[4]
+        result['resource_id'] = list[5]
+        result['resource_name'] = list[6]
+        result['athmovil_id'] = list[7]
+        result['athmovil_transaction_num'] = list[8]
+        result['athmovil_phone_number'] = list[9]
         return result
 
     def build_athmovil_attributes(self, payment_id, payment_method):
@@ -37,14 +37,16 @@ class athmovilHandler:
         return result_list
         # return jsonify(Athmovil=result_list)
 
-    def getAthmovilById(self, athmovil_id):
+    def getAllById(self, athmovil_id):
         dao = athmovilDAO()
         row = dao.getAthmovilById(athmovil_id)
         if not row:
             return jsonify(Error="Athmovil Not Found"), 404
         else:
+            result_list = []
             athmovil = self.build_athmovil_dict(row)
-            return jsonify(Athmovil=athmovil)
+            result_list.append(athmovil)
+            return result_list
 
     # def insertPaymentJson(self, form):
     #     print("form: ", form)
