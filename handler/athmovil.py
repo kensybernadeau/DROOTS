@@ -9,8 +9,15 @@ class athmovilHandler:
     def build_athmovil_dict(self, list):
         result = {}
         result['payment_id'] = list[0]
-        result['payment_method'] = list[1]
-
+        result['payment_date'] = list[1]
+        result['payment_amount'] = list[2]
+        result['supplier_id'] = list[3]
+        result['resource_id'] = list[4]
+        result['resource_name'] = list[5]
+        result['athmovil_id'] = list[6]
+        result['athmovil_transaction_num'] = list[7]
+        result['athmovil_phone_number'] = list[8]
+        # select payment_id, payment_date, payment_amount, supplier_id, resource_id, resource_name, athmovil_id, athmovil_transaction_num, athmovil_phone_number
         return result
 
     def build_athmovil_attributes(self, payment_id, payment_method):
@@ -20,14 +27,15 @@ class athmovilHandler:
 
         return result
 
-    def getAllAthmovil(self):
+    def getAllPayment(self):
         dao = athmovilDAO()
         athmovil_list = dao.getAllAthmovil()
         result_list = []
         for row in athmovil_list:
             result = self.build_athmovil_dict(row)
             result_list.append(result)
-        return jsonify(Athmovil=result_list)
+        return result_list
+        # return jsonify(Athmovil=result_list)
 
     def getAthmovilById(self, athmovil_id):
         dao = athmovilDAO()

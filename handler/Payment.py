@@ -1,6 +1,8 @@
 from flask import jsonify
 
 from dao.payment import paymentDAO
+from handler.athmovil import athmovilHandler
+from handler.card import cardHandler
 
 
 class PaymentHandler:
@@ -31,8 +33,13 @@ class PaymentHandler:
     def build_payment_dict(self, list):
         result = {}
         result['payment_id'] = list[0]
-        result['payment_method'] = list[1]
+        result['customer_id'] = list[1]
+        result['payment_date'] = list[2]
+        result['payment_amount'] = list[3]
+        result['resource_id'] = list[4]
+        result['supplier_id'] = list[5]
 
+        # select payment_id, customer_id, payment_date, payment_amount, resource_id, supplier_id
         return result
 
     def build_payment_attributes(self, payment_id, payment_method):
@@ -42,14 +49,12 @@ class PaymentHandler:
 
         return result
 
-    def getAllPayment(self):
-        dao = paymentDAO()
-        payment_list = dao.getAllPayment()
-        result_list = []
-        for row in payment_list:
-            result = self.build_payment_dict(row)
-            result_list.append(result)
-        return jsonify(Payment=result_list)
+    def getAllPaymentMethods(self):
+        handler_list = [athmovilHandler(), cardHandler()]
+        payment_list = []
+        for handler in handler_list:
+            payment_list.extend(handler.getAllPayment())
+        return jsonify(Payments=payment_list)
 
     def getPaymentById(self, payment_id):
         dao = paymentDAO()

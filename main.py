@@ -509,7 +509,7 @@ def getPaymentById(payment_id):
 @app.route('/droots/payment', methods=['GET', 'POST'])
 def getAllPayment():
     if request.method == 'GET':
-        return PaymentHandler().getAllPayment()
+        return PaymentHandler().getAllPaymentMethods()
 
     if request.method == 'POST':
         print("REQUEST: ", request.json)

@@ -24,7 +24,7 @@ class paymentDAO:
     def getPaymentById(self, payment_id):
         cursor = self.conn.cursor()
         query = "select payment_id, customer_id, payment_date, payment_amount, resource_id, supplier_id  " \
-                "from payment inner join customer inner join supplies where payment_id = %s;"
+                "from payment natural inner join customer natural inner join supplies where payment_id = %s;"
         cursor.execute(query, (payment_id,))
         result = cursor.fetchone()
         return result
