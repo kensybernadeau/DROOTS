@@ -28,17 +28,17 @@ CREATE TABLE Power_Resources(power_id serial PRIMARY KEY,power_type VARCHAR(10),
 
 CREATE TABLE Fuel(fuel_id serial PRIMARY KEY,fuel_type VARCHAR(10),fuel_liters INTEGER,resource_id INTEGER REFERENCES Resources(resource_id))
 
-CREATE TABLE Heavy_Equipment(heavy_id serial PRIMARY KEY, heavy_description VARCHAR(50), resource_id REFERENCES Resources(resource_id) )
+CREATE TABLE Heavy_Equipment(heavy_id serial PRIMARY KEY, heavy_description VARCHAR(50), resource_id INTEGER REFERENCES Resources(resource_id) )
 
 CREATE TABLE Batteries (batteries_id serial PRIMARY KEY, batteries_material VARCHAR(20), batteries_voltage VARCHAR(10), battery_type VARCHAR(10), battery_description VARCHAR(50), resource_id INTEGER REFERENCES Resources(resource_id))
 
-CREATE TABLE Request(request_id serial PRIMARY KEY, customer_id REFERENCES Customer(customer_id), resource_id INTEGER REFERENCES resources(resource_id))
+CREATE TABLE Request(request_id serial PRIMARY KEY, customer_id INTEGER REFERENCES Customer(customer_id), resource_id INTEGER REFERENCES resources(resource_id))
 
 CREATE TABLE Reservation(reservation_id serial PRIMARY KEY, customer_id REFERENCES Customer(customer_id), resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id))
 
-CREATE TABLE Payment(payment_id serial PRIMARY KEY, payment_date VARCHAR(20), payment_amount FLOAT,resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id))
+CREATE TABLE Payment(payment_id serial PRIMARY KEY, payment_date VARCHAR(20), payment_amount FLOAT,resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id), customer_id INTEGER REFERENCES customer(customer_id))
 
-CREATE TABLE athmovil( athmovil_id serial PRIMARY KEY, athmovil_transaction_num VARCHAR(20), athmovil_phone_number VARCHAR(20), payment_id REFERENCES Payment(payment_id))
+CREATE TABLE athmovil( athmovil_id serial PRIMARY KEY, athmovil_transaction_num VARCHAR(20), athmovil_phone_number VARCHAR(20), payment_id INTEGER REFERENCES Payment(payment_id))
 
-CREATE TABLE Card(card_id serial PRIMARY KEY, card_type VARCHAR(20), card_number INTEGER, card_secutrity_code INTEGER(3), payment_id REFERENCES Payment(payment_id))
+CREATE TABLE Card(card_id serial PRIMARY KEY, card_type VARCHAR(20), card_number INTEGER, card_security_code INTEGER, payment_id INTEGER REFERENCES Payment(payment_id))
 

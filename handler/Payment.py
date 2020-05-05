@@ -38,8 +38,6 @@ class PaymentHandler:
         result['payment_amount'] = list[3]
         result['resource_id'] = list[4]
         result['supplier_id'] = list[5]
-
-        # select payment_id, customer_id, payment_date, payment_amount, resource_id, supplier_id
         return result
 
     def build_payment_attributes(self, payment_id, payment_method):
@@ -58,12 +56,11 @@ class PaymentHandler:
 
     def getAllPaymentById(self, payment_id):
         handler_list = [athmovilHandler(), cardHandler()]
-        payment_list = []
         for handler in handler_list:
             row = handler.getAllById(payment_id)
             if row:
                 return jsonify(Resource=row)
-        return jsonify(Error="Resource Not Found"), 404
+        return jsonify(Error="Payment Not Found"), 404
 
     def insertPaymentJson(self, form):
         print("form: ", form)
