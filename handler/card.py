@@ -43,12 +43,6 @@ class cardHandler:
     def getAllById(self, card_id):
         dao = cardDAO()
         row = dao.getCardById(card_id)
-        result_list = []
-        if not row:
-            return jsonify(Error="Card Not Found"), 404
-        else:
-            card = self.build_card_dict(row)
-            result_list.append(card)
-            return result_list
-
-
+        if row:
+            result = self.build_card_dict(row)
+            return result

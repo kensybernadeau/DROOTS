@@ -40,13 +40,9 @@ class athmovilHandler:
     def getAllById(self, athmovil_id):
         dao = athmovilDAO()
         row = dao.getAthmovilById(athmovil_id)
-        if not row:
-            return jsonify(Error="Athmovil Not Found"), 404
-        else:
-            result_list = []
-            athmovil = self.build_athmovil_dict(row)
-            result_list.append(athmovil)
-            return result_list
+        if row:
+            result = self.build_athmovil_dict(row)
+            return result
 
     # def insertPaymentJson(self, form):
     #     print("form: ", form)
