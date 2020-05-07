@@ -24,7 +24,7 @@ class RequestHandler:
         for row in request_list:
             result = self.build_request_dict(row)
             result_list.append(result)
-        return jsonify(Reservation=result_list)
+        return jsonify(Request=result_list)
 
     def getRequestById(self, request_id):
         dao = requestDAO()
