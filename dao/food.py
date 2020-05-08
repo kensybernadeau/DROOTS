@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class FoodDAO:
 
@@ -9,7 +11,7 @@ class FoodDAO:
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
-        self.conn = psycopg2._connect(connection_url)
+        self.conn = psycopg2.connect(connection_url)
         self.select_statement = "select food_id, resource_name, food_exp_date, food_type, food_description, resource_id "
 
     def getAllFood(self):
@@ -73,22 +75,22 @@ class FoodDAO:
         return result
 
 
-#----------------------------------Inserts------------------------------------------------------------------------------
-    # def insert_resource(self, resource_name, resource_category, resource_availability):
-    #     cursor = self.conn.cursor()
-    #     query = "insert into resources(resource_name, resource_category) values (%s, %s) returning resource_id;"
-    #     cursor.execute(query, (resource_category, resource_availability,))
-    #     resource_id = cursor.fetchone()[0]
-    #     self.conn.commit()
-    #     return resource_id
-    #
-    # def insert_food(self, food_exp_date, food_type, food_description, resource_availability):
-    #     resource_id = self.insert_resource("food", resource_availability)
-    #     cursor = self.conn.cursor()
-    #     query = "insert into food(food_exp_date, food_type, food_description, resource_id) values (%s, %s, %s, %s) returning food_id;"
-    #     cursor.execute(query, (food_exp_date, food_type, food_description, resource_id))
-    #     food_id = cursor.fetchone()[0]
-    #     self.conn.commit()
-    #     return food_id
+# ----------------------------------Inserts------------------------------------------------------------------------------
+#     def insert_resource(self, resource_name, resource_category):
+#         cursor = self.conn.cursor()
+#         query = "insert into resources(resource_name, resource_category) values (%s, %s) returning resource_id;"
+#         cursor.execute(query, (resource_name, resource_category,))
+#         resource_id = cursor.fetchone()[0]
+#         self.conn.commit()
+#         return resource_id
+
+    def insert_food(self, resource_name,  food_exp_date, food_type, food_description):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'food')
+        cursor = self.conn.cursor()
+        query = "insert into food(food_exp_date, food_type, food_description, resource_id) values (%s, %s, %s, %s) returning food_id;"
+        cursor.execute(query, (food_exp_date, food_type, food_description, resource_id))
+        food_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return food_id, resource_id
 
 
