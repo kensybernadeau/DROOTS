@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class BatteriesDAO:
 
@@ -61,3 +63,12 @@ class BatteriesDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert_battery(self, resource_name, battery_material, battery_voltage, battery_type, battery_description):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'batteries')
+        cursor = self.conn.cursor()
+        query = "insert into batteries(battery_material, battery_voltage, battery_type, battery_description, resource_id) values (%s, %s, %s, %s, %s) returning battery_id;"
+        cursor.execute(query, (battery_material, battery_voltage, battery_type, battery_description, resource_id))
+        battery_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return battery_id, resource_id

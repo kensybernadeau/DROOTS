@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class PowerResourcesDAO:
 
@@ -61,3 +63,12 @@ class PowerResourcesDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert_power_resource(self, resource_name, power_type, power_description):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'powerres')
+        cursor = self.conn.cursor()
+        query = "insert into power_resources(power_type, power_description, resource_id) values (%s, %s, %s) returning power_id;"
+        cursor.execute(query, (power_type, power_description, resource_id))
+        power_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return power_id, resource_id

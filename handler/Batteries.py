@@ -39,12 +39,15 @@ class BatteriesHandler:
         result['resource_id'] = list[6]
         return result
 
-    def build_batteries_attributes(self, batteries_id, batteries_type, batteries_voltage, batteries_quantity):
+    def build_battery_attributes(self, batteries_id, battery_name, battery_material, batteries_voltage, batteries_type, resource_description, resource_id):
         result = {}
         result['battery_id'] = batteries_id
-        result['battery_type'] = batteries_type
+        result['battery_name'] = battery_name
+        result['battery_material'] = battery_material
         result['battery_voltage'] = batteries_voltage
-        result['battery_quantity'] = batteries_quantity
+        result['battery_type'] = batteries_type
+        result['battery_description'] = resource_description
+        result['resource_id'] = resource_id
         return result
 
     def getAllBatteries(self):
@@ -104,16 +107,18 @@ class BatteriesHandler:
 
     def insertBatteriesJson(self, form):
         print("form: ", form)
-        if len(form) != 3:
+        if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
-            batteries_type = form['batteries_type']
-            batteries_voltage = form['batteries_voltage']
-            batteries_quantity = form['batteries_quantity']
-            if batteries_type and batteries_voltage and batteries_quantity:
-                batteries_id = self.insert_batteries(batteries_type, batteries_voltage, batteries_quantity)
-                result = self.build_batteries_attributes(batteries_id, batteries_type, batteries_voltage,
-                                                         batteries_quantity)
+            battery_name = form['battery_name']
+            battery_material = form['battery_material']
+            battery_voltage = form['battery_voltage']
+            battery_type = form['battery_type']
+            battery_description = form['battery_description']
+            if battery_name and battery_material and battery_voltage and battery_type and battery_description:
+                dao = BatteriesDAO()
+                battery_id_and_resource_id = dao.insert_battery(battery_name, battery_material, battery_voltage, battery_type, battery_description)
+                result = self.build_battery_attributes(battery_id_and_resource_id[0], battery_name, battery_material, battery_voltage, battery_type, battery_description, battery_id_and_resource_id[1])
                 return jsonify(Batteries=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

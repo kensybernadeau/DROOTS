@@ -14,13 +14,14 @@ class PowerResourcesHandler:
         result['resource_id'] = row[4]
         return result
 
-    def build_power_resources_attributes(self, power_resource_id, power_resource_category, power_resource_type,
-                                         power_resource_description):
+    def build_power_resources_attributes(self, power_resource_id, power_resource_name, power_resource_type,
+                                         power_resource_description, resource_id):
         result = {}
         result['power_resource_id'] = power_resource_id
-        result['power_resource_category'] = power_resource_category
-        result['power_resource_quantity'] = power_resource_type
+        result['power_resource_name'] = power_resource_name
+        result['power_resource_type'] = power_resource_type
         result['power_resource_description'] = power_resource_description
+        result['resource_id'] = resource_id
         return result
 
     def getAllPowerResources(self):
@@ -82,15 +83,16 @@ class PowerResourcesHandler:
         print("json ", json)
         if len(json) != 3:
             return jsonify(Error="Malformed post request"), 400
-        power_resource_category = json['power_resource_category']
+        power_resource_name = json['power_resource_name']
         power_resource_type = json['power_resource_type']
         power_resource_description = json['power_resource_description']
 
-        if power_resource_category and power_resource_type and power_resource_description:
-            power_resource_id = self.insert_power_resource(power_resource_category, power_resource_type,
-                                                           power_resource_description)
-            result = self.build_power_resources_attributes(power_resource_id, power_resource_category,
-                                                           power_resource_type, power_resource_description)
+        if power_resource_name and power_resource_type and power_resource_description:
+            dao = PowerResourcesDAO()
+            power_resource_id_and_resource_id = dao.insert_power_resource(power_resource_name, power_resource_type,
+                                                                         power_resource_description)
+            result = self.build_power_resources_attributes(power_resource_id_and_resource_id[0], power_resource_name,
+                                                           power_resource_type, power_resource_description, power_resource_id_and_resource_id[1])
             return jsonify(Power_Resource=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
