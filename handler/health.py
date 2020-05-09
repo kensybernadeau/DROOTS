@@ -43,13 +43,14 @@ class HealthHandler:
         return result
 
     def build_health_attributes(self, health_id, health_name, health_exp_date, health_type,
-                                health_description, resource_quantity):
+                                health_description, resource_id):
         result = {}
         result['health_id'] = health_id
         result['health_name'] = health_name
         result['health_exp_date'] = health_exp_date
         result['health_type'] = health_type
         result['health_description'] = health_description
+        result['resource_id'] = resource_id
         return result
 
     def getAllHealth(self):
@@ -109,20 +110,18 @@ class HealthHandler:
 
     def insertHealthJson(self, form):
         print("form: ", form)
-        if len(form) != 5:
+        if len(form) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
             health_name = form['health_name']
             health_exp_date = form['health_exp_date']
             health_type = form['health_type']
             health_description = form['health_description']
-            resource_quantity = form["resource_quantity"]
-            if health_name and health_exp_date and health_type and health_description and resource_quantity is not None:
+            if health_name and health_exp_date and health_type and health_description:
                 dao = HealthDAO()
-                health_id = dao.insert_health(health_name, health_exp_date, health_type, health_description,
-                                              resource_quantity)
-                result = self.build_health_attributes(health_id, health_name, health_exp_date,
-                                                      health_type, health_description, resource_quantity)
+                health_id_and_resource_id = dao.insert_health(health_name, health_exp_date, health_type, health_description)
+                result = self.build_health_attributes(health_id_and_resource_id[0], health_name, health_exp_date,
+                                                      health_type, health_description, health_id_and_resource_id[1])
                 return jsonify(Health=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class HealthDAO:
 
@@ -72,15 +74,15 @@ class HealthDAO:
     #     resource_id = cursor.fetchone()[0]
     #     self.conn.commit()
     #     return resource_id
-    #
-    # def insert_health(self, health_name, health_exp_date, health_type, health_description, resource_quantity):
-    #     resource_id = self.insert_resource("health", resource_quantity)
-    #     cursor = self.conn.cursor()
-    #     query = "insert into health(health_name, health_exp_date, health_type, health_description, resource_id) values (%s, %s, %s, %s, %s) returning health_id;"
-    #     cursor.execute(query, (health_name, health_exp_date, health_type, health_description, resource_id))
-    #     health_id = cursor.fetchone()[0]
-    #     self.conn.commit()
-    #     return health_id
+
+    def insert_health(self, resource_name, health_exp_date, health_type, health_description):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'health')
+        cursor = self.conn.cursor()
+        query = "insert into health(health_name, health_exp_date, health_type, health_description, resource_id) values (%s, %s, %s, %s) returning health_id;"
+        cursor.execute(query, (health_exp_date, health_type, health_description, resource_id))
+        health_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return health_id, resource_id
     #
     # def get_available_resources(self):
     #     cursor = self.conn.cursor()
