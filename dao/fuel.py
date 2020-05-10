@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class FuelDAO:
 
@@ -10,7 +12,7 @@ class FuelDAO:
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-        self.select_statement = "select fuel_id, resource_name, fuel_type, fuel_liters, resource_id " \
+        self.select_statement = "select fuel_id, resource_name, fuel_type, fuel_liters, resource_id "
 
     def getAllFuel(self):
         cursor = self.conn.cursor()
@@ -61,3 +63,12 @@ class FuelDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert_fuel(self, resource_name, fuel_type, fuel_liters):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'fuel')
+        cursor = self.conn.cursor()
+        query = "insert into fuel(fuel_type, fuel_liters, resource_id) values (%s, %s, %s) returning fuel_id;"
+        cursor.execute(query, (fuel_type, fuel_liters, resource_id))
+        fuel_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return fuel_id, resource_id

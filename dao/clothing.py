@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class ClothingDAO:
 
@@ -10,7 +12,7 @@ class ClothingDAO:
                                                             pg_config['user'],
                                                             pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
-        self.select_statement = "select clothe_id, resource_name, clothe_size, clothe_type, clothe_description, resource_id " \
+        self.select_statement = "select clothe_id, resource_name, clothe_size, clothe_type, clothe_description, resource_id "
 
     def getAllClothing(self):
         cursor = self.conn.cursor()
@@ -30,7 +32,7 @@ class ClothingDAO:
 
     def getResourceById(self, resource_id):
         cursor = self.conn.cursor()
-        query = self.select_statement +  "from clothing natural inner join resources where resource_id = %s;"
+        query = self.select_statement + "from clothing natural inner join resources where resource_id = %s;"
         cursor.execute(query, (resource_id,))
         result = cursor.fetchone()
         return result
@@ -61,3 +63,13 @@ class ClothingDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert_clothing(self, resource_name, clothe_type, clothe_size, clothe_description):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'clothing')
+        cursor = self.conn.cursor()
+        query = "insert into clothing(clothe_type, clothe_size, clothe_description, resource_id) " \
+                "values (%s, %s, %s, %s) returning clothe_id;"
+        cursor.execute(query, (clothe_type, clothe_size, clothe_description, resource_id))
+        clothe_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return clothe_id, resource_id

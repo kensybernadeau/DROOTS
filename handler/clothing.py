@@ -15,12 +15,14 @@ class ClothingHandler:
         result['resource_id'] = row[5]
         return result
 
-    def build_clothe_attributes(self, clothe_id, clothe_type, clothe_size, clothe_description):
+    def build_clothe_attributes(self, clothe_id, clothe_name, clothe_type, clothe_size, clothe_description, resource_id):
         result = {}
         result['clothe_id'] = clothe_id
+        result['clothe_name'] = clothe_name
         result['clothe_type'] = clothe_type
         result['clothe_size'] = clothe_size
         result['clothe_description'] = clothe_description
+        result['resource_id'] = resource_id
         return result
 
     def getAllclothes(self):
@@ -30,7 +32,7 @@ class ClothingHandler:
         for row in clothing_list:
             result = self.build_clothe_dict(row)
             result_list.append(result)
-        return jsonify(Clothes=result_list)
+        return jsonify(Clothing=result_list)
 
     def getClotheById(self, clothe_id):
         dao = ClothingDAO()
@@ -78,18 +80,21 @@ class ClothingHandler:
             result_list.append(result)
         return result_list
 
-    def insertClotheJson(self, form):
-        print("form: ", form)
-        if len(form) != 3:
+    def insertClothingJson(self, json):
+        print("json: ", json)
+        if len(json) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
-            clothe_type = form['clothe_type']
-            clothe_size = form['clothe_size']
-            clothe_description = form['clothe_description']
-            if clothe_type and clothe_size and clothe_description:
-                clothe_id = self.insert_clothe(clothe_type, clothe_size, clothe_description)
-                result = self.build_clothe_attributes(clothe_id, clothe_type, clothe_size, clothe_description)
-                return jsonify(Clothe=result), 201
+            clothe_name = json['clothe_name']
+            clothe_type = json['clothe_type']
+            clothe_size = json['clothe_size']
+            clothe_description = json['clothe_description']
+            if clothe_name and clothe_type and clothe_size and clothe_description:
+                dao = ClothingDAO()
+                clothe_and_resource_id = dao.insert_clothing(clothe_name, clothe_type, clothe_size, clothe_description)
+                result = self.build_clothe_attributes(clothe_and_resource_id[0], clothe_name, clothe_type, clothe_size,
+                                                      clothe_description, clothe_and_resource_id[1])
+                return jsonify(Clothing=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -106,7 +111,7 @@ class ClothingHandler:
                 if clothe_type and clothe_size and clothe_description:
                     self.update_clothe(clothe_id, clothe_type, clothe_size, clothe_description)
                     result = self.build_clothe_attributes(clothe_id, clothe_size, clothe_description)
-                    return jsonify(Cloth=result), 200
+                    return jsonify(Clothe=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
