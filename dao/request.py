@@ -39,6 +39,14 @@ class requestDAO:
             result.append(row)
         return result
 
+    def insert_request(self, customer_id, resource_id):
+        cursor = self.conn.cursor()
+        query = "insert into request(customer_id, resource_id) values (%s, %s) returning request_id;"
+        cursor.execute(query, (customer_id, resource_id))
+        request_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return request_id
+
 # CREATE TABLE child_table(
 #   c1 INTEGER PRIMARY KEY,
 #   c2 INTEGER,

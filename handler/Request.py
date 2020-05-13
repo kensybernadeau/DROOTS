@@ -12,9 +12,11 @@ class RequestHandler:
         result['resource_name'] = list[3]
         return result
 
-    def build_request_attributes(self, request_id):
+    def build_request_attributes(self, request_id, customer_id, resource_id):
         result = {}
         result['request_id'] = request_id
+        result['customer_id'] = customer_id
+        result['resource_id'] = resource_id
         return result
 
     def getAllRequest(self):
@@ -51,11 +53,14 @@ class RequestHandler:
 
     def insertRequestJson(self, form):
         print("form: ", form)
-        if len(form) != 1:
+        if len(form) != 2:
             return jsonify(Error="Malformed post request"), 400
-        else:
-            request_id = self.insert_request()
-            result = self.build_request_attributes(request_id)
+        customer_id = form['customer_id']
+        resource_id = form['resource_id']
+        if customer_id and resource_id:
+            dao = requestDAO()
+            request_id = dao.insert_request(customer_id, resource_id)
+            result = self.build_request_attributes(request_id, customer_id, resource_id)
             return jsonify(Request=result), 201
 
     def updateRequest(self, request_id, form):
