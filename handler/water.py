@@ -5,7 +5,6 @@ from dao.water import WaterDAO
 
 class WaterHandler:
 
-
     def build_water_dict(self, row):
         result = {}
         result['water_id'] = row[0]
@@ -15,12 +14,13 @@ class WaterHandler:
         result['resource_id'] = row[4]
         return result
 
-    def build_water_attributes(self, water_id, water_name, water_oz, water_type, water_description):
+    def build_water_attributes(self, water_id, water_name, water_oz, water_type, resource_id):
         result = {}
         result['water_id'] = water_id
         result['water_name'] = water_name
         result['water_oz'] = water_oz
         result['water_type'] = water_type
+        result['resource_id'] = resource_id
         return result
 
     def getAllWater(self):
@@ -31,7 +31,6 @@ class WaterHandler:
             result = self.build_water_dict(row)
             result_list.append(result)
         return jsonify(Water=result_list)
-
 
     def getWaterById(self, water_id):
         dao = WaterDAO()
@@ -88,3 +87,20 @@ class WaterHandler:
             result = self.build_water_dict(row)
             result_list.append(result)
         return jsonify(Water=result_list)
+
+    def insertWaterJson(self, json):
+        print("json ", json)
+        if len(json) != 3:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            water_name = json['water_name']
+            water_oz = json['water_oz']
+            water_type = json['water_type']
+            if water_name and water_oz and water_type:
+                dao = WaterDAO()
+                water_and_resource_id = dao.insert_water(water_name, water_oz, water_type)
+                result = self.build_water_attributes(water_and_resource_id[0], water_name, water_oz, water_type,
+                                                     water_and_resource_id[1])
+                return jsonify(Water=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400

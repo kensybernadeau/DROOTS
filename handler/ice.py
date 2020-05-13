@@ -13,11 +13,12 @@ class IceHandler:
         result['resource_id'] = row[3]
         return result
 
-    def build_ice_attributes(self, ice_id, ice_name, ice_oz, ice_description):
+    def build_ice_attributes(self, ice_id, ice_name, ice_description, resource_id):
         result = {}
         result['ice_id'] = ice_id
         result['ice_name'] = ice_name
         result['ice_description'] = ice_description
+        result['resource_id'] = resource_id
         return result
 
     def getAllIce(self):
@@ -28,7 +29,6 @@ class IceHandler:
             result = self.build_ice_dict(row)
             result_list.append(result)
         return jsonify(Ice=result_list)
-
 
     def getIceById(self, ice_id):
         dao = IceDAO()
@@ -44,7 +44,7 @@ class IceHandler:
         row = dao.getResourceById(resource_id)
         if row:
             result = self.build_ice_dict(row)
-        # jsonify(Food=food)
+            # jsonify(Food=food)
             return result
 
     def get_available_resources(self):
@@ -75,3 +75,19 @@ class IceHandler:
             result = self.build_ice_dict(row)
             result_list.append(result)
         return result_list
+
+    def insertIceJson(self, json):
+        print("json ", json)
+        if len(json) != 2:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            ice_name = json['ice_name']
+            ice_description = json['ice_description']
+            if ice_name and ice_description:
+                dao = IceDAO()
+                ice_and_resource_id = dao.insert_ice(ice_name, ice_description)
+                result = self.build_ice_attributes(ice_and_resource_id[0], ice_name, ice_description,
+                                                   ice_and_resource_id[1])
+                return jsonify(Ice=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
