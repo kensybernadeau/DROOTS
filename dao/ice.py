@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.resources import ResourcesDAO
+
 
 class IceDAO:
 
@@ -9,8 +11,9 @@ class IceDAO:
         connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
                                                             pg_config['passwd'])
+
         self.conn = psycopg2._connect(connection_url)
-        self.select_statement = "select ice_id, resource_name, ice_description, resource_id " \
+        self.select_statement = "select ice_id, resource_name, ice_description, resource_id "
 
     def getAllIce(self):
         cursor = self.conn.cursor()
@@ -61,3 +64,12 @@ class IceDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert_ice(self, resource_name, ice_description):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'ice')
+        cursor = self.conn.cursor()
+        query = "insert into ice(ice_description, resource_id) values (%s, %s) returning ice_id;"
+        cursor.execute(query, (ice_description, resource_id))
+        ice_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return ice_id, resource_id
