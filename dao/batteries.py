@@ -64,8 +64,8 @@ class BatteriesDAO:
             result.append(row)
         return result
 
-    def insert_battery(self, resource_name, battery_material, battery_voltage, battery_type, battery_description):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'batteries')
+    def insert_battery(self, resource_name, battery_material, battery_voltage, battery_type, battery_description, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'batteries', resource_date)
         cursor = self.conn.cursor()
         query = "insert into batteries(battery_material, battery_voltage, battery_type, battery_description, resource_id) values (%s, %s, %s, %s, %s) returning battery_id;"
         cursor.execute(query, (battery_material, battery_voltage, battery_type, battery_description, resource_id))

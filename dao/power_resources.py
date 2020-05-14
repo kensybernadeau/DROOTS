@@ -64,8 +64,8 @@ class PowerResourcesDAO:
             result.append(row)
         return result
 
-    def insert_power_resource(self, resource_name, power_type, power_description):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'powerres')
+    def insert_power_resource(self, resource_name, power_type, power_description, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'powerres', resource_date)
         cursor = self.conn.cursor()
         query = "insert into power_resources(power_type, power_description, resource_id) values (%s, %s, %s) returning power_id;"
         cursor.execute(query, (power_type, power_description, resource_id))

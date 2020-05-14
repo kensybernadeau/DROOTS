@@ -14,13 +14,14 @@ class FuelHandler:
         result['resource_id'] = row[4]
         return result
 
-    def build_fuel_attributes(self, fuel_id, fuel_name, fuel_type, fuel_liters, resource_id):
+    def build_fuel_attributes(self, fuel_id, fuel_name, fuel_type, fuel_liters, resource_id, resource_date):
         result = {}
         result['fuel_id'] = fuel_id
         result['fuel_name'] = fuel_name
         result['fuel_type'] = fuel_type
         result['fuel_liters'] = fuel_liters
         result['resource_id'] = resource_id
+        result['resource_date'] = resource_date
         return result
 
     def getAllFuel(self):
@@ -80,17 +81,17 @@ class FuelHandler:
 
     def insertFuelJson(self, json):
         print("json ", json)
-        if len(json) != 3:
+        if len(json) != 4:
             return jsonify(Error="Malformed post request"), 400
         fuel_name = json['fuel_name']
         fuel_type = json['fuel_type']
         fuel_liters = json['fuel_liters']
-
-        if fuel_name and fuel_type and fuel_liters:
+        fuel_date = json['fuel_date']
+        if fuel_name and fuel_type and fuel_liters and fuel_date:
             dao = FuelDAO()
-            fuel_and_resource_id = dao.insert_fuel(fuel_name, fuel_type, fuel_liters)
+            fuel_and_resource_id = dao.insert_fuel(fuel_name, fuel_type, fuel_liters, fuel_date)
             result = self.build_fuel_attributes(fuel_and_resource_id[0], fuel_name, fuel_type, fuel_liters,
-                                                fuel_and_resource_id[1])
+                                                fuel_and_resource_id[1], fuel_date)
             return jsonify(Fuel=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400

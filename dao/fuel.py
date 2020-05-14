@@ -64,8 +64,8 @@ class FuelDAO:
             result.append(row)
         return result
 
-    def insert_fuel(self, resource_name, fuel_type, fuel_liters):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'fuel')
+    def insert_fuel(self, resource_name, fuel_type, fuel_liters, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'fuel', resource_date)
         cursor = self.conn.cursor()
         query = "insert into fuel(fuel_type, fuel_liters, resource_id) values (%s, %s, %s) returning fuel_id;"
         cursor.execute(query, (fuel_type, fuel_liters, resource_id))

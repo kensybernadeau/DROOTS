@@ -18,6 +18,7 @@ from handler.fuel import FuelHandler
 from handler.health import HealthHandler
 from handler.ice import IceHandler
 from handler.power_resources import PowerResourcesHandler
+from handler.statistics import StatisticsHandler
 from handler.supplier import SupplierHandler
 from handler.user import UserHandler
 from handler.clothing import ClothingHandler
@@ -539,6 +540,18 @@ def getAddressById(address_id):
         return AddressHandler().deleteAddress(address_id)
     else:
         return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/statistics', methods=['GET', 'POST', ])
+def getAllStatistics():
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return RequestHandler().insertRequestJson(request.json)
+    else:
+        if not request.args:
+            return RequestHandler().getAllRequest()
+        else:
+            return StatisticsHandler().searchStatistics(request.args)
 
 
 if __name__ == '__main__':

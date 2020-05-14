@@ -64,8 +64,8 @@ class ClothingDAO:
             result.append(row)
         return result
 
-    def insert_clothing(self, resource_name, clothe_type, clothe_size, clothe_description):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'clothing')
+    def insert_clothing(self, resource_name, clothe_type, clothe_size, clothe_description, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'clothing', resource_date)
         cursor = self.conn.cursor()
         query = "insert into clothing(clothe_type, clothe_size, clothe_description, resource_id) " \
                 "values (%s, %s, %s, %s) returning clothe_id;"
