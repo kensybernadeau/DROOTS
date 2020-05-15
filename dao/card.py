@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.payment import paymentDAO
+
 
 class cardDAO:
 
@@ -28,4 +30,14 @@ class cardDAO:
         cursor.execute(query, (card_id,))
         result = cursor.fetchone()
         return result
+
+    def insertCard(self, card_type, card_number, card_security_code, payment_date, payment_amount, resource_id,
+                   supplier_id, customer_id):
+        payment_id = paymentDAO().insertPayment(payment_date, payment_amount, resource_id, supplier_id, customer_id)
+        cursor = self.conn.cursor()
+        query = "insert into Card(card_type, card_number, card_security_code, payment_id) values (%s, %s, %s, %s) returning card_id;"
+        cursor.execute(query, (card_type, card_number, card_security_code, payment_id,))
+        card_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return card_id, payment_id
 

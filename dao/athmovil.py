@@ -1,6 +1,8 @@
 from config.dbconfig import pg_config
 import psycopg2
 
+from dao.payment import paymentDAO
+
 
 class athmovilDAO:
 
@@ -29,5 +31,15 @@ class athmovilDAO:
         cursor.execute(query, (athmovil_id,))
         result = cursor.fetchone()
         return result
+
+    def insertAthmovil(self, athmovil_transaction_num, athmovil_phone_number, payment_date, payment_amount, customer_id, resource_id,
+                   supplier_id):
+        payment_id = paymentDAO().insertPayment(payment_date, payment_amount, resource_id, supplier_id, customer_id)
+        cursor = self.conn.cursor()
+        query = "insert into athmovil(athmovil_transaction_num, athmovil_phone_number, payment_id) values (%s, %s, %s) returning athmovil_id;"
+        cursor.execute(query, ( athmovil_transaction_num, athmovil_phone_number, payment_id,))
+        athmovil_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return athmovil_id, payment_id
 
 

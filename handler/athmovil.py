@@ -19,12 +19,21 @@ class athmovilHandler:
         result['athmovil_transaction_num'] = list[8]
         result['athmovil_phone_number'] = list[9]
         return result
+    # athmovil(athmovil_transaction_num, athmovil_phone_number, payment_id
 
-    def build_athmovil_attributes(self, payment_id, payment_method):
+
+    def build_athmovil_attributes(self, payment_id, payment_date, payment_amount, customer_id, supplier_id, resource_id,
+                              athmovil_id, athmovil_transaction_num, athmovil_phone_number):
         result = {}
         result['payment_id'] = payment_id
-        result['payment_method'] = payment_method
-
+        result['payment_date'] = payment_date
+        result['payment_amount'] = payment_amount
+        result['customer_id'] = customer_id
+        result['supplier_id'] = supplier_id
+        result['resource_id'] = resource_id
+        result['athmovil_id'] = athmovil_id
+        result['athmovil_transaction_num'] = athmovil_transaction_num
+        result['athmovil_phone_number'] = athmovil_phone_number
         return result
 
     def getAllPayment(self):
@@ -43,6 +52,29 @@ class athmovilHandler:
         if row:
             result = self.build_athmovil_dict(row)
             return result
+
+    def insertAthmovilJson(self, form):
+        print("form: ", form)
+        if len(form) != 7:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            payment_date = form['payment_date']
+            payment_amount = form['payment_amount']
+            customer_id = form['customer_id']
+            supplier_id = form['supplier_id']
+            resource_id = form['resource_id']
+            athmovil_transaction_num = form['athmovil_transaction_num']
+            athmovil_phone_number = form['athmovil_phone_number']
+            if athmovil_transaction_num and athmovil_phone_number and payment_date and payment_amount and resource_id and supplier_id and customer_id:
+                dao = athmovilDAO()
+                athmovil_and_payment_id = dao.insertAthmovil(athmovil_transaction_num, athmovil_phone_number, payment_date, payment_amount, customer_id, resource_id, supplier_id)
+                result = self.build_athmovil_attributes(athmovil_and_payment_id[1], payment_date, payment_amount, customer_id, supplier_id, resource_id, athmovil_and_payment_id[0], athmovil_transaction_num, athmovil_phone_number)
+                return jsonify(Payment=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    # athmovil(athmovil_transaction_num, athmovil_phone_number, payment_id
 
     # def insertPaymentJson(self, form):
     #     print("form: ", form)

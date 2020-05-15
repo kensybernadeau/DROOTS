@@ -28,3 +28,11 @@ class paymentDAO:
         cursor.execute(query, (payment_id,))
         result = cursor.fetchone()
         return result
+
+    def insertPayment(self, payment_date, payment_amount, resource_id, supplier_id, customer_id):
+        cursor = self.conn.cursor()
+        query = "insert into payment(payment_date, payment_amount, resource_id, supplier_id, customer_id) values (%s, %s, %s, %s, %s) returning payment_id;"
+        cursor.execute(query, (payment_date, payment_amount, resource_id, supplier_id, customer_id,))
+        payment_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return payment_id
