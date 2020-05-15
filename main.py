@@ -13,6 +13,8 @@ from handler.Payment import PaymentHandler
 from handler.Request import RequestHandler
 from handler.Reservation import ReservationHandler
 from handler.address import AddressHandler
+from handler.athmovil import athmovilHandler
+from handler.card import cardHandler
 from handler.food import FoodHandler
 from handler.fuel import FuelHandler
 from handler.health import HealthHandler
@@ -518,6 +520,33 @@ def getAllPayment():
 
     else:
         return jsonify(Error="Method not allowed."), 405
+
+@app.route('/droots/payment/card', methods=['GET', 'POST'])
+def getAllPaymentCard():
+    if request.method == 'GET':
+        return PaymentHandler().getAllPaymentMethods()
+
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return cardHandler().insertCardJson(request.json)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+@app.route('/droots/payment/athmovil', methods=['GET', 'POST'])
+def getAllPaymentAthmovil():
+    if request.method == 'GET':
+        return PaymentHandler().getAllPaymentMethods()
+
+    if request.method == 'POST':
+        print("REQUEST: ", request.json)
+        return athmovilHandler().insertAthmovilJson(request.json)
+
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
+
+
 
 
 @app.route('/droots/address', methods=['GET', 'POST'])

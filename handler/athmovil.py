@@ -58,13 +58,13 @@ class athmovilHandler:
         if len(form) != 7:
             return jsonify(Error="Malformed post request"), 400
         else:
-            payment_date = form['payment_date']
-            payment_amount = form['payment_amount']
-            customer_id = form['customer_id']
-            supplier_id = form['supplier_id']
-            resource_id = form['resource_id']
             athmovil_transaction_num = form['athmovil_transaction_num']
             athmovil_phone_number = form['athmovil_phone_number']
+            payment_date = form['payment_date']
+            payment_amount = form['payment_amount']
+            resource_id = form['resource_id']
+            supplier_id = form['supplier_id']
+            customer_id = form['customer_id']
             if athmovil_transaction_num and athmovil_phone_number and payment_date and payment_amount and resource_id and supplier_id and customer_id:
                 dao = athmovilDAO()
                 athmovil_and_payment_id = dao.insertAthmovil(athmovil_transaction_num, athmovil_phone_number, payment_date, payment_amount, customer_id, resource_id, supplier_id)
