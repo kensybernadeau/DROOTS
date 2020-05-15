@@ -77,7 +77,7 @@ class FoodDAO:
 
 # ----------------------------------Inserts------------------------------------------------------------------------------
 
-    def insert_food(self, resource_name,  food_exp_date, food_type, food_description, resource_date):
+    def insert_food(self, resource_name, food_exp_date, food_type, food_description, resource_date):
         resource_id = ResourcesDAO().insert_resource(resource_name, 'food', resource_date)
         cursor = self.conn.cursor()
         query = "insert into food(food_exp_date, food_type, food_description, resource_id) values (%s, %s, %s, %s) returning food_id;"
