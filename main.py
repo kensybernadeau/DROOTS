@@ -450,7 +450,7 @@ def getReservationById(reservation_id):
 def getAllHEquipment():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
-        return HeavyEquipmentHandler().insertHEquipmentJson(request.json)
+        return HeavyEquipmentHandler().insertHeavyEquipmentJson(request.json)
     elif request.method == 'GET':
         return HeavyEquipmentHandler().getAllHeavyEquipment()
 

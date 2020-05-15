@@ -37,11 +37,12 @@ class ToolsHandler:
         result['resource_id'] = row[3]
         return result
 
-    def build_tool_attributes(self, tool_id, tool_name, tool_description, resource_date):
+    def build_tool_attributes(self, tool_id, tool_name, tool_description, resource_id, resource_date):
         result = {}
         result['tool_id'] = tool_id
         result['tool_name'] = tool_name
         result['tool_description'] = tool_description
+        result['resource_id'] = resource_id
         result['resource_date'] = resource_date
         return result
 
@@ -100,7 +101,7 @@ class ToolsHandler:
             result_list.append(result)
         return result_list
 
-    def insertPowerResourceJson(self, json):
+    def insertToolJson(self, json):
         print("json ", json)
         if len(json) != 3:
             return jsonify(Error="Malformed post request"), 400

@@ -67,7 +67,7 @@ class ToolsDAO:
     def insert_tools(self, resource_name, tool_description, resource_date):
         resource_id = ResourcesDAO().insert_resource(resource_name, 'tools', resource_date)
         cursor = self.conn.cursor()
-        query = "insert into food(tool_description, resource_id) values (%s, %s) returning tool_id;"
+        query = "insert into tools(tool_description, resource_id) values (%s, %s) returning tool_id;"
         cursor.execute(query, (tool_description, resource_id))
         tool_id = cursor.fetchone()[0]
         self.conn.commit()

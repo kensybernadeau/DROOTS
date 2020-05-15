@@ -1,7 +1,7 @@
 #Databse configuration information
 
 pg_config = {
-    'user': 'kensy',
-    'passwd': '0752',
+    'user': 'droots',
+    'passwd': 'droots',
     'dbname': 'drootsdb'
 }

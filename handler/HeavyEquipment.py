@@ -13,11 +13,12 @@ class HeavyEquipmentHandler:
         result['resource_id'] = list[3]
         return result
 
-    def build_heavy_attributes(self, hequipment_id, hequipment_name, hequipment_description, resource_date):
+    def build_heavy_attributes(self, hequipment_id, hequipment_name, hequipment_description, resource_id, resource_date):
         result = {}
         result['hequipment_id'] = hequipment_id
         result['hequipment_name'] = hequipment_name
         result['hequipment_description'] = hequipment_description
+        result['resource_id'] = resource_id
         result['resource_date'] = resource_date
         return result
 
@@ -88,7 +89,7 @@ class HeavyEquipmentHandler:
             heavy_and_resource_id = dao.insert_heavy_equipment(heavy_name, heavy_description, heavy_date)
             result = self.build_heavy_attributes(heavy_and_resource_id [0], heavy_name, heavy_description,
                                                 heavy_and_resource_id[1], heavy_date)
-            return jsonify(Fuel=result), 201
+            return jsonify(HeavyEquipment=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
 
