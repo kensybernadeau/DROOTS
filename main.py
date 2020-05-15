@@ -434,14 +434,12 @@ def getAllReservation():
 
 @app.route('/droots/customer/reservation/<int:reservation_id>', methods=['GET', 'POST', 'PUT'])
 def getReservationById(reservation_id):
-    if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return ReservationHandler().insertReservationJson(request.json)
-    elif request.method == 'GET':
+    if request.method == 'GET':
         return ReservationHandler().getReservationById(reservation_id)
     elif request.method == 'PUT':
-        return ReservationHandler().updateReservation(reservation_id, request.form)
-
+        return ReservationHandler().updateBatteries(reservation_id, request.form)
+    elif request.method == 'DELETE':
+        return ReservationHandler().deleteBatteries(reservation_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 

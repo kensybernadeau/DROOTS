@@ -13,7 +13,7 @@ class reservationDAO:
 
     def getAllReservation(self):
         cursor = self.conn.cursor()
-        query = "select reservation_id, customer_id, supplier_id, resource_id, resource_name   " \
+        query = "select reservation_id, customer_id, supplier_id, resource_id, resource_name, reservation_date   " \
                 "from  customer natural inner join reservation natural inner join supplies natural inner join resources;"
         cursor.execute(query)
         result = []
@@ -23,8 +23,8 @@ class reservationDAO:
 
     def getReservationById(self, reservation_id):
         cursor = self.conn.cursor()
-        query = "select reservation_id, customer_id, resource_id, supplier_id  " \
-                "from reservation natural inner join customer natural inner join supplies where reservation_id = %s;"
+        query = "select reservation_id, customer_id, supplier_id, resource_id, resource_name, reservation_date " \
+                "from reservation natural inner join customer natural inner join supplies natural inner join resources where reservation_id = %s;"
         cursor.execute(query, (reservation_id,))
         result = cursor.fetchone()
         return result

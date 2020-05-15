@@ -12,6 +12,7 @@ class ReservationHandler:
         result['supplier_id'] = list[2]
         result['resource_id'] = list[3]
         result['resource_name'] = list[4]
+        result['reservation_date'] = list[5]
         return result
 
     def build_reservation_attributes(self, reservation_id, customer_id, reservation_date, resource_id, supplier_id):
