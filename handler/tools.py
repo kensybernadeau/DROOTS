@@ -37,11 +37,12 @@ class ToolsHandler:
         result['resource_id'] = row[3]
         return result
 
-    def build_tool_attributes(self, tool_id, tool_name, tool_description):
+    def build_tool_attributes(self, tool_id, tool_name, tool_description, resource_date):
         result = {}
         result['tool_id'] = tool_id
         result['tool_name'] = tool_name
         result['tool_description'] = tool_description
+        result['resource_date'] = resource_date
         return result
 
     def getAllTools(self):
