@@ -13,11 +13,12 @@ class HeavyEquipmentHandler:
         result['resource_id'] = list[3]
         return result
 
-    def build_heavy_attributes(self, hequipment_id, hequipment_name, hequipment_description):
+    def build_heavy_attributes(self, hequipment_id, hequipment_name, hequipment_description, resource_date):
         result = {}
         result['hequipment_id'] = hequipment_id
         result['hequipment_name'] = hequipment_name
         result['hequipment_description'] = hequipment_description
+        result['resource_date'] = resource_date
         return result
 
     def getAllHeavyEquipment(self):

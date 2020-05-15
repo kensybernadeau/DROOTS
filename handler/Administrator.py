@@ -15,12 +15,12 @@ class AdministratorsHandler:
         result['administrator_lname'] = row[3]
         result['administrator_uname'] = row[4]
         result['administrator_passwd'] = row[5]
-        result['address_id'] = row[6]
-        result['administrator_country'] = row[7]
-        result['administrator_city'] = row[8]
-        result['administrator_street_address'] = row[9]
-        result['administrator_zipcode'] = row[10]
-
+        result['administrator_country'] = row[6]
+        result['administrator_city'] = row[7]
+        result['administrator_street_address'] = row[8]
+        result['administrator_zipcode'] = row[9]
+        result['administrator_phone'] = row[10]
+        result['administrator_email'] = row[11]
         return result
 
     def build_administrator_attributes(self, administrator_id, user_id, administrator_fname, administrator_lname,
