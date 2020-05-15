@@ -15,11 +15,12 @@ class CustomerHandler:
         result['customer_lname'] = row[3]
         result['customer_uname'] = row[4]
         result['customer_passwd'] = row[5]
-        result['address_id'] = row[6]
-        result['customer_country'] = row[7]
-        result['customer_city'] = row[8]
-        result['customer_street_address'] = row[9]
-        result['customer_zipcode'] = row[10]
+        result['customer_country'] = row[6]
+        result['customer_city'] = row[7]
+        result['customer_street_address'] = row[8]
+        result['customer_zipcode'] = row[9]
+        result['customer_phone'] = row[10]
+        result['customer_email'] = row[11]
 
         return result
 
