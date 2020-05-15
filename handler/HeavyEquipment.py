@@ -83,7 +83,7 @@ class HeavyEquipmentHandler:
         heavy_name = json['heavy_name']
         heavy_description = json['heavy_description']
         heavy_date = json['heavy_date']
-        if heavy_name  and heavy_description and heavy_date:
+        if heavy_name and heavy_description and heavy_date:
             dao = HeavyEquipmentDAO()
             heavy_and_resource_id = dao.insert_heavy_equipment(heavy_name, heavy_description, heavy_date)
             result = self.build_heavy_attributes(heavy_and_resource_id [0], heavy_name, heavy_description,

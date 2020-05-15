@@ -100,19 +100,21 @@ class ToolsHandler:
             result_list.append(result)
         return result_list
 
-    def insertToolJson(self, form):
-        print("form: ", form)
-        if len(form) != 2:
+    def insertPowerResourceJson(self, json):
+        print("json ", json)
+        if len(json) != 3:
             return jsonify(Error="Malformed post request"), 400
+        tool_name = json['tool_name']
+        tool_description = json['tool_description']
+        tool_date = json['tool_date']
+        if tool_name and tool_description and tool_date:
+            dao = ToolsDAO()
+            tool_id_and_resource_id = dao.insert_tools(tool_name,tool_description,tool_date)
+            result = self.build_tool_attributes(tool_id_and_resource_id[0], tool_name, tool_description,
+                                                           tool_id_and_resource_id[1], tool_date)
+            return jsonify(Power_Resource=result), 201
         else:
-            tool_name = form['tool_name']
-            tool_description = form['tool_description']
-            if tool_name and tool_description:
-                tool_id = self.insert_tool(tool_name, tool_description)
-                result = self.build_tool_attributes(tool_id, tool_name, tool_description)
-                return jsonify(Tool=result), 201
-            else:
-                return jsonify(Error="Unexpected attributes in post request"), 400
+            return jsonify(Error="Unexpected attributes in post request"), 400
 
     def updateTool(self, tool_id, form):
         if not self.getToolById(tool_id):
