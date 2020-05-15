@@ -5,17 +5,17 @@ import psycopg2
 class AdministratorsDAO:
     def __init__(self):
 
-        connection_url = "dbname=%s user=%s password=%s host=%s" % (pg_config['dbname'],
+        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
                                                             pg_config['user'],
-                                                            pg_config['passwd'],
-                                                            pg_config['host'])
+                                                            pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
     def getAllAdmins(self):
         cursor = self.conn.cursor()
-        query = "select admin_id, user_id, user_first_name, user_last_name, user_uname, user_password, address_id, " \
-                "user_country, user_city, user_street_address, user_zipcode " \
-                "from administrators natural inner join users natural inner join address;"
+        query = "select admin_id, user_id, user_first_name, user_last_name, user_uname, user_password, " \
+                "user_country, user_city, user_street_address, user_zipcode, phone_number, email_address " \
+                "from administrators natural inner join users natural inner join address natural inner join " \
+                "phone natural inner join email;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -24,9 +24,9 @@ class AdministratorsDAO:
 
     def getAdminById(self, admin_id):
         cursor = self.conn.cursor()
-        query = "select admin_id, user_id, user_first_name, user_last_name, user_uname, user_password, address_id, " \
-                "user_country, user_city, user_street_address, user_zipcode " \
-                "from administrators natural inner join users natural inner join address where admin_id = %s;"
+        query = "select admin_id, user_id, user_first_name, user_last_name, user_uname, user_password, " \
+                "user_country, user_city, user_street_address, user_zipcode, phone_number, email_address " \
+                "from administrators natural inner join users natural inner join address natural inner join phone natural inner join email where admin_id = %s;"
         cursor.execute(query, (admin_id,))
         result = cursor.fetchone()
         return result
