@@ -74,35 +74,3 @@ class athmovilHandler:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
 
-    # athmovil(athmovil_transaction_num, athmovil_phone_number, payment_id
-
-    # def insertPaymentJson(self, form):
-    #     print("form: ", form)
-    #     if len(form) != 1:
-    #         return jsonify(Error="Malformed post request"), 400
-    #     else:
-    #         payment_method = form['payment_method']
-    #         if payment_method:
-    #             payment_id = self.insert_payment(payment_method)
-    #             result = self.build_payment_attributes(payment_id, payment_method)
-    #             return jsonify(Payment=result), 201
-    #         else:
-    #             return jsonify(Error="Unexpected attributes in post request"), 400
-    #
-    # def updatePayment(self, payment_id, payment_method, form):
-    #     if not self.getPaymentById(payment_id):
-    #         return jsonify(Error="Payment not found."), 404
-    #     else:
-    #         if len(form) != 1:
-    #             return jsonify(Error="Malformed update request"), 400
-    #         else:
-    #             self.update_payment(payment_id, payment_method)
-    #             result = self.build_payment_attributes(payment_id,payment_method)
-    #             return jsonify(Payment=result), 200
-    #
-    # def deletePayment(self, payment_id):
-    #     if not self.getPaymentById(payment_id):
-    #         return jsonify(Error="Payment not found."), 404
-    #     else:
-    #         self.delete_payment(payment_id)
-    #         return jsonify(DeleteStatus="OK"), 200

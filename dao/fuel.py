@@ -64,6 +64,15 @@ class FuelDAO:
             result.append(row)
         return result
 
+    def get_fuel_by_type(self, fuel_type):
+        cursor = self.conn.cursor()
+        query = self.select_statement + "from fuel natural inner join resources where fuel_type = %s;"
+        cursor.execute(query, (fuel_type,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def insert_fuel(self, resource_name, fuel_type, fuel_liters, resource_date):
         resource_id = ResourcesDAO().insert_resource(resource_name, 'fuel', resource_date)
         cursor = self.conn.cursor()

@@ -79,6 +79,16 @@ class FuelHandler:
             result_list.append(result)
         return result_list
 
+    def get_fuel_by_type(self, fuel_type):
+        dao = FuelDAO()
+        fuel_list = []
+        fuel_list = dao.get_fuel_by_type(fuel_type)
+        result_list = []
+        for row in fuel_list:
+            result = self.build_fuel_dict(row)
+            result_list.append(result)
+        return jsonify(Food=result_list)
+
     def insertFuelJson(self, json):
         print("json ", json)
         if len(json) != 4:

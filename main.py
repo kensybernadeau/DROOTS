@@ -22,6 +22,7 @@ from handler.ice import IceHandler
 from handler.power_resources import PowerResourcesHandler
 from handler.statistics import StatisticsHandler
 from handler.supplier import SupplierHandler
+from handler.supplies import SuppliesHandler
 from handler.user import UserHandler
 from handler.clothing import ClothingHandler
 from handler.tools import ToolsHandler
@@ -66,7 +67,7 @@ def getResourceById(resource_id):
 def get_resources_supplied():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
-        return ResourcesHandler().insertResourceJson(request.json)
+        return SuppliesHandler().insertSuppliesJson(request.json)
     else:
         if not request.args:
             return ResourcesHandler().get_resources_supplied()
@@ -143,6 +144,7 @@ def getWaterById(water_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
+
 @app.route('/droots/resources/water/smallbottle', methods=['GET', 'POST'])
 def getSmallBottleWater():
     if request.method == 'POST':
@@ -151,6 +153,7 @@ def getSmallBottleWater():
     else:
         if not request.args:
             return WaterHandler().get_water_by_type('sb')
+
 
 @app.route('/droots/resources/water/onegallon', methods=['GET', 'POST'])
 def getOneGallonWater():
@@ -303,6 +306,24 @@ def getFuelById(fuel_id):
 
     else:
         return jsonify(Error="Method not allowed."), 405
+
+
+@app.route('/droots/resources/fuel/gasoline', methods=['GET', 'POST'])
+def getGasoline():
+    if not request.args:
+        return FuelHandler().get_fuel_by_type('gasoline')
+
+
+@app.route('/droots/resources/fuel/diesel', methods=['GET', 'POST'])
+def getDiesel():
+    if not request.args:
+        return FuelHandler().get_fuel_by_type('diesel')
+
+
+@app.route('/droots/resources/fuel/propane', methods=['GET', 'POST'])
+def getPropane():
+    if not request.args:
+        return FuelHandler().get_fuel_by_type('propane')
 
 
 @app.route('/droots/resources/clothing', methods=['GET', 'POST'])
