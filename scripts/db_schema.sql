@@ -40,7 +40,7 @@ CREATE TABLE Request(request_id serial PRIMARY KEY, customer_id INTEGER REFERENC
 
 CREATE TABLE Reservation(reservation_id serial PRIMARY KEY, customer_id REFERENCES Customer(customer_id), resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id))
 
-CREATE TABLE Payment(payment_id serial PRIMARY KEY, payment_date VARCHAR(20), payment_amount FLOAT,resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id), customer_id INTEGER REFERENCES customer(customer_id))
+CREATE TABLE Payment(payment_id serial PRIMARY KEY, payment_date DATE, payment_amount FLOAT,resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id), customer_id INTEGER REFERENCES customer(customer_id))
 
 CREATE TABLE athmovil( athmovil_id serial PRIMARY KEY, athmovil_transaction_num VARCHAR(20), athmovil_phone_number VARCHAR(20), payment_id INTEGER REFERENCES Payment(payment_id))
 
