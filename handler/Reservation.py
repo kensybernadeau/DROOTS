@@ -14,10 +14,11 @@ class ReservationHandler:
         result['resource_name'] = list[4]
         return result
 
-    def build_reservation_attributes(self, reservation_id, customer_id, resource_id, supplier_id):
+    def build_reservation_attributes(self, reservation_id, customer_id, reservation_date, resource_id, supplier_id):
         result = {}
         result['reservation_id'] = reservation_id
         result['customer_id'] = customer_id
+        result['reservation_date'] = reservation_date
         result['resource_id'] = resource_id
         result['supplier_id'] = supplier_id
         return result
@@ -42,16 +43,17 @@ class ReservationHandler:
 
     def insertReservationJson(self, form):
         print("form: ", form)
-        if len(form) != 3:
+        if len(form) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
             customer_id = form['customer_id']
+            reservation_date = form['reservation_date']
             resource_id = form['resource_id']
             supplier_id = form['supplier_id']
-            if customer_id and resource_id and supplier_id:
+            if customer_id and reservation_date and resource_id and supplier_id:
                 dao = reservationDAO()
-                reservation_id = dao.insertReservation(customer_id, resource_id, supplier_id)
-                result = self.build_reservation_attributes(reservation_id, customer_id, resource_id, supplier_id)
+                reservation_id = dao.insertReservation(customer_id, reservation_date, resource_id, supplier_id)
+                result = self.build_reservation_attributes(reservation_id, customer_id, reservation_date, resource_id, supplier_id)
                 return jsonify(Reservation=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

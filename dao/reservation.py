@@ -29,11 +29,11 @@ class reservationDAO:
         result = cursor.fetchone()
         return result
 
-    def insertReservation(self, customer_id, resource_id, supplier_id):
+    def insertReservation(self, customer_id, reservation_date, resource_id, supplier_id):
         cursor = self.conn.cursor()
-        query = "insert into reservation(customer_id, resource_id, supplier_id) " \
-                "values (%s, %s, %s) returning reservation_id;"
-        cursor.execute(query, (customer_id, resource_id, supplier_id,))
+        query = "insert into reservation(customer_id, reservation_date, resource_id, supplier_id) " \
+                "values (%s, %s, %s, %s) returning reservation_id;"
+        cursor.execute(query, (customer_id, reservation_date, resource_id, supplier_id,))
         reservation_id = cursor.fetchone()[0]
         self.conn.commit()
         return reservation_id
