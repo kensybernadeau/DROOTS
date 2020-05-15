@@ -31,7 +31,6 @@ class AdministratorsDAO:
         result = cursor.fetchone()
         return result
 
-
     def insert(self, user_id):
         cursor = self.conn.cursor()
         query = "insert into administrators(user_id) values (%s) returning admin_id;"

@@ -2,6 +2,8 @@ from flask import jsonify
 
 from dao.address import AddressDAO
 from dao.administrators import AdministratorsDAO
+from dao.email import EmailDAO
+from dao.phone import PhoneDAO
 from dao.users import UsersDAO
 
 
@@ -59,7 +61,7 @@ class AdministratorsHandler:
 
     def insertAdministratorJson(self, json):
         print("json ", json)
-        if len(json) != 8:
+        if len(json) != 10:
             return jsonify(Error="Malformed post request"), 400
         else:
             administrator_fname = json['administrator_fname']
@@ -70,17 +72,24 @@ class AdministratorsHandler:
             administrator_city = json['administrator_city']
             administrator_street_address = json['administrator_street_address']
             administrator_zipcode = json['administrator_zipcode']
+            administrator_phone = json['administrator_phone']
+            administrator_email = json['administrator_email']
             if administrator_fname and administrator_lname and administrator_uname and \
                     administrator_passwd and administrator_country and administrator_city and \
-                    administrator_street_address and administrator_zipcode:
+                    administrator_street_address and administrator_zipcode and administrator_phone and \
+                    administrator_email:
                 udao = UsersDAO()
                 adao = AdministratorsDAO()
                 addao = AddressDAO()
+                email_dao = EmailDAO()
+                phone_dao = PhoneDAO()
                 user_id = udao.insert(administrator_fname, administrator_lname,
                                       administrator_uname, administrator_passwd)
                 admin_id = adao.insert(user_id)
                 address_id = addao.insert(administrator_country, administrator_city,
                                           administrator_street_address, administrator_zipcode, user_id)
+                email_dao.insert(administrator_email, user_id)
+                phone_dao.insert(administrator_phone, user_id)
                 result = self.build_administrator_attributes(admin_id, user_id, administrator_fname,
                                                              administrator_lname,
                                                              administrator_uname,
