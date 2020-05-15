@@ -38,7 +38,7 @@ CREATE TABLE Batteries (batteries_id serial PRIMARY KEY, batteries_material VARC
 
 CREATE TABLE Request(request_id serial PRIMARY KEY, customer_id INTEGER REFERENCES Customer(customer_id), resource_id INTEGER REFERENCES resources(resource_id))
 
-CREATE TABLE Reservation(reservation_id serial PRIMARY KEY, customer_id REFERENCES Customer(customer_id), resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id))
+CREATE TABLE Reservation(reservation_id serial PRIMARY KEY, customer_id REFERENCES Customer(customer_id), reservation_date DATE, resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id))
 
 CREATE TABLE Payment(payment_id serial PRIMARY KEY, payment_date DATE, payment_amount FLOAT,resource_id INTEGER, supplier_id INTEGER, FOREIGN KEY (supplier_id, resource_id) REFERENCES supplies(supplier_id, resource_id), customer_id INTEGER REFERENCES customer(customer_id))
 

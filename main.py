@@ -497,7 +497,7 @@ def getAllBatteries():
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/payment/<int:payment_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/droots/customer/payment/<int:payment_id>', methods=['GET', 'PUT', 'DELETE'])
 def getPaymentById(payment_id):
     if request.method == 'GET':
         return PaymentHandler().getAllPaymentById(payment_id)
@@ -509,7 +509,7 @@ def getPaymentById(payment_id):
         return jsonify(Error="Method not allowed."), 405
 
 
-@app.route('/droots/payment', methods=['GET', 'POST'])
+@app.route('/droots/customer/payment', methods=['GET', 'POST'])
 def getAllPayment():
     if request.method == 'GET':
         return PaymentHandler().getAllPaymentMethods()
@@ -521,7 +521,7 @@ def getAllPayment():
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/droots/payment/card', methods=['GET', 'POST'])
+@app.route('/droots/customer/payment/card', methods=['GET', 'POST'])
 def getAllPaymentCard():
     if request.method == 'GET':
         return PaymentHandler().getAllPaymentMethods()
@@ -533,7 +533,7 @@ def getAllPaymentCard():
     else:
         return jsonify(Error="Method not allowed."), 405
 
-@app.route('/droots/payment/athmovil', methods=['GET', 'POST'])
+@app.route('/droots/customer/payment/athmovil', methods=['GET', 'POST'])
 def getAllPaymentAthmovil():
     if request.method == 'GET':
         return PaymentHandler().getAllPaymentMethods()
