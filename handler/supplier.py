@@ -15,17 +15,18 @@ class SupplierHandler:
         result['supplier_lname'] = row[3]
         result['supplier_uname'] = row[4]
         result['supplier_passwd'] = row[5]
-        result['address_id'] = row[6]
-        result['supplier_country'] = row[7]
-        result['supplier_city'] = row[8]
-        result['supplier_street_address'] = row[9]
-        result['supplier_zipcode'] = row[10]
-
+        result['supplier_country'] = row[6]
+        result['supplier_city'] = row[7]
+        result['supplier_street_address'] = row[8]
+        result['supplier_zipcode'] = row[9]
+        result['supplier_phone'] = row[10]
+        result['supplier_email'] = row[11]
         return result
 
     def build_supplier_attributes(self, supplier_id, user_id, user_fname, user_lname,
                                   user_uname, user_passwd, address_id, supplier_country, supplier_city,
-                                  supplier_street_address, supplier_zipcode):
+                                  supplier_street_address, supplier_zipcode, supplier_phone_number,
+                                  supplier_email_address):
         result = {}
         result['supplier_id'] = supplier_id
         result['user_id'] = user_id
@@ -38,6 +39,8 @@ class SupplierHandler:
         result['supplier_city'] = supplier_city
         result['supplier_street_address'] = supplier_street_address
         result['supplier_zipcode'] = supplier_zipcode
+        result['supplier_phone_number'] = supplier_phone_number
+        result['supplier_email_address'] = supplier_email_address
         return result
 
     def getAllSupplier(self):
