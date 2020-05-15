@@ -1,6 +1,8 @@
 from flask import jsonify
 
 from dao.address import AddressDAO
+from dao.email import EmailDAO
+from dao.phone import PhoneDAO
 from dao.supplier import SupplierDAO
 from dao.users import UsersDAO
 
@@ -24,9 +26,9 @@ class SupplierHandler:
         return result
 
     def build_supplier_attributes(self, supplier_id, user_id, user_fname, user_lname,
-                                  user_uname, user_passwd, address_id, supplier_country, supplier_city,
-                                  supplier_street_address, supplier_zipcode, supplier_phone_number,
-                                  supplier_email_address):
+                                  user_uname, user_passwd, supplier_country, supplier_city,
+                                  supplier_street_address, supplier_zipcode, supplier_phone,
+                                  supplier_email):
         result = {}
         result['supplier_id'] = supplier_id
         result['user_id'] = user_id
@@ -34,13 +36,12 @@ class SupplierHandler:
         result['supplier_lname'] = user_lname
         result['supplier_uname'] = user_uname
         result['supplier_passwd'] = user_passwd
-        result['address_id'] = address_id
         result['supplier_country'] = supplier_country
         result['supplier_city'] = supplier_city
         result['supplier_street_address'] = supplier_street_address
         result['supplier_zipcode'] = supplier_zipcode
-        result['supplier_phone_number'] = supplier_phone_number
-        result['supplier_email_address'] = supplier_email_address
+        result['supplier_phone'] = supplier_phone
+        result['supplier_email'] = supplier_email
         return result
 
     def getAllSupplier(self):
@@ -62,7 +63,7 @@ class SupplierHandler:
 
     def insertSupplierJson(self, json):
         print("json: ", json)
-        if len(json) != 8:
+        if len(json) != 10:
             return jsonify(Error="Malformed post request"), 400
         else:
             supplier_fname = json['supplier_fname']
@@ -73,18 +74,26 @@ class SupplierHandler:
             supplier_city = json['supplier_city']
             supplier_street_address = json['supplier_street_address']
             supplier_zipcode = json['supplier_zipcode']
-            if supplier_fname and supplier_lname and supplier_uname and supplier_passwd and supplier_country\
-                    and supplier_city and supplier_street_address and supplier_zipcode:
+            supplier_phone = json['supplier_phone']
+            supplier_email = json['supplier_email']
+            if supplier_fname and supplier_lname and supplier_uname and supplier_passwd and supplier_country \
+                    and supplier_city and supplier_street_address and supplier_zipcode and supplier_phone and \
+                    supplier_email:
                 udao = UsersDAO()
                 sdao = SupplierDAO()
                 addao = AddressDAO()
+                pdao = PhoneDAO()
+                edao = EmailDAO()
                 user_id = udao.insert(supplier_fname, supplier_lname, supplier_uname, supplier_passwd)
                 supplier_id = sdao.insert(user_id)
-                address_id = addao.insert(supplier_country, supplier_city, supplier_street_address,
-                                          supplier_zipcode, user_id)
+                addao.insert(supplier_country, supplier_city, supplier_street_address,
+                             supplier_zipcode, user_id)
+                pdao.insert(supplier_phone, user_id)
+                edao.insert(supplier_email, user_id)
                 result = self.build_supplier_attributes(supplier_id, user_id, supplier_fname, supplier_lname,
-                                                        supplier_uname, supplier_passwd, address_id, supplier_country,
-                                                        supplier_city, supplier_street_address, supplier_zipcode)
+                                                        supplier_uname, supplier_passwd, supplier_country,
+                                                        supplier_city, supplier_street_address, supplier_zipcode,
+                                                        supplier_phone, supplier_email)
                 return jsonify(Supplier=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
