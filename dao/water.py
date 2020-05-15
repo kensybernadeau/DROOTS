@@ -74,8 +74,8 @@ class WaterDAO:
             result.append(row)
         return result
 
-    def insert_water(self, resource_name, water_oz, water_type):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'water')
+    def insert_water(self, resource_name, water_oz, water_type, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'water', resource_date)
         cursor = self.conn.cursor()
         query = "insert into water(water_oz, water_type, resource_id) values (%s, %s, %s) returning water_id;"
         cursor.execute(query, (water_oz, water_type, resource_id))

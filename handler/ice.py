@@ -13,12 +13,13 @@ class IceHandler:
         result['resource_id'] = row[3]
         return result
 
-    def build_ice_attributes(self, ice_id, ice_name, ice_description, resource_id):
+    def build_ice_attributes(self, ice_id, ice_name, ice_description, resource_id, resource_date):
         result = {}
         result['ice_id'] = ice_id
         result['ice_name'] = ice_name
         result['ice_description'] = ice_description
         result['resource_id'] = resource_id
+        result['resource_date'] = resource_date
         return result
 
     def getAllIce(self):
@@ -78,16 +79,17 @@ class IceHandler:
 
     def insertIceJson(self, json):
         print("json ", json)
-        if len(json) != 2:
+        if len(json) != 3:
             return jsonify(Error="Malformed post request"), 400
         else:
             ice_name = json['ice_name']
             ice_description = json['ice_description']
-            if ice_name and ice_description:
+            ice_date = json['ice_date']
+            if ice_name and ice_description and ice_date:
                 dao = IceDAO()
-                ice_and_resource_id = dao.insert_ice(ice_name, ice_description)
+                ice_and_resource_id = dao.insert_ice(ice_name, ice_description, ice_date)
                 result = self.build_ice_attributes(ice_and_resource_id[0], ice_name, ice_description,
-                                                   ice_and_resource_id[1])
+                                                   ice_and_resource_id[1], ice_date)
                 return jsonify(Ice=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

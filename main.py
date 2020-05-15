@@ -124,7 +124,7 @@ def getBabyFood():
 def getAllWater():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
-        return WaterHandler().insertFoodJson(request.json)
+        return WaterHandler().insertWaterJson(request.json)
     else:
         if not request.args:
             return WaterHandler().getAllWater()
@@ -164,7 +164,7 @@ def getOneGallonWater():
 def getAllIce():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
-        return IceHandler().insertFoodJson(request.json)
+        return IceHandler().insertIceJson(request.json)
     else:
         if not request.args:
             return IceHandler().getAllIce()

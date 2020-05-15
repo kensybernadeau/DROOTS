@@ -65,8 +65,8 @@ class IceDAO:
             result.append(row)
         return result
 
-    def insert_ice(self, resource_name, ice_description):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'ice')
+    def insert_ice(self, resource_name, ice_description, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'ice', resource_date)
         cursor = self.conn.cursor()
         query = "insert into ice(ice_description, resource_id) values (%s, %s) returning ice_id;"
         cursor.execute(query, (ice_description, resource_id))
