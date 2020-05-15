@@ -64,10 +64,10 @@ class HeavyEquipmentDAO:
             result.append(row)
         return result
 
-    def insert_tools(self, resource_name,  heavy_description, resource_date):
-        resource_id = ResourcesDAO().insert_resource(resource_name, 'tools', resource_date)
+    def insert_heavy_equipment(self, resource_name,  heavy_description, resource_date):
+        resource_id = ResourcesDAO().insert_resource(resource_name, 'heavy', resource_date)
         cursor = self.conn.cursor()
-        query = "insert into food(heavy_description, resource_id) values (%s, %s) returning heavy_id;"
+        query = "insert into heavy_equipment(heavy_description, resource_id) values (%s, %s) returning heavy_id;"
         cursor.execute(query, (heavy_description, resource_id))
         heavy_id = cursor.fetchone()[0]
         self.conn.commit()
