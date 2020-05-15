@@ -15,7 +15,8 @@ class ClothingHandler:
         result['resource_id'] = row[5]
         return result
 
-    def build_clothe_attributes(self, clothe_id, clothe_name, clothe_type, clothe_size, clothe_description, resource_id):
+    def build_clothe_attributes(self, clothe_id, clothe_name, clothe_type, clothe_size, clothe_description, resource_id,
+                                resource_date):
         result = {}
         result['clothe_id'] = clothe_id
         result['clothe_name'] = clothe_name
@@ -23,6 +24,7 @@ class ClothingHandler:
         result['clothe_size'] = clothe_size
         result['clothe_description'] = clothe_description
         result['resource_id'] = resource_id
+        result['resource_date'] = resource_date
         return result
 
     def getAllclothes(self):
@@ -80,20 +82,22 @@ class ClothingHandler:
             result_list.append(result)
         return result_list
 
-    def insertClothingJson(self, json):
+    def insertClotheJson(self, json):
         print("json: ", json)
-        if len(json) != 4:
+        if len(json) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
             clothe_name = json['clothe_name']
             clothe_type = json['clothe_type']
             clothe_size = json['clothe_size']
             clothe_description = json['clothe_description']
-            if clothe_name and clothe_type and clothe_size and clothe_description:
+            clothe_date = json['clothe_date']
+            if clothe_name and clothe_type and clothe_size and clothe_description and clothe_date:
                 dao = ClothingDAO()
-                clothe_and_resource_id = dao.insert_clothing(clothe_name, clothe_type, clothe_size, clothe_description)
+                clothe_and_resource_id = dao.insert_clothing(clothe_name, clothe_type, clothe_size, clothe_description,
+                                                             clothe_date)
                 result = self.build_clothe_attributes(clothe_and_resource_id[0], clothe_name, clothe_type, clothe_size,
-                                                      clothe_description, clothe_and_resource_id[1])
+                                                      clothe_description, clothe_and_resource_id[1], clothe_date)
                 return jsonify(Clothing=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

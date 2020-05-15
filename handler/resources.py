@@ -56,6 +56,11 @@ class ResourcesHandler:
         result['resource_availability'] = resource_availability
         return result
 
+    def build_statistic_dict(self, list):
+        result = {}
+        result['amount_of_resources'] = list[0]
+        return result
+
     def getResourceById(self, resource_id):
         handler_list = [FoodHandler(), BatteriesHandler(), ClothingHandler(), FuelHandler(), HealthHandler(),
                         HeavyEquipmentHandler(), IceHandler(), PowerResourcesHandler(), ToolsHandler(), WaterHandler()]
@@ -64,8 +69,6 @@ class ResourcesHandler:
             if row:
                 return jsonify(Resource=row)
         return jsonify(Error="Resource Not Found"), 404
-
-
 
     def get_available_resources(self):
         handler_list = [FoodHandler(), HealthHandler(), WaterHandler(), IceHandler(), ClothingHandler(),
@@ -95,6 +98,26 @@ class ResourcesHandler:
         else:
             return jsonify(Error="Malformed query string"), 400
         return jsonify(Resources=result_list)
+
+    def get_resource_daily_statistics(self, day):
+        resourceDao = ResourcesDAO()
+        resource_list = []
+        resource_list = resourceDao.get_resource_daily_statistics(day)
+        result_list = []
+        for row in resource_list:
+            result = self.build_statistic_dict(row)
+            result_list.append(result)
+        return result_list
+
+    def get_resource_weekly_statistics(self, week):
+        resourceDao = ResourcesDAO()
+        resource_list = []
+        resource_list = resourceDao.get_resource_weekly_statistics(week)
+        result_list = []
+        for row in resource_list:
+            result = self.build_statistic_dict(row)
+            result_list.append(result)
+        return result_list
 
     def getAllResources(self):
         flist = self.give_me_resource()

@@ -16,7 +16,7 @@ class FoodHandler:
         result['resource_id'] = row[5]
         return result
 
-    def build_food_attributes(self, food_id, food_name, food_exp_date, food_type, food_description, resource_id):
+    def build_food_attributes(self, food_id, food_name, food_exp_date, food_type, food_description, resource_id, food_date):
         result = {}
         result['food_id'] = food_id
         result['food_name'] = food_name
@@ -24,6 +24,7 @@ class FoodHandler:
         result['food_type'] = food_type
         result['food_description'] = food_description
         result['resource_id'] = resource_id
+        result['food_date'] = food_date
         return result
 
     def getAllFood(self):
@@ -95,18 +96,19 @@ class FoodHandler:
 #----------------inserts------------------------------------------
     def insertFoodJson(self, form):
         print("form: ", form)
-        if len(form) != 4:
+        if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
             food_name = form['food_name']
             food_exp_date = form['food_exp_date']
             food_type = form['food_type']
             food_description = form['food_description']
-            if food_name and food_exp_date and food_type  and food_description:
+            food_date = form['food_date']
+            if food_name and food_exp_date and food_type and food_description and food_date:
                 dao = FoodDAO()
-                food_and_resource_id = dao.insert_food(food_name, food_exp_date, food_type, food_description)
+                food_and_resource_id = dao.insert_food(food_name, food_exp_date, food_type, food_description, food_date)
                 result = self.build_food_attributes(food_and_resource_id[0], food_name, food_exp_date, food_type,
-                                                    food_description, food_and_resource_id[1])
+                                                    food_description, food_and_resource_id[1], food_date)
                 return jsonify(Food=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
