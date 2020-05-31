@@ -26,7 +26,7 @@ CREATE TABLE Tools(tool_id serial PRIMARY KEY, tool_name VARCHAR(10), tool_descr
 
 CREATE TABLE Health(health_id serial PRIMARY KEY, health_type VARCHAR(15), health_exp_date CHAR(10), health_description VARCHAR(250), resource_id  INTEGER REFERENCES resources(resource_id))
 
-CREATE TABLE Food(food_id serial PRIMARY KEY, food_exp_date VARCHAR10), food_type VARCHAR(15), food_description VARCHAR(250), resource_id INTEGER references resources(resource_id))
+CREATE TABLE Food(food_id serial PRIMARY KEY, food_exp_date VARCHAR(10), food_type VARCHAR(15), food_description VARCHAR(250), resource_id INTEGER references resources(resource_id))
 
 CREATE TABLE Power_Resources(power_id serial PRIMARY KEY,power_type VARCHAR(10),power_description VARCHAR(250), resource_id INTEGER REFERENCES Resources(resource_id))
 
