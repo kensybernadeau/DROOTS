@@ -94,20 +94,3 @@ class RequestHandler:
             result = self.build_request_attributes(request_id, customer_id, resource_id, request_date)
             return jsonify(Request=result), 201
 
-    def updateRequest(self, request_id, form):
-        if not self.getRequestById(request_id):
-            return jsonify(Error="Request not found."), 404
-        else:
-            if len(form) != 1:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                self.update_request(request_id)
-                result = self.build_request_attributes(request_id)
-                return jsonify(Request=result), 200
-
-    def deleteRequest(self, request_id):
-        if not self.getRequestById(request_id):
-            return jsonify(Error="Request not found."), 404
-        else:
-            self.delete_request(request_id)
-            return jsonify(DeleteStatus="OK"), 200

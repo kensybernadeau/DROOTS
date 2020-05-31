@@ -14,6 +14,4 @@ class SuppliesDAO:
         cursor = self.conn.cursor()
         query = "insert into supplies(resource_id, supplier_id, supplies_price, supplies_stock) values (%s, %s, %s, %s);"
         cursor.execute(query, (resource_id, supplier_id, supplies_price, supplies_stock))
-        # request_id = cursor.fetchone()[0]
         self.conn.commit()
-        # return request_id

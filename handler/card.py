@@ -76,10 +76,3 @@ class cardHandler:
                 return jsonify(Payment=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
-
-
-
-
-
-# card_type, card_number, card_security_code, payment_date, payment_amount, resource_id,
-# supplier_id, customer_id

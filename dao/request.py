@@ -67,10 +67,3 @@ class requestDAO:
         request_id = cursor.fetchone()[0]
         self.conn.commit()
         return request_id
-
-# CREATE TABLE child_table(
-#   c1 INTEGER PRIMARY KEY,
-#   c2 INTEGER,
-#   c3 INTEGER,
-#   FOREIGN KEY (c2, c3) REFERENCES parent_table (p1, p2)
-# );

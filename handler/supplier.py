@@ -97,25 +97,3 @@ class SupplierHandler:
                 return jsonify(Supplier=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
-
-    def updateSupplier(self, supplier_id, form):
-        if not self.getSupplierById(supplier_id):
-            return jsonify(Error="Supplier not found."), 404
-        else:
-            if len(form) != 1:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                supplier_location = form['supplier_location']
-                if supplier_location:
-                    self.update_supplier(supplier_id, supplier_location)
-                    result = self.build_supplier_attributes(supplier_id, supplier_location)
-                    return jsonify(Supplier=result), 200
-                else:
-                    return jsonify(Error="Unexpected attributes in update request"), 400
-
-    def deleteSupplier(self, supplier_id):
-        if not self.getSupplierById(supplier_id):
-            return jsonify(Error="Supplier not found."), 404
-        else:
-            self.delete_supplier(supplier_id)
-            return jsonify(DeleteStatus="OK"), 200

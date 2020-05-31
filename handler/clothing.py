@@ -101,28 +101,3 @@ class ClothingHandler:
                 return jsonify(Clothing=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
-
-    def updateClothe(self, clothe_id, form):
-        if not self.getClotheById(clothe_id):
-            return jsonify(Error = "Clothe not found."), 404
-        else:
-            if len(form) != 3:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                clothe_type = form['clothe_type']
-                clothe_size = form['clothe_size']
-                clothe_description = form['clothe_description']
-                if clothe_type and clothe_size and clothe_description:
-                    self.update_clothe(clothe_id, clothe_type, clothe_size, clothe_description)
-                    result = self.build_clothe_attributes(clothe_id, clothe_size, clothe_description)
-                    return jsonify(Clothe=result), 200
-                else:
-                    return jsonify(Error="Unexpected attributes in update request"), 400
-
-    def deleteClothe(self, clothe_id):
-        if not self.getClotheById(clothe_id):
-            return jsonify(Error="Clothe not found."), 404
-        else:
-            # dao.delete(pid)
-            self.delete_clothe(clothe_id)
-            return jsonify(DeleteStatus="OK"), 200

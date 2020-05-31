@@ -4,33 +4,6 @@ from dao.health import HealthDAO
 
 
 class HealthHandler:
-    health = [(1, "panadol", 20, "05/30/2020", "pm", "for people"),
-              (2, "tylenol", 30, "05/30/2020", "jiji", "for babies")]
-
-    # ----------------utils-------------------
-    def give_me_health(self):
-        return self.health
-
-    def getById(self, health_id):
-        for f in self.health:
-            if health_id == f[0]:
-                return f
-
-    def insert_health(self, health_name, health_quantity, health_exp_date, health_type, health_description):
-        self.health.append(
-            (len(self.health) + 1, health_name, health_quantity, health_exp_date, health_type, health_description))
-        return len(self.health)
-
-    def update_health(self, health_id, health_name, health_quantity, health_exp_date, health_type, health_description):
-        self.health.remove(self.getById(health_id))
-        self.health.insert(health_id - 1,
-                           (health_id, health_name, health_quantity, health_exp_date, health_type, health_description))
-
-    def delete_health(self, health_id):
-        h = self.getById(health_id)
-        self.health.remove(h)
-
-    # --------------end utils-----------------
 
     def build_health_dict(self, row):
         result = {}

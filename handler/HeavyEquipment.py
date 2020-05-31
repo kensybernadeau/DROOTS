@@ -92,26 +92,3 @@ class HeavyEquipmentHandler:
             return jsonify(HeavyEquipment=result), 201
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
-
-    # def updateHEquipment(self, hequipment_id, form):
-    #     if not self.getHEquipmentById(hequipment_id):
-    #         return jsonify(Error = "HeavyEquipment not found."), 404
-    #     else:
-    #         if len(form) != 2:
-    #             return jsonify(Error="Malformed update request"), 400
-    #         else:
-    #             hequipment_name = form['hequipment_name']
-    #             hequipment_description = form['hequipment_description']
-    #             if hequipment_name and hequipment_description:
-    #                 self.update_hequipment(hequipment_id, hequipment_name, hequipment_description)
-    #                 result = self.build_heavy_attributes(hequipment_id, hequipment_name, hequipment_description)
-    #                 return jsonify(HeavyEquipment=result), 200
-    #             else:
-    #                 return jsonify(Error="Unexpected attributes in update request"), 400
-    #
-    # def deleteHEquipment(self, hequipment_id):
-    #     if not self.getHEquipmentById(hequipment_id):
-    #         return jsonify(Error="HeavyEquipment not found."), 404
-    #     else:
-    #         self.delete_hequipment(hequipment_id)
-    #         return jsonify(DeleteStatus="OK"), 200

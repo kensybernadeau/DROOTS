@@ -113,30 +113,5 @@ class FoodHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-    def updateFood(self, food_id, form):
-        if not self.getFoodById(food_id):
-            return jsonify(Error = "Food not found."), 404
-        else:
-            if len(form) != 5:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                food_name = form['food_name']
-                food_quantity = form['food_quantity']
-                food_exp_date = form['food_exp_date']
-                food_type = form['food_type']
-                food_description = form['food_description']
-                if food_name and food_quantity and food_exp_date and food_type  and food_description:
-                    self.update_food(food_id, food_name, food_quantity, food_exp_date, food_type, food_description)
-                    result = self.build_food_attributes(food_id, food_name, food_quantity, food_exp_date, food_type,
-                                                        food_description)
-                    return jsonify(food=result), 200
-                else:
-                    return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def deleteFood(self, food_id):
-        if not self.getFoodById(food_id):
-            return jsonify(Error="Food not found."), 404
-        else:
-            self.delete_food(food_id)
-            return jsonify(DeleteStatus="OK"), 200
 

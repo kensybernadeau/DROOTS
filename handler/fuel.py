@@ -106,29 +106,6 @@ class FuelHandler:
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
 
-    def updateFuel(self, fuel_id, form):
-        if not self.getById(fuel_id):
-            return jsonify(Error="Fuel not found."), 404
-        else:
-            if len(form) != 2:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                fuel_type = form['fuel_type']
-                fuel_liters = form['fuel_liters']
-                if fuel_type and fuel_liters:
-                    self.update_fuel(fuel_id, fuel_type, fuel_liters)
-                    result = self.build_fuel_attributes(fuel_id, fuel_type, fuel_liters)
-                    return jsonify(Fuel=result), 200
-                else:
-                    return jsonify(Error="Unexpected attributes in update request"), 400
-
-    def deleteFuel(self, fuel_id):
-        if not self.getById(fuel_id):
-            return jsonify(Error="Fuel not found."), 404
-        else:
-            self.delete_fuel(fuel_id)
-            return jsonify(DeleteStatus="OK"), 200
-
     def searchFuels(self, args):
         f_type = args.get("fuel_type")
         fuels_list = []

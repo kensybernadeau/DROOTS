@@ -17,30 +17,6 @@ from handler.water import WaterHandler
 
 
 class ResourcesHandler:
-    resources = [(1, "baby food", "false"),
-                 (2, "tool", "true")]
-
-    # ----------------utils-------------------
-    def give_me_resource(self):
-        return self.resources
-
-    def getById(self, resource_id):
-        for f in self.resources:
-            if resource_id == f[0]:
-                return f
-
-    def insert_resource(self, resource_category, resource_availability):
-        self.resources.append((len(self.resources) + 1, resource_category, resource_availability))
-        return len(self.resources)
-
-    def update_resource(self, resource_id, resource_category, resource_availability):
-        self.resources.remove(self.getById(resource_id))
-        self.resources.insert(resource_id - 1, (resource_id, resource_category, resource_availability))
-
-    def delete_resource(self, resource_id):
-        self.resources.remove(self.getById(resource_id))
-
-    # --------------end utils-----------------
 
     def build_resource_dict(self, row):
         result = {}
@@ -141,30 +117,6 @@ class ResourcesHandler:
                 return jsonify(Resource=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
-
-    def updateResource(self, resource_id, form):
-        if not self.getResourceById(resource_id):
-            return jsonify(Error="Resource not found."), 404
-        else:
-            if len(form) != 2:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                resource_category = form['resource_category']
-                resource_availability = form['resource_availability']
-                if resource_category and resource_availability:
-                    self.update_resource(resource_id, resource_category, resource_availability)
-                    result = self.build_resource_attributes(resource_id, resource_category, resource_availability)
-                    return jsonify(Resource=result), 200
-                else:
-                    return jsonify(Error="Unexpected attributes in update request"), 400
-
-    def deleteResource(self, resource_id):
-        if not self.getResourceById(resource_id):
-            return jsonify(Error="Resource not found."), 404
-        else:
-            # dao.delete(pid)
-            self.delete_resource(resource_id)
-            return jsonify(DeleteStatus="OK"), 200
 
 
 

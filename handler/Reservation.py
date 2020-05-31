@@ -59,21 +59,3 @@ class ReservationHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-
-    def updateReservation(self, reservation_id, form):
-        if not self.getReservationById(reservation_id):
-            return jsonify(Error="Reservation not found."), 404
-        else:
-            if len(form) != 1:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                self.update_reservation(reservation_id)
-                result = self.build_reservation_attributes(reservation_id)
-                return jsonify(Reservation=result), 200
-
-    def deleteReservation(self, reservation_id):
-        if not self.getReservationById(reservation_id):
-            return jsonify(Error="Reservation not found."), 404
-        else:
-            self.delete_reservation(reservation_id)
-            return jsonify(DeleteStatus="OK"), 200

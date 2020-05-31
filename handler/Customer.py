@@ -100,25 +100,3 @@ class CustomerHandler:
                 return jsonify(Customer=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
-
-    def updateCustomers(self, customers_id, form):
-        if not self.getCustomersById(customers_id):
-            return jsonify(Error="Customer not found."), 404
-        else:
-            if form:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                self.update_customers(customers_id)
-                result = self.build_customers_attributes(customers_id)
-                return jsonify(Customer=result), 200
-
-    def deleteCustomers(self, customer_id):
-        udao = UsersDAO()
-        cdao = CustomerDAO()
-        customer = cdao.getCustomerById(customer_id)
-        if not customer:
-            return jsonify(Error="Customer not found."), 404
-        else:
-            user_id = cdao.delete(customer_id)
-            udao.delete(user_id)
-            return jsonify(DeleteStatus="OK"), 200

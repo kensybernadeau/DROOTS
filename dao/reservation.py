@@ -37,12 +37,3 @@ class reservationDAO:
         reservation_id = cursor.fetchone()[0]
         self.conn.commit()
         return reservation_id
-
-
-
-# CREATE TABLE child_table(
-#   c1 INTEGER PRIMARY KEY,
-#   c2 INTEGER,
-#   c3 INTEGER,
-#   FOREIGN KEY (c2, c3) REFERENCES parent_table (p1, p2)
-# );

@@ -55,10 +55,6 @@ def get_available_resources():
 def getResourceById(resource_id):
     if request.method == 'GET':
         return ResourcesHandler().getResourceById(resource_id)
-    elif request.method == 'PUT':
-        return ResourcesHandler().updateResource(resource_id, request.json)
-    elif request.method == 'DELETE':
-        return ResourcesHandler().deleteResource(resource_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -88,10 +84,6 @@ def getAllFood():
 def getFoodById(food_id):
     if request.method == 'GET':
         return FoodHandler().getFoodById(food_id)
-    elif request.method == 'PUT':
-        return FoodHandler().updateFood(food_id, request.json)
-    elif request.method == 'DELETE':
-        return FoodHandler().deleteFood(food_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -137,10 +129,6 @@ def getAllWater():
 def getWaterById(water_id):
     if request.method == 'GET':
         return WaterHandler().getWaterById(water_id)
-    elif request.method == 'PUT':
-        return WaterHandler().updateWater(water_id, request.json)
-    elif request.method == 'DELETE':
-        return WaterHandler().deleteWater(water_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -179,10 +167,6 @@ def getAllIce():
 def getIceById(ice_id):
     if request.method == 'GET':
         return IceHandler().getIceById(ice_id)
-    elif request.method == 'PUT':
-        return IceHandler().updateIce(ice_id, request.json)
-    elif request.method == 'DELETE':
-        return IceHandler().deleteIce(ice_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -201,10 +185,6 @@ def getAllHealth():
 def getHealthById(health_id):
     if request.method == 'GET':
         return HealthHandler().getHealthById(health_id)
-    elif request.method == 'PUT':
-        return HealthHandler().updateHealth(health_id, request.json)
-    elif request.method == 'DELETE':
-        return HealthHandler().deleteHealth(health_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -223,10 +203,6 @@ def getAllSupplier():
 def getSupplierById(supplier_id):
     if request.method == 'GET':
         return SupplierHandler().getSupplierById(supplier_id)
-    elif request.method == 'PUT':
-        return SupplierHandler().updateSupplier(supplier_id, request.json)
-    elif request.method == 'DELETE':
-        return SupplierHandler().deleteSupplier(supplier_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -261,7 +237,6 @@ def getAllPowerResources():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
         return PowerResourcesHandler().insertPowerResourceJson(request.json)
-
     else:
         if not request.args:
             return PowerResourcesHandler().getAllPowerResources()
@@ -271,13 +246,6 @@ def getAllPowerResources():
 def getPowerResourceById(power_resource_id):
     if request.method == 'GET':
         return PowerResourcesHandler().getPowerResourcesById(power_resource_id)
-
-    elif request.method == 'PUT':
-        return PowerResourcesHandler().updatePowerResource(power_resource_id, request.form)
-
-    elif request.method == 'DELETE':
-        return PowerResourcesHandler().deletePowerResource(power_resource_id)
-
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -287,7 +255,6 @@ def getAllFuels():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
         return FuelHandler().insertFuelJson(request.json)
-
     else:
         if not request.args:
             return FuelHandler().getAllFuel()
@@ -297,13 +264,6 @@ def getAllFuels():
 def getFuelById(fuel_id):
     if request.method == 'GET':
         return FuelHandler().getFuelById(fuel_id)
-
-    elif request.method == 'PUT':
-        return FuelHandler().updateFuel(fuel_id, request.form)
-
-    elif request.method == 'DELETE':
-        return FuelHandler().deleteFuel(fuel_id)
-
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -340,10 +300,6 @@ def getAllClothes():
 def getClotheById(clothe_id):
     if request.method == 'GET':
         return ClothingHandler().getClotheById(clothe_id)
-    elif request.method == 'PUT':
-        return ClothingHandler().updateClothe(clothe_id, request.json)
-    elif request.method == 'DELETE':
-        return ClothingHandler().deleteClothe(clothe_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -362,10 +318,6 @@ def getAllTools():
 def getToolById(tool_id):
     if request.method == 'GET':
         return ToolsHandler().getToolsById(tool_id)
-    elif request.method == 'PUT':
-        return ToolsHandler().updateTool(tool_id, request.json)
-    elif request.method == 'DELETE':
-        return ToolsHandler().deleteTool(tool_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -412,7 +364,6 @@ def getAllCustomer():
     if request.method == 'POST':
         print("REQUEST: ", request.json)
         return CustomerHandler().insertCustomersJson(request.json)
-
     else:
         return CustomerHandler().getAllCustomers()
 
@@ -457,10 +408,6 @@ def getAllReservation():
 def getReservationById(reservation_id):
     if request.method == 'GET':
         return ReservationHandler().getReservationById(reservation_id)
-    elif request.method == 'PUT':
-        return ReservationHandler().updateBatteries(reservation_id, request.form)
-    elif request.method == 'DELETE':
-        return ReservationHandler().deleteBatteries(reservation_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -495,10 +442,6 @@ def getHEquipmentById(hequipment_id):
 def getBatteriesById(batteries_id):
     if request.method == 'GET':
         return BatteriesHandler().getBatteriesById(batteries_id)
-    elif request.method == 'PUT':
-        return BatteriesHandler().updateBatteries(batteries_id, request.form)
-    elif request.method == 'DELETE':
-        return BatteriesHandler().deleteBatteries(batteries_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -520,10 +463,6 @@ def getAllBatteries():
 def getPaymentById(payment_id):
     if request.method == 'GET':
         return PaymentHandler().getAllPaymentById(payment_id)
-    elif request.method == 'PUT':
-        return PaymentHandler().updatePayment(payment_id, request.json)
-    elif request.method == 'DELETE':
-        return PaymentHandler().deletePayment(payment_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -563,10 +502,6 @@ def getAllPaymentAthmovil():
 
     else:
         return jsonify(Error="Method not allowed."), 405
-
-
-
-
 
 @app.route('/droots/address', methods=['GET', 'POST'])
 def getAllAddress():
