@@ -26,8 +26,8 @@ class SupplierDAO:
         cursor = self.conn.cursor()
         query = "select supplier_id, user_id, user_first_name, user_last_name, user_uname, user_password, " \
                 "user_country, user_city, user_street_address, user_zipcode, phone_number, email_address " \
-                "from suppliers natural inner join users natural inner join address natural inner join phone" \
-                " natural inner join email where supplier_id = %s;"
+                "from suppliers natural inner join users natural inner join address natural inner join phone " \
+                "natural inner join email where supplier_id = %s;"
         cursor.execute(query, (supplier_id,))
         result = cursor.fetchone()
         return result
@@ -40,17 +40,3 @@ class SupplierDAO:
         self.conn.commit()
         return supplier_id
 
-    def delete(self, supplier_id):
-        cursor = self.conn.cursor()
-        query = "delete from suppliers where customer_id = %s returning user_id;"
-        cursor.execute(query, (supplier_id,))
-        user_id = cursor.fetchone()[0]
-        self.conn.commit()
-        return user_id
-
-    # def update(self, user_id, user_first_name, user_last_name, user_location, user_name, user_password):
-    # cursor = self.conn.cursor()
-    # query = "update users set user_first_name = %s, user_last_name = %s, user_location = %s, user_name = %s, user_password = %s where user_id = %s;"
-    # cursor.execute(query, (user_id, user_first_name, user_last_name, user_location, user_name, user_password,))
-    # self.conn.commit()
-    # return user_id

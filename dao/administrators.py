@@ -38,19 +38,3 @@ class AdministratorsDAO:
         admin_id = cursor.fetchone()[0]
         self.conn.commit()
         return admin_id
-
-    def delete(self, admin_id):
-        cursor = self.conn.cursor()
-        query = "delete from administrators where admin_id = %s returning user_id;"
-        cursor.execute(query, (admin_id,))
-        user_id = cursor.fetchone()[0]
-        self.conn.commit()
-        return user_id
-
-    #def update(self, user_id, user_first_name, user_last_name, user_location, user_name, user_password):
-        #cursor = self.conn.cursor()
-        #query = "update users set user_first_name = %s, user_last_name = %s, user_location = %s, user_name = %s, user_password = %s where user_id = %s;"
-        #cursor.execute(query, (user_id, user_first_name, user_last_name, user_location, user_name, user_password,))
-        #self.conn.commit()
-        #return user_id
-

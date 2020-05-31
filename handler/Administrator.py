@@ -100,30 +100,3 @@ class AdministratorsHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-    # def updateAdministrator(self, administrator_id, form):
-    # if not self.getById(administrator_id):
-    # return jsonify(Error="Administrator not found."), 404
-    # else:
-    # if len(form) != 2:
-    # return jsonify(Error="Malformed update request"), 400
-    # else:
-    # administrator_fname = form['administrator_fname']
-    # administrator_lname = form['administrator_lname']
-    # if administrator_fname and administrator_lname:
-    # self.update_administrator(administrator_id, administrator_fname, administrator_lname)
-    # result = self.build_administrator_attributes(administrator_id, administrator_fname,
-    # administrator_lname)
-    # return jsonify(Administrator=result), 200
-    # else:
-    # return jsonify(Error="Unexpected attributes in update request"), 400
-
-    def deleteAdministrator(self, admin_id):
-        udao = UsersDAO()
-        adao = AdministratorsDAO()
-        admin = adao.getAdminById(admin_id)
-        if not admin:
-            return jsonify(Error="Administrator not found."), 404
-        else:
-            user_id = adao.delete(admin_id)
-            udao.delete(user_id)
-            return jsonify(DeleteStatus="OK"), 200

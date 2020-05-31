@@ -12,7 +12,6 @@ from handler.HeavyEquipment import HeavyEquipmentHandler
 from handler.Payment import PaymentHandler
 from handler.Request import RequestHandler
 from handler.Reservation import ReservationHandler
-from handler.address import AddressHandler
 from handler.athmovil import athmovilHandler
 from handler.card import cardHandler
 from handler.food import FoodHandler
@@ -221,13 +220,6 @@ def getAllUsers():
 def getUserById(user_id):
     if request.method == 'GET':
         return UserHandler().getUserById(user_id)
-
-    elif request.method == 'PUT':
-        return UserHandler().updateUser(user_id, request.form)
-
-    elif request.method == 'DELETE':
-        return UserHandler().deleteUser(user_id)
-
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -336,13 +328,6 @@ def getAllAdministrators():
 def getAdministratorById(administrator_id):
     if request.method == 'GET':
         return AdministratorsHandler().getAdministratorById(administrator_id)
-
-    elif request.method == 'PUT':
-        return AdministratorsHandler().updateAdministrator(administrator_id, request.form)
-
-    elif request.method == 'DELETE':
-        return AdministratorsHandler().deleteAdministrator(administrator_id)
-
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -351,10 +336,6 @@ def getAdministratorById(administrator_id):
 def getCustomerById(customer_id):
     if request.method == 'GET':
         return CustomerHandler().getCustomersById(customer_id)
-    elif request.method == 'PUT':
-        return CustomerHandler().updateCustomers(customer_id, request.form)
-    elif request.method == 'DELETE':
-        return CustomerHandler().deleteCustomers(customer_id)
     else:
         return jsonify(Error="Method not allowed."), 405
 
@@ -502,28 +483,6 @@ def getAllPaymentAthmovil():
 
     else:
         return jsonify(Error="Method not allowed."), 405
-
-@app.route('/droots/address', methods=['GET', 'POST'])
-def getAllAddress():
-    if request.method == 'POST':
-        print("REQUEST: ", request.json)
-        return AddressHandler().insertAddressJson(request.json)
-
-    else:
-        return AddressHandler().getAllAddress()
-
-
-@app.route('/droots/address/<int:address_id>', methods=['GET', 'PUT', 'DELETE'])
-def getAddressById(address_id):
-    if request.method == 'GET':
-        return AddressHandler().getAddressById(address_id)
-    elif request.method == 'PUT':
-        return AddressHandler().updateAddress(address_id, request.json)
-    elif request.method == 'DELETE':
-        return AddressHandler().deleteAddress(address_id)
-    else:
-        return jsonify(Error="Method not allowed."), 405
-
 
 @app.route('/droots/statistics', methods=['GET', 'POST', ])
 def getAllStatistics():
